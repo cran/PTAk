@@ -67,7 +67,7 @@ metric \eqn{W_g^{-1}}. Based on theoretical considerations they recommand for  t
 
  data(iris)
   iris2 <- as.matrix(iris[,1:4])
-  dimnames(iris2)[[1]] <- iris[,5]
+  dimnames(iris2)[[1]] <- as.character(iris[,5])
 
  D2 <- CauRuimet(iris2,ker=1,withingroup=TRUE)
  D2 <- Powmat(D2,(-1))

@@ -1,0 +1,40 @@
+Licence definitions for PTAk version 1.1-6 :
+
+i. academic work (Public reasearch institutes)				... licence free
+ii.academic work or post-doc research work within commercial cie		... licence free until use of this work iii. use in a 	process or methodology within commercial cie			... licence A payable every year
+iv. any other situation where you need to justify a licence			... licence B payable once
+v. to commercialize a methodology involving the package			... licence C  payable every year
+
+Licence Fees are different according to the commercial sector and are agreed multi-user on one site.
+The software is licenced without any responsability from his author for its accuracy and proper use.
+
+
+All licences are per site and so multi-user  (a site is understood as departement or a division at one geographically located  site).
+
+For pharmaceutical companies license fees are :
+licence A : £700 per year
+licence B : £200 once
+licence C : £400 per year (with clear mention of the double copyright to the clients who will need  licence A )
+
+The notification of the licence and its applicabilities will be sent to you soon after your payment.
+
+Payements of licences should be made  in GBP to :
+Dr D G  Leibovici
+ Branch code: 08-93-00   Account number: 13251972   Tran/Code: 77
+at
+The Cooperative Bank
+PO Box 48
+1 Balloon Street
+Manchester M60 1GP
+ (U.K.)
+
+Any published work should mention two references one for the package and one with the main article given in the licence specification :
+
+Leibovici D (2002) "PTAk Principal Tensor on k modes: an R Statistical Contributing Package, version 1.1-6". CopyRight (C) 2000 Didier Leibovici;  http://cran.r-project.org/src/contrib/PTAk_1.1-6.tar.gz
+
+Leibovici D and Sabatier R (1998) "A Singular Value Decomposition of a k-ways array for a Principal Component Analysis of multi-way data, the PTA-k". Linear Algebra and its Applications, 269:307-329.
+
+
+best regards
+Dr Didier Leibovici
+
