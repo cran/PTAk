@@ -1,0 +1,34 @@
+Package: PTAk
+Version: 1.1-1
+Date: 2001/04/17
+Title: Principal Tensor Analysis on k modes
+Author: Didier Leibovici <didier@fmrib.ox.ac.uk>.
+Depends: tensor (useful but not necessary)
+Description: A multiway method to decompose a tensor (array) of any order,
+             as a generalisation of SVD also supporting \emph{non-identity metrics} and \emph{penalisations}.
+             2-way SVD with these extensions is also available. The package includes also some other multiway
+             methods: PCAn (Tucker-n) and PARAFAC/CANDECOMP.
+License: free for non-commercial purposes.
+Maintainer: Didier Leibovici <didier@fmrib.ox.ac.uk>.
+URL: http://www.fmrib.ox.ac.uk/~didier
+
+###############
+ Copyright (C) 2000 Didier Leibovici
+
+  The main Reference to quote
+        check also  http://www.fmrib.ox.ac.uk/~didier/cv/recentpub.html
+
+ Leibovici D and Sabatier R (1998)
+   "A Singular Value Decomposition of a k-ways array for a
+ Principal Component Analysis of multi-way data, the PTA-k"
+                          Linear Algebra and its Applications
+                                  269:307-329.
+#################
+2001/02/22
+If one does not want to use the tensor package the default arguments of CONTRACTION
+and CONTRACTION.list has to be change with usetensor=FALSE.
+
+Some C++ code are currently developed  to speed the core algorithms.
+ #
+2001/04/17
+ smoothing option allows different smoothing for different Principal Tensors.
