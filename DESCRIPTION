@@ -1,6 +1,6 @@
 Package: PTAk
-Version: 1.1-5
-Date: 2002/05/08
+Version: 1.1-6
+Date: 2002/05/13
 Title: Principal Tensor Analysis on k modes
 Author: Didier Leibovici <didier@fmrib.ox.ac.uk>
 Depends: tensor

@@ -13,8 +13,7 @@ APSOLU3((X,solu,pt3=NULL,nbPT2=1,
 \item{X}{a tensor (as an array) of order \emph{3}, if non-identity metrics are
 used \code{X} is a list with \code{data}  as the array and
 \code{met} a list of metrics }
-\item{solu}{a \code{PTAk
-object} see \code{\link{is.PTAk}}}
+\item{solu}{a \code{\link{PTAk}} object}
 \item{pt3}{a number identifying in \code{solu} the Principal Tensor to use or the
 last (if \code{NULL})}
 \item{nbPT2}{integer, if 1 all solutions will be computed otherwise at maximum

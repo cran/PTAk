@@ -138,7 +138,7 @@ limi <- range(c(solua[[1]]$v[com,],solub[[1]]$v[com,]))
 mtext(paste("vs",com,":",yla[1],"\%"),2,col=2,line=2)
  par(new=TRUE)
 
-  plot.PTAk(solub,nb1=com,mod=1,labels=F,type="b",lty=1,
+  plot.PTAk(solub,nb1=com,mod=1,labels=FALSE,type="b",lty=1,
   lengthlabels=4,cex=0.6,ylimit=limi,ylab="",main=paste("smooth vs",com,":",yla[2],"\%"),...)
   par(new=FALSE)
 }   ####

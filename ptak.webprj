@@ -1,8 +1,8 @@
 <!DOCTYPE webproject ><webproject>
  <project preview="" type="Local" name="PTAk" >
   <upload/>
-  <author></author>
-  <email></email>
+  <author/>
+  <email/>
   <item url="data/00Index" />
   <item url="data/crimerate.RData" />
   <item url="data/crimerate.sas" />
