@@ -90,8 +90,8 @@ Ramsay J.O. and Silverman B.W.  (1997) \emph{Functional Data
 \seealso{\code{\link{PTAk}},\code{\link{PCAn}}, \code{\link{CANDPARA}} }
 
 \examples{
-library(modreg)
- library(tensor)
+#library(stats)
+ #library(tensor)
 
  # on smoothing
 

@@ -1,0 +1,113 @@
+Copyright (C) 2000 Didier Leibovici
+
+  The main References to quote
+        check also  http://c3s2i.free.fr/cv/recentpub.html
+
+ Leibovici D and Sabatier R (1998)
+   "A Singular Value Decomposition of a k-ways array for a
+ Principal Component Analysis of multi-way data, the PTA-k"
+                          Linear Algebra and its Applications
+                                  269:307-329.
+Leibovici D (2004) "PTAk Principal Tensor on k modes: an R Statistical Contributing Package, version 1.1-9". CopyRight (C) 2000 Didier Leibovici;  http://cran.r-project.org/src/contrib/PTAk_1.1-9.tar.gz
+
+
+
+Licence definitions for PTAk version 1.1-9 :
+
+i. academic work (Public reasearch institutes)				... licence free
+ii.academic work or post-doc research work within commercial cie		... licence free until use of this work
+iii. use in a process or methodology within commercial cie			... licence A payable every year
+iv. any other situation where you need to justify a licence			... licence B payable once
+v. to commercialize a methodology involving the package			... licence C  payable every year
+
+Licence Fees are different according to the commercial sector and are agreed multi-user on one site.
+The software is licenced without any responsability from his author for its accuracy and proper use.
+
+
+All licences are per site and so multi-user  (a site is understood as departement or a division at one geographically located  site).
+
+For pharmaceutical companies license fees are :
+licence A : £950 per year
+licence B : £450 once
+licence C : £650 per year (with clear mention of the double copyright to the clients who will need  licence A )
+
+for other companies these rates can be negociated.
+
+The notification of the licence and its applicabilities will be sent to you soon after your payment.
+
+Payements of licences should be made  in GBP to :
+Dr D G  Leibovici
+ Branch code: 08-93-00   Account number: 13251972   Tran/Code: 77
+at
+The Cooperative Bank
+PO Box 48
+1 Balloon Street
+Manchester M60 1GP
+ (U.K.)
+
+Any published work should mention two references one for the package and one with the main article given in the licence specification :
+
+Leibovici D (2004) "PTAk Principal Tensor on k modes: an R Statistical Contributing Package, version 1.1-7". CopyRight (C) 2000 Didier Leibovici;  http://cran.r-project.org/src/contrib/PTAk_1.1-9.tar.gz
+
+Leibovici D and Sabatier R (1998) "A Singular Value Decomposition of a k-ways array for a Principal Component Analysis of multi-way data, the PTA-k". Linear Algebra and its Applications, 269:307-329.
+
+
+This package is licenced as it is without any warranty of accuracy and or proper use.
+
+best regards
+Dr Didier Leibovici
+didier@fmrib.ox.ac.uk
+c3s2i@free.fr
+
+
+
+History of Changes :
+---------------------
+
+Package: PTAk
+Version: 1.1-2
+Date: 2001/04/17
+Title: Principal Tensor Analysis on k modes
+Author: Didier Leibovici <didier@fmrib.ox.ac.uk>.
+Depends: tensor (useful but not necessary)
+Description: A multiway method to decompose a tensor (array) of any order,
+             as a generalisation of SVD also supporting \emph{non-identity metrics} and \emph{penalisations}.
+             2-way SVD with these extensions is also available. The package includes also some other multiway
+             methods: PCAn (Tucker-n) and PARAFAC/CANDECOMP.
+License: free for non-commercial purposes.
+Maintainer: Didier Leibovici <didier@fmrib.ox.ac.uk>.
+URL: http://www.fmrib.ox.ac.uk/~didier
+#############################################
+TO INSTALL see instructions in R documentation
+#############################################
+
+#################
+Package: PTAk
+Version: 1.1-2
+Date: 2001/02/22
+If one does not want to use the tensor package the default arguments of CONTRACTION
+and CONTRACTION.list has to be change with usetensor=FALSE.
+
+Some C++ code are currently developed  to speed the core algorithms.
+ #
+Package: PTAk
+Version: 1.1-2
+Date: 2001/04/17
+ smoothing option allows different smoothing for different Principal Tensors.
+ #
+Package: PTAk
+Version: 1.1-4
+Date: 2001/06/06
+  just updating few Rd mistakes for R 1.3.0
+Package: PTAk
+Version: 1.1-5
+Date: 2002/05/08
+  just updating  for R 1.5.0
+Package: PTAk
+Version: 1.1-6
+Date: 2002/05/08
+  just updating  for R 1.5.0
+Package: PTAk
+Version: 1.1-5
+Date: 2003/06/06
+  just updating  for R 1.7.0
