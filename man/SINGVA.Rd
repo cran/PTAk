@@ -3,7 +3,7 @@
 \title{Optimisation algorithm RPVSCC}
 \description{Computes the best rank-one approximation using the RPVSCC algorithm.}
 \usage{
-SINGVA(X,test=1E-12,PTnam="vs111",Maxiter=1000,
+SINGVA(X,test=1E-12,PTnam="vs111",Maxiter=2000,
                   verbose=getOption("verbose"),file=NULL,
                     smoothing=FALSE,smoo=list(NA),
                      modesnam=NULL,
@@ -47,6 +47,11 @@ of every bilinear form deducted from the original tensor, that is the
 number of components in each space), PARAFAC/CANDECOMP will look for
 best approximation according to the \emph{rank} (\emph{i.e.} the
 rank-one tensors are not necessarily orthogonal).
+\cr
+Recent work from Tamara G Kolda showed on an example that \emph{orthogonal rank}
+decompositions are not necesseraly nested. This makes PTA-\emph{k}modes a model with
+nested decompositions not giving the exact \emph{orthogonal rank}.
+ So PTA-\emph{k}modes will look for best approximation according to orthogonal tensors in a nested approximmation process.
  }
 \value{a \code{\link{PTAk}} object (without \code{datanam method})}
 \references{
@@ -67,6 +72,9 @@ multi-way data, the PTA-k}. Linear Algebra and its Applications,
 De Lathauwer L, De Moor B and Vandewalle J (2000) \emph{On the best
 rank-1 and rank-(R1,R2,...,Rn) approximation of higher-order
 tensors}. SIAM J. Matrix Anal. Appl. 21,4:1324-1342.
+
+
+Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
 }
 \note{
 The algorithm was derived in generalising the \emph{transition

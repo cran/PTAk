@@ -7,7 +7,7 @@ Principal Tensor of the given tensor. Calls recursively PTAk. }
 \usage{
  APSOLUk(X,solu,nbPT,nbPT2=1,
                        smoothing=FALSE,smoo=list(NA),
-                        minpct=0.01,ptk=NULL,
+                        minpct=0.1,ptk=NULL,
                          verbose=getOption("verbose"),file=NULL,
                           modesnam=NULL)}
 

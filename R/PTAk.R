@@ -1385,7 +1385,7 @@ function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksm
 }
 "PTAk" <-
 function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
-    smoo = list(, NA), verbose = getOption("verbose"), file = NULL,
+    smoo = list(NA), verbose = getOption("verbose"), file = NULL,
     modesnam = NULL, addedcomment = "")
 {
     datanam <- substitute(X)
@@ -2001,7 +2001,7 @@ function (A)
     Powmat(A, -1)
 }
 "IterMV" <-
-function (n = 10, dat = J12.dat, Mm = c(1, 3), Vm = c(2, 3),
+function (n = 10, dat = X, Mm = c(1, 3), Vm = c(2, 3),
     fFUN = mean, usetren = FALSE, tren = function(x) smooth.spline(as.vector(x),
         df = 5)$y, rsd = TRUE)
 {
@@ -2027,7 +2027,7 @@ function (n = 10, dat = J12.dat, Mm = c(1, 3), Vm = c(2, 3),
     return(dat)
 }
 "Multcent" <-
-function (dat = J12.dat, bi = c(1, 2), by = 3, centre = mean,
+function (dat = X, bi = c(1, 2), by = 3, centre = mean,
     centrebyBA = c(TRUE, FALSE), scalebyBA = c(TRUE, FALSE))
 {
     if (centrebyBA[1]) {

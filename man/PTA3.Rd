@@ -45,7 +45,13 @@ for \code{PTAk} but simpler as the recursivity implied by the
 every \emph{3}-modes  Principal Tensors, 3 SVD are performed for
 every contracted product with one the three components of the
 \emph{3}-modes  Principal Tensors (see \code{\link{APSOLU3}},
-\code{\link{PTAk}}).
+\code{\link{PTAk}}). \cr
+
+Recent work from Tamara G Kolda showed on an example that \emph{orthogonal rank}
+decompositions are not necesseraly nested. This makes PTA-\emph{3}modes a model with
+nested decompositions not giving the exact \emph{orthogonal rank}.
+ So PTA-\emph{3}modes will look for best approximation according to orthogonal tensors in a nested approximmation process. PTA3 decompositions is "a" generalisation of SVD but not the ...
+ \cr
 With the \code{smoothing} option \code{smoo} contain a list of (lists) of functions to
 apply on vectors of component (within the algorithm, see
 \code{\link{SVDgen}}). For a given dimension (1,2,or 3) a list of
@@ -72,6 +78,8 @@ Leibovici D and Sabatier R (1998) \emph{A Singular Value
 Decomposition of a k-ways array for a Principal Component Analysis of
 multi-way data, the PTA-k}. Linear Algebra and its Applications,
 269:307-329.
+
+Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
  }
 
   \note{

@@ -29,7 +29,7 @@ used \code{X} is a list with \code{data}  as the array and
 Looking for the best rank-one tensor approximation (LS) the three
 methods described in the package are equivalent. If the number of
 tensors looked for is greater then one the  methods differs:
-PTA-\emph{k}modes will look for best approximation according to the
+PTA-\emph{k}modes will "look" for "best" approximation according to the
 \emph{orthogonal rank} (\emph{i.e.} the rank-one tensors are
 orthogonal), PCA-\emph{k}modes will look for best approximation
 according to the \emph{space ranks} (\emph{i.e.} the rank of every
@@ -39,7 +39,11 @@ PARAFAC/CANDECOMP will look for best approximation according to the
 orthogonal). For the sake of comparisons the PARAFAC/CANDECOMP method
 and the PCA-\emph{n}modes are also in the  package but complete
 functionnality  of the use these methods  and more complete packages
-may be fetched at the www site quoted below. }
+may be fetched at the www site quoted below. \cr
+Recent work from Tamara G Kolda showed on an example that \emph{orthogonal rank}
+decompositions are not necesseraly nested. This makes PTA-\emph{k}modes a model with
+nested decompositions not giving the exact \emph{orthogonal rank}.
+ So PTA-\emph{k}modes will look for best approximation according to orthogonal tensors in a nested approximmation process. }
 \value{a \code{PCAn} (inherits \code{\link{PTAk}}) object}
 \references{
 Caroll J.D  and Chang J.J (1970) \emph{Analysis of individual
@@ -58,6 +62,8 @@ Leibovici D and Sabatier R (1998) \emph{A Singular Value
 Decomposition of a k-ways array for a Principal Component Analysis of
 multi-way data, the PTA-k}. Linear Algebra and its Applications,
 269:307-329.
+
+Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
               }
 \note{The use of metrics (diagonal or not) and smoothing extend flexibility of analysis. }
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}

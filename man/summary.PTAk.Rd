@@ -6,7 +6,7 @@
 }
 \usage{
 summary.PTAk(object,testvar=1,dontshow="*",...)
-summary.FCAk(object,testvar=1,dontshow="*",...)
+summary.FCAk(object,testvar=0.5,dontshow="*",...)
 }
 \arguments{
    \item{object}{an object inheriting from class \code{PTAk}, representing a generalised  singular value decomposition}
@@ -16,7 +16,7 @@ boolean criterion to remove Principal Tensors from the summary, or
 default is a character "*" equivalent to the criterion:
 \cr
 \code{!substr(solution[[length(solution)]][["vsnam"]],1,1)=="*"} }
-\item{...}{summary generic additional argumentsnot used here }
+\item{...}{summary generic additional arguments not used here }
 }
 \details{
 The function prints a listing of the decomposition with historical

@@ -58,7 +58,12 @@ helping to reach the full decomposition. All these controls allow to
 truncate the full decomposition in a level-controlled fashion. Notice
 the full decomposition always contains any possible choice of
 truncation, \emph{i.e.} the solutions are not dependant on the
-truncation scheme (Generalised Eckart-Young Theorem).}
+truncation scheme (Generalised Eckart-Young Theorem).
+\cr
+Recent work from Tamara G Kolda showed on an example that \emph{orthogonal rank}
+decompositions are not necesseraly nested. This makes PTA-\emph{k}modes a model with
+nested decompositions not giving the exact \emph{orthogonal rank}.
+ So PTA-\emph{k}modes will look for best approximation according to orthogonal tensors in a nested approximmation process.}
 
   \value{a \code{\link{PTAk}} object }
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
@@ -77,7 +82,10 @@ Principal Component Analysis of multi-way data, the PTA-k}. Linear Algebra and i
 269:307-329.
 
 Leibovici D (2001) \emph{A Penalised algorithm for SVD and Multiway functional methods}. (in
-preparation) }
+preparation)
+
+Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
+}
 \note{
 The use of metrics (diagonal or not) allows flexibility of analysis like in \emph{2} modes
 \emph{e.g.} correspondence analysis, discriminant analysis, robust analysis.  Smoothing option

@@ -17,7 +17,7 @@ vectors as in \code{svd}) and \code{d}. }
     \item{dim}{
 default 1 in each space otherwise specify the number of dimensions
 e.g. \code{c(2,3..,2)} (with \code{"Presvd"} dim is obviously 1)}
-\item{...} extra arguments of the method \code{method}: the first argument is fixed (see details). }
+\item{...} {extra arguments of the method \code{method}: the first argument is fixed (see details). }}
  \details{
 Computes the first (or \code{dim}) right singular vector  (or other
 summaries) for every representation of the tensor as a matrix with

@@ -8,7 +8,7 @@ components (\code{u} and \code{v}) to be smooth.
  }
 
 \usage{
-  SVDgen(Y,D2=1,D1=1,smoothing=FALSE,nomb=dim(Y)[2],
+  SVDgen(Y,D2=1,D1=1,smoothing=FALSE,nomb= min(dim(Y)),
                   smoo=list(function(u)ksmooth(1:length(u),u,kernel="normal",
                            bandwidth=3,x.points=(1:length(u)))$y)) }
  \arguments{

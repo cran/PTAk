@@ -9,7 +9,7 @@ modes or not for one or two components.}
  plot.PTAk(x,labels=TRUE,mod=1,nb1=1,nb2=NULL,coefi=list(NULL,NULL),
                 xylab=TRUE,ppch=(1:length(solution)),lengthlabels=2,ylimit=NULL,
                 scree=FALSE,ordered=TRUE,nbvs=40,RiskJack=NULL,method="",...)
-RiskJackplot(x,nbvs=1:40,mod=NULL,max=NULL,rescaled=TRUE,...)
+RiskJackplot(x,nbvs=1:20,mod=NULL,max=NULL,rescaled=TRUE,...)
                               }
 \arguments{
 \item{x}{an object inheriting from class \code{PTAk}, representing a generalised  singular value decomposition}
