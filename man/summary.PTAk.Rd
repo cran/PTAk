@@ -1,30 +1,31 @@
-\name{summary.solutions.PTAk}
-\alias{summary.solutions.PTAk}
-\alias{summary.solutions.FCAk}
+\name{summary.PTAk}
+\alias{summary.PTAk}
+\alias{summary.FCAk}
 \title{Summary of a PTA-k modes analysis}
 \description{Print a summary listing of the decomposition obtained.
 }
 \usage{
-summary.solutions.PTAk(solution,testvar=1,dontshow="*")
-summary.solutions.FCAk(solution,testvar=1,dontshow="*")
-summary(object,testvar=1,dontshow="*")
+summary.PTAk(object,testvar=1,dontshow="*",...)
+summary.FCAk(object,testvar=1,dontshow="*",...)
 }
 \arguments{
-   \item{solution}{a \code{solutions.PTAk} object}
+   \item{object}{an object inheriting from class \code{PTAk}, representing a generalised  singular value decomposition}
    \item{testvar}{control within \code{nTens} used Principal Tensor with  minimum percent of variability explained}
    \item{dontshow}{
 boolean criterion to remove Principal Tensors from the summary, or
 default is a character "*" equivalent to the criterion:
 \cr
-\code{!substr(solutiont[[length(solution)]][["vsnam"]],1,1)=="*"} } }
+\code{!substr(solution[[length(solution)]][["vsnam"]],1,1)=="*"} }
+\item{...}{summary generic additional argumentsnot used here }
+}
 \details{
 The function prints a listing of the decomposition with historical
 order (instead of traditional singular value order). It is useful
 before any plots or reconstruction, a screeplot (using
 \code{plot.PTAk}) will be also useful. It is useful before any plots
-r reconstruction, a screeplot (using \code{plot.solutions.PTAk}) will be also
-useful. \code{summary.solutions.FCAk} is alike
-\code{summary.solutions.PTAk} but \code{testvar} operates on the variability of
+r reconstruction, a screeplot (using \code{plot.PTAk}) will be also
+useful. \code{summary.FCAk} is alike
+\code{summary.PTAk} but \code{testvar} operates on the variability of
 the lack of complete independence. }
 
 \value{prints on the prompt}
@@ -36,9 +37,9 @@ Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
 
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
 
-\note{At the moment can be used for \code{solutions.PCAn},
-  \code{solutions.CANDPRA}, better summaries will be in the next release.}
- \seealso{ \code{\link{plot.solutions.PTAk}} }
+\note{At the moment can be used for \code{PCAn},
+  \code{CANDPRA}, better summaries will be in the next release.}
+ \seealso{ \code{\link{plot.PTAk}} }
 
  \examples{
  data(crimerate)
@@ -48,7 +49,7 @@ Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
  summary(cri.svd,testvar=0)
   plot(cri.svd,scree=TRUE)
   par(new=TRUE)
-  RiskJack.plot(cri.svd,nbvs=1:7,mod=NULL,max=NULL,rescaled=TRUE,
+  RiskJackplot(cri.svd,nbvs=1:7,mod=NULL,max=NULL,rescaled=TRUE,
         axes=FALSE,ann=FALSE)
   par(new=FALSE)
 

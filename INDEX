@@ -1,24 +1,27 @@
- 
-      This package contains functions to perform an SVD-k modes using  metrics and penalisations.
-
-APSOLU3                 Associated solutions to a 3-modes Principal Tensor
-APSOLUk                 Associated solutions to a k-modes Principal Tensor
-CANDPARA                CANDECOMP or PARAFAC model
-CauRuimet               Robust estimate of an unknown within group covariance
-CONTRACTION             Contracted product of a tensor by another tensor
-datasets                Two datasets used in demos
-FCAk                    Generalisation of Correspondence Analysis for k-way tables
-FCAmet                  A tool to computes metrics used for FCAk
-INITIA                  Gives the first Tucker1 components of a given tensor
-is.solutions.PTAk       Check class object output from PTAk and others
-PCAn                    Tucker model for PCA of n-way table
-plot.solutions.PTAk     Plot of components together or not, screeplot of squared singular values
-preprocessings          Some preprocessings for array  analysis
-PROJOT                  Orthogonal-tensoriel projection  of a tensor according to a rank-1 tensor
-PTA3                    Principal Tensor Analysis  for a tensor of order 3
-PTAk                    Principal Tensor Analysis  for a tensor of order k
-REBUILD                 Approximation of a tensor using the given solutions.PTAk object
-SINGVA                  First Singular Value and Principal Tensor of a given tensor
-summary.solutions.PTAk  Print a summary of the solutions.PTAk object (generic)
-SVDgen                  SVD using metrics and/or penalisations
-TENSELE                 Tensor product of a list of vectors according to a given order
+APSOLU3                 Associated 3-modes Principal Tensors of a
+                        3-modes Principal Tensor
+APSOLUk                 Associated k-modes Principal Tensors of a
+                        k-modes Principal Tensor
+CANDPARA                CANonical DECOMPosition analysis and PARAllel
+                        FACtor analysis
+CONTRACTION             Contraction of two tensors 
+CauRuimet               Robust estimation of within group covariance
+FCAk                    Generalisation of Correspondence Analysis for
+                        k-way tables
+FCAmet                  Tool used in Generalisation of Correspondence
+                        Analysis for k-way tables
+INITIA                  Initialisation used in SINGVA
+PCAn                    Principal Component Analysis on n modes 
+PROJOT                  Orthogonal Tensor projection 
+PTA3                    Principal Tensor Analysis on 3 modes
+PTAk-internal           Internal PTAk functions
+PTAk                    Principal Tensor Analysis on k modes
+REBUILD                 Build an approximation of the tensor of any
+                        order
+SINGVA                  Optimisation algorithm RPVSCC
+SVDgen                  SVD with metrics and smoothing approximation
+TENSELE                 Elementary Tensor product
+datasets                data used for demo in SVDgen
+plot.PTAk               Plot a PTAk object
+preprocessings          Few useful functions for preprocessing arrays 
+summary.PTAk            Summary of a PTA-k modes analysis

@@ -7,7 +7,7 @@ given decomposition. }
 \usage{
  REBUILD(solutions,nTens=1:2,testvar=1 ,redundancy=FALSE)}
 \arguments{
-   \item{solutions}{a \code{solutions.PTAk} object}
+   \item{solutions}{a \code{PTAk} object}
    \item{nTens}{a vector of identifying positions (numbers given in \code{summary}) for  the choice of Principal Tensors to use}
    \item{testvar}{control within \code{nTens} used Principal Tensor with  minimum percent of variability explained}
    \item{redundancy}{

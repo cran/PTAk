@@ -17,7 +17,7 @@ Principal Tensor of the given tensor. Calls recursively PTAk. }
 a tensor (as an array) of order \emph{k}, if non-identity metrics are
 used \code{X} is a list with \code{data}  as the array and
 \code{met} a list of metrics}
-\item{solu}{a \code{solutions.PTAk}  object }
+\item{solu}{a \code{PTAk}  object }
 \item{nbPT}{a number or a vector of dimension \emph{(k-2)}}
 \item{nbPT2}{integer, if 0 no 2-modes solutions will be computed, 1 means all, >1 otherwise}
 \item{smoothing}{see \code{\link{SVDgen}}}
@@ -38,7 +38,7 @@ a Principal Tensors of X at the first place. For full description of
 arguments see \code{\link{PTAk}}.}
 
 \value{
-an updated \code{solutions.PTAk} object see \code{\link{is.solutions.PTAk}}}
+an updated \code{PTAk} object }                                  
 
 \references{
 Leibovici D and Sabatier R (1998) \emph{A Singular Value

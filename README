@@ -39,6 +39,10 @@ Date: 2001/04/17
  smoothing option allows different smoothing for different Principal Tensors.
  #
 Package: PTAk
-Version: 1.1-3
+Version: 1.1-4
 Date: 2001/06/06
   just updating few Rd mistakes for R 1.3.0
+Package: PTAk
+Version: 1.1-5
+Date: 2002/05/8
+  just updating  for R 1.5.0

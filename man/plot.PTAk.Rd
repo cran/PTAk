@@ -1,28 +1,25 @@
-\name{plot.solutions.PTAk}
-\alias{plot.solutions.PTAk}
-\alias{RiskJack.plot}
-\title{Plot for solutions.PTAk objects}
+\name{plot.PTAk}
+\alias{plot.PTAk}
+\alias{RiskJackplot}
+\title{Plot a PTAk object}
 \description{
-Gives either a screeplot of singular values or plot of superposed
+Screeplot of singular values or plot of superposed
 modes or not for one or two components.}
 \usage{
- plot.PTAk(solution,labels=TRUE,mod=1,nb1=1,nb2=NULL,coefi=list(NULL,NULL),
+ plot.PTAk(x,labels=TRUE,mod=1,nb1=1,nb2=NULL,coefi=list(NULL,NULL),
                 xylab=TRUE,ppch=(1:length(solution)),lengthlabels=2,ylimit=NULL,
                 scree=FALSE,ordered=TRUE,nbvs=40,RiskJack=NULL,method="",...)
-RiskJack.plot(solution,nbvs=1:40,mod=NULL,max=NULL,rescaled=TRUE,...)
+RiskJackplot(x,nbvs=1:40,mod=NULL,max=NULL,rescaled=TRUE,...)
                               }
 \arguments{
-\item{solution}{a \code{solutions.PTAk} object}
+\item{x}{an object inheriting from class \code{PTAk}, representing a generalised  singular value decomposition}
 \item{labels}{logical if \code{TRUE} plots the labels given in \code{solution[[mod]]["n"]}}
 \item{mod}{vectors of the modes numbers to be plotted}
-\item{nb1}{
-number identifying the Principal Tensor to display on the vertical
-axe, can be checked using \code{\link{summary.solutions.PTAk}} }
-\item{nb2}{
-as nb1 to be displayed on the horizontal axe, if \code{NULL} the horizontal
+\item{nb1}{number identifying the Principal Tensor to display on the vertical
+axe, can be checked using \code{\link{summary.PTAk}} }
+\item{nb2}{as nb1 to be displayed on the horizontal axe, if \code{NULL} the horizontal
 axe will be used  as \code{Index} (see \code{\link{plot.default}}) }
-\item{coefi}{
-coefficients to multiply components for rescaling or changing signs
+\item{coefi}{coefficients to multiply components for rescaling or changing signs
 purposes; each element of the list correpond to \code{nb1} and \code{nb2}
 and are vectors of dimentions the tensor order}
 \item{xylab}{logical to display axes labels}
@@ -37,11 +34,13 @@ logical to display s screeplot of squared singular values as percent of total va
 values (TRUE) or the order is given by output listing from
 \code{summary.PTAk}}
 \item{nbvs}{a maximum number of singular values to display on the screeplot or a vector of ranks}
+\item{max}{is the number of singular values to be considered as giving the perfect fit, NULL is the max possible in x}
+\item{rescaled}{boolean to rescale the y axis to 0-100}
 \item{RiskJack}{
 if not \code{NULL} is a integer,  scree is \code{TRUE} and ordered is \code{TRUE}, plots
 on top of the scree plot a Risk plot with maximum dimension: \cr
 \code{min(RiskJack+length(nbvs),length(solution[[k]][["d"]]))}. It is
-possible to use directly the function \code{RiskJack.plot}: the default
+possible to use directly the function \code{RiskJackplot}: the default
 maximum dimension (argument \code{max}) is  \code{length(solution[[k]][["d"]])}. }
 \item{method}{default is \code{""}, a value \code{"FCA"} is to be used only
 if \code{solution} is after an FCA with \code{SVDgen}}
@@ -67,14 +66,15 @@ data}. Computational Statistics and Data Analysis, 24:255-270.
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for Pharmaco-EEG
 Studies}.(submitted) \url{http://www.fmrib.ox.ac.uk/~didier/cv/recentpub.html}
              }
-\note{This function is used all for \code{solutions.FCAk}, and
-  \code{solutions.CANDPARA}, \code{solutions.PCAn}, notheless for this
+\note{This function is used all for \code{FCAk}, and
+  \code{CANDPARA}, \code{PCAn} objjects notheless for this
   last object other interesting plots known as jointplots have not been implemented.}
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
 \seealso{ \code{\link{PTAk}}, \code{\link{PTA3}},
 \code{\link{FCAk}},\code{\link{SVDgen}}}
 \examples{
-#  demo function
+#  see the demo function   source(paste(R.home(),"/ library/PTAk/demo/PTA3.R",sep=""));
+# or    source(paste(R.home(),"/ library/PTAk/demo/PTAk.R",sep=""));
  
  # demo.PTA3()
  }

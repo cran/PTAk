@@ -60,7 +60,7 @@ the full decomposition always contains any possible choice of
 truncation, \emph{i.e.} the solutions are not dependant on the
 truncation scheme (Generalised Eckart-Young Theorem).}
 
-  \value{a \code{\link{solutions.PTAk}} object }
+  \value{a \code{\link{PTAk}} object }
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
 \references{
 Leibovici D(1993) \emph{Facteurs à Mesures Répétées et Analyses Factorielles :
@@ -84,7 +84,7 @@ The use of metrics (diagonal or not) allows flexibility of analysis like in \emp
 extending the analysis towards functional data analysis is theoretically
 valid for Principal Tensors  belonging to a tensor product of separable
 Hilbert spaces (\emph{e.g.} Sobolev spaces) see Leibovici and El Maach (1997).}
- \seealso{\code{\link{REBUILD}}, \code{\link{FCAk}}, \code{\link{PTA3}} \code{\link{summary.solutions.PTAk}}
+ \seealso{\code{\link{REBUILD}}, \code{\link{FCAk}}, \code{\link{PTA3}} \code{\link{summary.PTAk}}
       }
  \examples{
 

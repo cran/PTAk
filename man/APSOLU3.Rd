@@ -13,8 +13,8 @@ APSOLU3((X,solu,pt3=NULL,nbPT2=1,
 \item{X}{a tensor (as an array) of order \emph{3}, if non-identity metrics are
 used \code{X} is a list with \code{data}  as the array and
 \code{met} a list of metrics }
-\item{solu}{a \code{solutions.PTAk
-object} see \code{\link{is.solutions.PTAk}}}
+\item{solu}{a \code{PTAk
+object} see \code{\link{is.PTAk}}}
 \item{pt3}{a number identifying in \code{solu} the Principal Tensor to use or the
 last (if \code{NULL})}
 \item{nbPT2}{integer, if 1 all solutions will be computed otherwise at maximum
@@ -28,7 +28,7 @@ nbPT2  solutions}
 given in \code{solu}, an SVD of the contracted product of \code{X} and the component is done.
 This gives all the associated Principal Tensors which updates \code{solu} supposed to contain
 Principal Tensors of \code{X}. }
-\value{an updated \code{\link{solutions.PTAk}} object}
+\value{an updated \code{\link{PTAk}} object}
 \references{ Leibovici D and Sabatier R (1998) \emph{A Singular Value Decomposition of a k-ways
 array for a Principal Component Analysis of multi-way data, the PTA-k}. Linear Algebra and its
 Applications, 269:307-329 }

@@ -40,7 +40,7 @@ orthogonal). For the sake of comparisons the PARAFAC/CANDECOMP method
 and the PCA-\emph{n}modes are also in the  package but complete
 functionnality  of the use these methods  and more complete packages
 may be fetched at the www site quoted below. }
-\value{a \code{solutions.PCAn} (inherits \code{\link{solutions.PTAk}}) object}
+\value{a \code{PCAn} (inherits \code{\link{PTAk}}) object}
 \references{
 Caroll J.D  and Chang J.J (1970) \emph{Analysis of individual
 differences in multidimensional   scaling via n-way generalization of

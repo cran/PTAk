@@ -8,7 +8,7 @@ a given order.}
  \usage{
  TENSELE(T,moins=NULL, asarray=TRUE,order=NULL,id=NULL)}
  \arguments{
-   \item{T}{a list like a \code{solutions.PTAk} object and minimally  just contains \code{v} }
+   \item{T}{a list like a \code{PTAk} object and minimally  just contains \code{v} }
    \item{moins}{if not \code{NULL}, vector of indexes  (in the list T) to skip  }
    \item{asarray}{logical to specify the output form \code{TRUE} gives an array, \code{FALSE} gives a vector}
    \item{order}{

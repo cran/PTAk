@@ -63,7 +63,7 @@ for(s in toshow){
 par(mfrow=c(2,2))
 for(s in toshow[1:4]){
   for( i in 1:combien){
-   plot.solutions.PTAk(vs[[s]],cex=0.7,,ylimit=yli[[match(s,toshow)]],
+   plot.PTAk(vs[[s]],cex=0.7,,ylimit=yli[[match(s,toshow)]],
    ppch=rep(i%%25,3),labels=TRUE,mod=c(1,2,3),nb1=i,nb2=NULL,axes=FALSE,main=paste(combien," PT",s)
      ,xylab=FALSE)
      par(new=TRUE)}

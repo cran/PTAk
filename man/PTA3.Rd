@@ -61,7 +61,7 @@ otherwise the function given at the \emph{3}mode level will be used for
 all. These rules are te same for \code{\link{PTAk}}.
 }
 
-\value{a \code{\link{solutions.PTAk}} object}
+\value{a \code{\link{PTAk}} object}
 \references{
 Leibovici D(1993) \emph{Facteurs à Mesures Répétées et Analyses
 Factorielles : applications à un suivi épidémiologique}. Université
@@ -82,7 +82,7 @@ theoretically valid for tensors belonging to a tensor product of separable Hilbe
 (\emph{e.g.} Sobolev spaces) (see references in \code{PTAk}, \code{SVDgen}).}
 
  \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
-\seealso{\code{\link{SVDgen}}, \code{\link{FCAk}}, \code{\link{PTAk}}, \code{\link{summary.solutions.PTAk}}}
+\seealso{\code{\link{SVDgen}}, \code{\link{FCAk}}, \code{\link{PTAk}}, \code{\link{summary.PTAk}}}
  \examples{
  cat(" A little fun using iris3 and matching randomly 15 for each iris sample!","\n")
  cat("   then performing a PTA-3modes.  If many draws are done, plots")

@@ -48,7 +48,7 @@ number of components in each space), PARAFAC/CANDECOMP will look for
 best approximation according to the \emph{rank} (\emph{i.e.} the
 rank-one tensors are not necessarily orthogonal).
  }
-\value{a \code{\link{solutions.PTAk}} object (without \code{datanam method})}
+\value{a \code{\link{PTAk}} object (without \code{datanam method})}
 \references{
 Kroonenberg P (1983) \emph{Three-mode Principal Component Analysis:
 Theory and Applications}. DSWO press. Leiden.(related references in

@@ -52,7 +52,7 @@ Escofier(1984) for a 2-way derivation, e.g. for a three way contingency table
   marginal  dependencies (i.e. for a three way table no two-ways lack of
   independence are looked for).
 }
- \value{a \code{solutions.FCAk} (inherits \code{\link{solutions.PTAk}}) object }
+ \value{a \code{FCAk} (inherits \code{\link{PTAk}}) object }
 \references{
 Escoufier Y (1985) \emph{L'Analyse des correspondances : ses
 propriétés et ses extensions}. ISI 45th session Amsterdam.
@@ -67,7 +67,7 @@ Pharmaco-EEG Studies}. (submitted)
 \url{http://www.fmrib.ox.ac.uk/~didier/cv/recentpub.html}
 }
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
-\seealso{\code{\link{PTAk}}, \code{\link{FCAmet}}, \code{\link{summary.solutions.FCAk}}  }
+\seealso{\code{\link{PTAk}}, \code{\link{FCAmet}}, \code{\link{summary.FCAk}}  }
 
 \examples{
  # try the demo
