@@ -40,7 +40,7 @@ de Montpellier II PhD Thesis in Mathématiques et Applications
 (Biostatistiques).
 
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
-Pharmaco-EEG Studies}.(submitted) \url{http://www.fmrib.ox.ac.uk/~didier/cv/recentpub.html}
+Pharmaco-EEG Studies}.(submitted) \url{http://c3s2i.free.fr/cv/recentpub.html}
                      }
 \note{
 For PTA-\emph{k}modes the projection used is only on rank-one tensors
@@ -50,7 +50,7 @@ the projector onto a tensorial structure, and can define the
 PTAIV-\emph{k}modes (PTAk on Instrumental Variables Leibovici(1993).
 (see other references  for tensorial product of linear operators in
 Leibovici(2000) \emph{e.g.} Dauxois et al.(1994))}
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{PTAk}} }
 \examples{
 

@@ -64,7 +64,7 @@ be the first best rank-one tensor approximating \code{X}
 for this decomposition analysis to be called
 PTA-\emph{k}modes.}
 
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{PTAk}} }
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

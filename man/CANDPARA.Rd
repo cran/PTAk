@@ -65,7 +65,7 @@ can be done with PTAk looking only for k-modes Principal Tensors
 It is identical to look in any \code{PTAk} decomposition only for the
 \emph{k}modes solution but obviously with unecessary computations.}
 
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

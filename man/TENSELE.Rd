@@ -29,7 +29,7 @@ According to \code{asarray} the value is either an array, or a vector
 representing the tensor product of the vectors (not in moins), the dimension
 in \code{order[1]} running the slowest.}
 
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
  \seealso{\code{\link{REBUILD}}}
 
 \keyword{array }  \keyword{algebra}

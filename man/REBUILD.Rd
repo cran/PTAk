@@ -29,7 +29,7 @@ method used see \code{method}). This constitutes a best Least Squares
  This function can be called for \code{PARAFAC/CANDECOMP} and
  \code{PCAn}. A specific rebuilt is implemented for this last one. }
 
- \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+ \author{Didier Leibovici \email{c3s2i@free.fr}}
 
   \seealso{\code{\link{PTAk}}}
 

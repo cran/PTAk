@@ -66,7 +66,7 @@ nested decompositions not giving the exact \emph{orthogonal rank}.
  So PTA-\emph{k}modes will look for best approximation according to orthogonal tensors in a nested approximmation process.}
 
   \value{a \code{\link{PTAk}} object }
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \references{
 Leibovici D(1993) \emph{Facteurs à Mesures Répétées et Analyses Factorielles :
 applications à un suivi épidémiologique}. Université de Montpellier

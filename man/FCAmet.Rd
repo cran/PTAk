@@ -23,7 +23,7 @@ a list wherein each entry is the vector of the corresponding margins i.e.
 \item{count}{is the total sum \code{sum(X).}}
  }
 \note{The statistics and metrics do not depend on \code{E}. The statistic given measure only the lack of independence.}
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{ \code{\link{FCAk}} }
 \keyword{ multivariate}
 \keyword{models}

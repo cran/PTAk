@@ -77,7 +77,7 @@ Susan1D(y,x=NULL,sigmak=NULL,sigmat=NULL,
 
 
 }
-  \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+  \author{Didier Leibovici \email{c3s2i@free.fr}}
 
 \references{
  Smith S.M. and J.M. Brady (1997) \emph{SUSAN - a new approach to low level image processing}.

@@ -88,7 +88,7 @@ see \code{PCAn}). \emph{RPVSCC} stands for  \emph{R}echerche de la \emph{P}remiè
 \emph{V}aleur \emph{S}ingulière par \emph{C}ontraction
 \emph{C}omplête.
  }
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{INITIA}}, \code{\link{PTAk}}, \code{\link{PCAn}},
 \code{\link{CANDPARA}} }
 

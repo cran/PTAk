@@ -66,7 +66,7 @@ multi-way data, the PTA-k}. Linear Algebra and its Applications,
 Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
               }
 \note{The use of metrics (diagonal or not) and smoothing extend flexibility of analysis. }
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \keyword{models}
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

@@ -1,9 +1,10 @@
 "howtoPTAk" <-
 function()
 {
-cat("Copyright \(C\) 2000 Didier Leibovici", "\n\n",
+cat("Copyright \(C\) 2000 Didier Leibovici" , "\n\n",
     "to see a full description of the licence and history of changes",
-    "open the file README given in the zip")
+    "open the file README given in the zip or contact c3s2i@free.fr")
+
 }
 "CANDPARA" <-
 function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,

@@ -14,7 +14,7 @@ howtoPTAk()}
 array for a Principal Component Analysis of multi-way data, the PTA-k}. Linear Algebra and its
 Applications, 269:307-329 }
 
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{PTA3}}, \code{\link{PTAk}} ,\code{\link{FCAk}}}
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

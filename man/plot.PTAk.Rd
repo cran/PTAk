@@ -64,12 +64,12 @@ non-parametric regressions of unbalanced longitudinal
 data}. Computational Statistics and Data Analysis, 24:255-270.
 
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for Pharmaco-EEG
-Studies}.(submitted) \url{http://www.fmrib.ox.ac.uk/~didier/cv/recentpub.html}
+Studies}.(submitted) \url{http://c3s2i.free.fr/cv/recentpub.html}
              }
 \note{This function is used all for \code{FCAk}, and
   \code{CANDPARA}, \code{PCAn} objjects notheless for this
   last object other interesting plots known as jointplots have not been implemented.}
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{ \code{\link{PTAk}}, \code{\link{PTA3}},
 \code{\link{FCAk}},\code{\link{SVDgen}}}
 \examples{

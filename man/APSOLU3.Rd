@@ -37,7 +37,7 @@ tensor used is the first Principal Tensor of X (and is the last updated in \code
 it is another Principal Tensor, the obtained associated solutions do not \emph{stricto sensu}
 refer to the SVD-\emph{k}modes decomposition (because the orthogonality is defined in the whole
 tensor space not necessarily on each component space) but are still meaningful. }
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{PTA3}}, \code{\link{APSOLUk}} }
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

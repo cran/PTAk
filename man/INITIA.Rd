@@ -42,7 +42,7 @@ multi-way data, the PTA-k}. Linear Algebra and its Applications,
 The collection these eigenvectors, is known as the Tucker1 solution
 or initialisation related to PCA-3modes or PCA-\emph{n}modes models.
 If a function is given  it may include \code{dim} as argument.}
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{ \code{\link{SINGVA}}, \code{\link{PTAk}} }
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

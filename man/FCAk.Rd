@@ -64,9 +64,9 @@ de Montpellier II PhD Thesis in Mathématiques et Applications
 
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
 Pharmaco-EEG Studies}. (submitted)
-\url{http://www.fmrib.ox.ac.uk/~didier/cv/recentpub.html}
+\url{http://c3s2i.free.fr/cv/recentpub.html}
 }
-\author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+\author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{PTAk}}, \code{\link{FCAmet}}, \code{\link{summary.FCAk}}  }
 
 \examples{

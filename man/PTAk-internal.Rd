@@ -52,6 +52,6 @@ These functions are not supposed to be called directly.
                  \item{smooth}{idem as pena}
                  \item{li}{any list}
                  }
- \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+ \author{Didier Leibovici \email{c3s2i@free.fr}}
   \seealso{\code{\link{PTAk}}}
 \keyword{misc}

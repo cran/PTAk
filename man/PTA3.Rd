@@ -89,7 +89,7 @@ extends the analysis towards functional data analysis, and or outliers ``protect
 theoretically valid for tensors belonging to a tensor product of separable Hilbert spaces
 (\emph{e.g.} Sobolev spaces) (see references in \code{PTAk}, \code{SVDgen}).}
 
- \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
+ \author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{SVDgen}}, \code{\link{FCAk}}, \code{\link{PTAk}}, \code{\link{summary.PTAk}}}
  \examples{
  cat(" A little fun using iris3 and matching randomly 15 for each iris sample!","\n")
