@@ -1,7 +1,14 @@
+"howtoPTAk" <-
+function()
+{
+cat("Copyright \(C\) 2000 Didier Leibovici", "\n\n",
+    "to see a full description of the licence and history of changes",
+    "open the file README given in the zip")
+}
 "CANDPARA" <-
-function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE, 
+function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,
     smoo = list(NA), verbose = getOption("verbose"), file = NULL, 
-    modesnam = NULL, addedcomment = "") 
+    modesnam = NULL, addedcomment = "")
 {
     datanam <- substitute(X)
     sym <- NULL
@@ -438,6 +445,7 @@ function (solu)
 function (X, z, Xwiz = NULL, zwiX = NULL, rezwiX = FALSE, usetensor = TRUE)
 {
     if (usetensor) {
+   	 library(tensor)
         if (is.null(zwiX)) {
             if (is.vector(z))
                 zwiX <- 1
@@ -711,6 +719,7 @@ function (solutions, nTens = 1:2, testvar = 1, redundancy = FALSE)
         return(tensfin)
     }
 }
+
 "RESUM" <-
 function (solb, sola = NULL, numass = NULL, verbose = getOption("verbose"),
     file = NULL, summary = FALSE, testvar = 0.1, with=TRUE)
