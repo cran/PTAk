@@ -74,7 +74,10 @@ Studies}.(submitted) \url{http://www.fmrib.ox.ac.uk/~didier/cv/recentpub.html}
 \seealso{ \code{\link{PTAk}}, \code{\link{PTA3}},
 \code{\link{FCAk}},\code{\link{SVDgen}}}
 \examples{
-demo.PTA3() }
+#  demo function
+ 
+ # demo.PTA3()
+ }
 
 \keyword{hplot}
 \keyword{multivariate}

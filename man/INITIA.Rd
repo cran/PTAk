@@ -4,7 +4,7 @@
 \description{Gives the first Tucker1 components of a given tensor.
 }
 \usage{
-   INITIA(X,modesnam=NULL,method="Presvd",dim=1)}
+   INITIA(X,modesnam=NULL,method="Presvd",dim=1,...)}
 \arguments{
     \item{X}{a tensor (as an array) of order \emph{k}}
     \item{modesnam}{a character vector of the names of the modes}
@@ -16,10 +16,11 @@ matrix and returning a list with \code{v} (in columns
 vectors as in \code{svd}) and \code{d}. }
     \item{dim}{
 default 1 in each space otherwise specify the number of dimensions
-e.g. \code{c(2,3..,2)} (with \code{"Presvd"} dim is obviously 1)} }
+e.g. \code{c(2,3..,2)} (with \code{"Presvd"} dim is obviously 1)}
+\item{...} extra arguments of the method \code{method}: the first argument is fixed (see details). }
  \details{
 Computes the first (or \code{dim}) right singular vector  (or other
-summaries)for every representation of the tensor as a matrix with
+summaries) for every representation of the tensor as a matrix with
 \code{dim(X)[i]} columns, \code{i=1...k}.}
 
 \value{
@@ -43,5 +44,5 @@ or initialisation related to PCA-3modes or PCA-\emph{n}modes models.
 If a function is given  it may include \code{dim} as argument.}
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
 \seealso{ \code{\link{SINGVA}}, \code{\link{PTAk}} }
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

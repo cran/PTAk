@@ -70,5 +70,5 @@ apply(donfc,c(1),mean)
          }
 
    }
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

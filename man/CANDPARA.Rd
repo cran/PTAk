@@ -67,5 +67,5 @@ It is identical to look in any \code{PTAk} decomposition only for the
 
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
 
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

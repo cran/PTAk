@@ -62,5 +62,5 @@ multi-way data, the PTA-k}. Linear Algebra and its Applications,
 \note{The use of metrics (diagonal or not) and smoothing extend flexibility of analysis. }
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
 \keyword{models}
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

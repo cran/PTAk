@@ -1,6 +1,9 @@
 \name{preprocessings}
 \alias{preprocessings}
-
+\alias{Multcent}
+\alias{IterMV}
+\alias{Detren}
+\alias{Susan1D}
 \title{Few useful functions for preprocessing arrays }
 \description{Choices of centering or detrending  and scaling are important preprocessings for multiway analysis.}
 \usage{

@@ -70,9 +70,9 @@ Pharmaco-EEG Studies}. (submitted)
 \seealso{\code{\link{PTAk}}, \code{\link{FCAmet}}, \code{\link{summary.solutions.FCAk}}  }
 
 \examples{
-# try the demo
-demo.FCAk()
+ # try the demo
+   # demo.FCAk()
 }
 \keyword{models}
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

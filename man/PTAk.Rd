@@ -89,8 +89,8 @@ Hilbert spaces (\emph{e.g.} Sobolev spaces) see Leibovici and El Maach (1997).}
  \examples{
 
   # don <- array((1:3)%x%rnorm(6*4)%x%(1:10),c(10,4,6,3))
- 
-don <- array(1:360,c(5,4,6,3)) 
+
+don <- array(1:360,c(5,4,6,3))
  don <- don + rnorm(360,1,2)
 
  dimnames(don) <- list(paste("s",1:5,sep=""),paste("T",1:4,sep=""),
@@ -99,7 +99,7 @@ don <- array(1:360,c(5,4,6,3))
 
  ones <-list(list(v=rep(1,5)),list(v=rep(1,4)),list(v=rep(1,6)),list(v=rep(1,3)))
 
- don <- PROJOT(don,ones) 
+ don <- PROJOT(don,ones)
  don.sol <- PTAk(don,nbPT=1,nbPT2=2,minpct=0.01,
                verbose=TRUE,
                 modesnam=c("Subjects","Trimester","Time","Age"),
@@ -110,9 +110,9 @@ don <- array(1:360,c(5,4,6,3))
   plot(don.sol,mod=c(1,2,3,4),nb1=4,nb2=NULL,
       xlab="Subjects/Trimester/Time/Age",main="Associated to Subject vs1111")
 
- # try the demo
- demo.PTAk()
+#  demo function
+ # demo.PTAk()
 
   }
- \keyword{array  algebra}
+ \keyword{array }  \keyword{algebra}
  \keyword{multivariate}

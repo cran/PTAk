@@ -85,5 +85,5 @@ see \code{PCAn}). \emph{RPVSCC} stands for  \emph{R}echerche de la \emph{P}remiè
 \code{\link{CANDPARA}} }
 
 \keyword{smooth}
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

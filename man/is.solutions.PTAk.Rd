@@ -8,7 +8,7 @@ The object class  \code{solutions.PTAk} is list of list.
 arguments: }
 
 \usage{
-is.solutions.PTAk(solutions)
+is.solutions.PTAk(solut)
 }
 \arguments{
    \item{v}{a matrix \code{nb of solutions} \eqn{\times } \code{dimension of the mode} \eqn{i} }
@@ -52,6 +52,6 @@ arguments and right dimensions. The class object is used in
 \seealso{\code{RESUM}}, \code{\link{summary.solutions.PTAk}},
 \code{\link{plot.solutions.PTAk}},\code{\link{REBUILD}}. }
 
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{list}
  \keyword{classes}

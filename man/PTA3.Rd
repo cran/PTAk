@@ -88,8 +88,9 @@ theoretically valid for tensors belonging to a tensor product of separable Hilbe
  cat("   then performing a PTA-3modes.  If many draws are done, plots")
  cat("   show the stability of the first and third Principal Tensors.","\n")
  cat("iris3 is centered and reduced beforehand for each original variables.","\n")
-
- demo.PTA3(bootn=10,show=5,openX11s=FALSE)
+#  demo function
+ # source(paste(R.home(),"/library/PTAk/demo/PTA3.R",sep=""))
+ # demo.PTA3(bootn=10,show=5,openX11s=FALSE)
 }
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

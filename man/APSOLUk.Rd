@@ -5,7 +5,7 @@
 Computes all the (k-1)-modes associated solutions to the given
 Principal Tensor of the given tensor. Calls recursively PTAk. }
 \usage{
- APSOLUk(X,solutions,nbPT,nbPT2=1,
+ APSOLUk(X,solu,nbPT,nbPT2=1,
                        smoothing=FALSE,smoo=list(NA),
                         minpct=0.01,ptk=NULL,
                          verbose=getOption("verbose"),file=NULL,
@@ -17,7 +17,7 @@ Principal Tensor of the given tensor. Calls recursively PTAk. }
 a tensor (as an array) of order \emph{k}, if non-identity metrics are
 used \code{X} is a list with \code{data}  as the array and
 \code{met} a list of metrics}
-\item{solutions}{a \code{solutions.PTAk}  object }
+\item{solu}{a \code{solutions.PTAk}  object }
 \item{nbPT}{a number or a vector of dimension \emph{(k-2)}}
 \item{nbPT2}{integer, if 0 no 2-modes solutions will be computed, 1 means all, >1 otherwise}
 \item{smoothing}{see \code{\link{SVDgen}}}
@@ -66,5 +66,5 @@ PTA-\emph{k}modes.}
 
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
 \seealso{\code{\link{PTAk}} }
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

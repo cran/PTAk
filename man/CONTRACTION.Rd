@@ -1,5 +1,6 @@
 \name{CONTRACTION}
 \alias{CONTRACTION}
+\alias{CONTRACTION.list}
  \title{Contraction of two tensors }
 \description{Computes the contraction product of two tensors as a generalisation of matrix product.
  }
@@ -103,4 +104,4 @@ possibilities.}
      CONTRACTION.list(tew,sval0,moins=c(1,2)) #must be equal to
      CONTRACTION(tew,sval0[[3]]$v,Xwiz=3)
    }
-\keyword{array algebra}
+\keyword{array} \keyword{algebra}

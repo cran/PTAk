@@ -5,18 +5,18 @@
 \description{Print a summary listing of the decomposition obtained.
 }
 \usage{
-summary.solutions.PTAk(object,testvar=1,dontshow="*")
-summary.solutions.FCAk(object,testvar=1,dontshow="*")
+summary.solutions.PTAk(solution,testvar=1,dontshow="*")
+summary.solutions.FCAk(solution,testvar=1,dontshow="*")
 summary(object,testvar=1,dontshow="*")
 }
 \arguments{
-   \item{object}{a \code{solutions.PTAk} object}
+   \item{solution}{a \code{solutions.PTAk} object}
    \item{testvar}{control within \code{nTens} used Principal Tensor with  minimum percent of variability explained}
    \item{dontshow}{
 boolean criterion to remove Principal Tensors from the summary, or
 default is a character "*" equivalent to the criterion:
 \cr
-\code{!substr(object[[length(object)]][["vsnam"]],1,1)=="*"} } }
+\code{!substr(solutiont[[length(solution)]][["vsnam"]],1,1)=="*"} } }
 \details{
 The function prints a listing of the decomposition with historical
 order (instead of traditional singular value order). It is useful
@@ -56,16 +56,15 @@ Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
 
   plot(cri.svd,scree=TRUE,type="b",lty=3,RiskJack=1) #set mod=NULL or c(1,2)
   ###
-demo.FCA <- function(){
    data(crimerate)
    criafc <- FCAmet(crimerate,chi2=TRUE)
    cri.afc <- SVDgen(criafc$data,criafc$met[[2]],criafc$met[[1]])
     summary(cri.afc)
    plot(cri.afc,scree=TRUE)
    plot(cri.afc,scree=TRUE,type="b",lty=3,RiskJack=1,method="FCA")
-   }
+
 
    }
 
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}
 \keyword{multivariate}

@@ -32,4 +32,4 @@ in \code{order[1]} running the slowest.}
 \author{Didier Leibovici \email{didier@fmrib.ox.ac.uk}}
  \seealso{\code{\link{REBUILD}}}
 
-\keyword{array  algebra}
+\keyword{array }  \keyword{algebra}

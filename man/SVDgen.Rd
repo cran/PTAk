@@ -131,8 +131,11 @@ limi <- range(c(solua[[1]]$v[com,],solub[[1]]$v[com,]))
  plot(cri.svdo,nb1=1,nb2=2,mod=1,lengthlabels=3)
  plot(cri.svdo,nb1=1,nb2=2,mod=2,lengthlabels=4,
        main=expression(paste("metric ",Wg^{-1})))
-# try the demo
-demo.svdsmoo1()
+
+###########
+#  demo function
+ # when ima is NULL it uses the dataset timage12 but you can put any array
+ # demo.SVDgen(ima=NULL,snr=3,openX11s=FALSE)
 
     }
 
