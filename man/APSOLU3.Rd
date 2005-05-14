@@ -5,7 +5,7 @@ Principal Tensor}
 \description{ Computes all the 2-modes solutions associated to the given
 Principal Tensor of the given tensor.  }
  \usage{
-APSOLU3((X,solu,pt3=NULL,nbPT2=1,
+APSOLU3(X,solu,pt3=NULL,nbPT2=1,
                  smoothing=FALSE,smoo=list(NA),
                         verbose=getOption("verbose"),file=NULL )}
 

@@ -6,7 +6,7 @@
  }
 \usage{
  CONTRACTION(X,z, Xwiz=NULL,zwiX=NULL,rezwiX=FALSE,usetensor=TRUE)
- CONTRACTION.list((X,zlist,moins=1,zwiX=NULL,usetensor=TRUE,withapply=FALSE)
+ CONTRACTION.list(X,zlist,moins=1,zwiX=NULL,usetensor=TRUE,withapply=FALSE)
 }
  \arguments{
    \item{X}{a tensor(as an array) of any order}
