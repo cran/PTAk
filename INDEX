@@ -6,11 +6,11 @@ CANDPARA                CANonical DECOMPosition analysis and PARAllel
                         FACtor analysis
 CauRuimet               Robust estimation of within group covariance
 CONTRACTION             Contraction of two tensors
-datasets                data used for demo in SVDgen
 FCAk                    Generalisation of Correspondence Analysis for
                         k-way tables
 FCAmet                  Tool used in Generalisation of Correspondence
                         Analysis for k-way tables
+Ginv                    Internal PTAk functions
 howtoPTAk               howto for Principal Tensors Analysis of a
                         k-modes Tensor
 INITIA                  Initialisation used in SINGVA
@@ -19,7 +19,6 @@ plot.PTAk               Plot a PTAk object
 preprocessings          Few useful functions for preprocessing arrays
 PROJOT                  Orthogonal Tensor projection
 PTA3                    Principal Tensor Analysis on 3 modes
-PTAk-internal           Internal PTAk functions
 PTAk                    Principal Tensor Analysis on k modes
 REBUILD                 Build an approximation of the tensor of any
                         order
@@ -27,3 +26,4 @@ SINGVA                  Optimisation algorithm RPVSCC
 summary.PTAk            Summary of a PTA-k modes analysis
 SVDgen                  SVD with metrics and smoothing approximation
 TENSELE                 Elementary Tensor product
+timage12                data used for demo in SVDgen

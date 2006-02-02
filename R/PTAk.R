@@ -1,10 +1,12 @@
 "howtoPTAk" <-
 function()
 {
-cat("Copyright \(C\) 2000 Didier Leibovici" , "\n\n",
-    "to see a full description of the licence and history of changes",
-    "open the file README given in the zip or contact c3s2i@free.fr")
-
+cat("Copyright \(C\) 2000, 2006 Didier Leibovici" , "\n",
+    "to see a full description of the licence ","\n",
+    "open the file COPYING given in the zip \(or gz\) or in","\n",
+    paste(.libPaths(),"/PTAk",sep="")," or contact c3s2i@free.fr","\n")
+cat("see an HowtoPTAk.pdf and some example on http://c3s2i.free.fr","\n")
+    
 }
 "CANDPARA" <-
 function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,
