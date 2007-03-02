@@ -50,7 +50,7 @@ analysis}. UCLA Working Papers in Phonetics, 16,1-84.
 
 Kroonenberg P (1983) \emph{Three-mode Principal Component Analysis:
 Theory and Applications}. DSWO press. Leiden.(related references in
-\url{http://www.fsw.leidenuniv.nl/~kroonenb/})
+\url{http://three-mode.leidenuniv.nl/})
 
 Leibovici D and Sabatier R (1998) \emph{A Singular Value
 Decomposition of a k-ways array for a Principal Component Analysis of
