@@ -1,6 +1,6 @@
 Package: PTAk
-Version: 1.1-14
-Date: 2007-03-02
+Version: 1.1-15
+Date: 2007-03-08
 Title: Principal Tensor Analysis on k modes
 Author: Didier Leibovici <didier.leibovici@teledetection.fr>
 Maintainer: Didier Leibovici <c3s2i@free.fr>
@@ -11,4 +11,4 @@ Description: A multiway method to decompose a tensor (array) of any order,
              methods: PCAn (Tucker-n) and PARAFAC/CANDECOMP with these extensions.
 License: GPL+fees for commercial purposes (see COPYING)
 URL: http://c3s2i.free.fr/work/tensor.html
-Packaged: Fri Mar  2 10:29:55 2007; lgzdl
+Packaged: Tue Mar  6 13:45:11 2007; lgzdl

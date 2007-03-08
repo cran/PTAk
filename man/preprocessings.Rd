@@ -7,10 +7,10 @@
 \title{Few useful functions for preprocessing arrays }
 \description{Choices of centering or detrending  and scaling are important preprocessings for multiway analysis.}
 \usage{
-Multcent(dat=X,bi=c(1,2),by=3,
+Multcent(dat,bi=c(1,2),by=3,
           centre=mean,
            centrebyBA=c(TRUE,FALSE),scalebyBA=c(TRUE,FALSE))
-IterMV(n=10,dat=X,Mm=c(1,3),Vm=c(2,3),
+IterMV(n=10,dat,Mm=c(1,3),Vm=c(2,3),
                fFUN=mean,usetren=FALSE,
                   tren=function(x)smooth.spline(as.vector(x),df=5)$y,
                    rsd=TRUE)

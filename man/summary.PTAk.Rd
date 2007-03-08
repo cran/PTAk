@@ -5,8 +5,8 @@
 \description{Print a summary listing of the decomposition obtained.
 }
 \usage{
-summary.PTAk(object,testvar=1,dontshow="*",...)
-summary.FCAk(object,testvar=0.5,dontshow="*",...)
+\method{summary}{PTAk}(object,testvar=1,dontshow="*", \dots)
+\method{summary}{FCAk}(object,testvar=0.5,dontshow="*", \dots)
 }
 \arguments{
    \item{object}{an object inheriting from class \code{PTAk}, representing a generalised  singular value decomposition}

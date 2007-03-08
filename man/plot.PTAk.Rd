@@ -6,9 +6,9 @@
 Screeplot of singular values or plot of superposed
 modes or not for one or two components.}
 \usage{
- plot.PTAk(x,labels=TRUE,mod=1,nb1=1,nb2=NULL,coefi=list(NULL,NULL),
+\method{plot}{PTAk}(x,labels=TRUE,mod=1,nb1=1,nb2=NULL,coefi=list(NULL,NULL),
                 xylab=TRUE,ppch=(1:length(solution)),lengthlabels=2,ylimit=NULL,
-                scree=FALSE,ordered=TRUE,nbvs=40,RiskJack=NULL,method="",...)
+                scree=FALSE,ordered=TRUE,nbvs=40,RiskJack=NULL,method="", \dots)
 RiskJackplot(x,nbvs=1:20,mod=NULL,max=NULL,rescaled=TRUE,...)
                               }
 \arguments{
