@@ -1,0 +1,61 @@
+ PTAk license if "FREE FOR NON-COMMERCIAL PURPOSES"
+
+Copyright (C) 2000, 2006, 2007 Dr Didier G Leibovici
+
+License implies 
+-quoting proper reference of the package
+-paying fee as appropiate
+-The software is licensed without any responsability from his author for its accuracy and proper use.
+-All licenses are per site and so multi-user  (a site is understood as departement or a division at one geographically located  site).
+
+
+  The main References to quote
+        (check also  http://c3s2i.free.fr/cv/recentpub.html)
+
+Leibovici D and Sabatier R (1998) "A Singular Value Decomposition of a k-ways array for a Principal Component Analysis
+ 	of multi-way data, the PTA-k" Linear Algebra and its Applications 269:307-329.
+Leibovici D (2006) "PTAk Principal Tensor on k modes: an R Statistical Contributing Package, version 1.1-15". 
+	CopyRight (C) 2000 Didier Leibovici; In: R-project.org, http://cran.r-project.org/src/contrib/PTAk_1.1-15.tar.gz
+
+
+
+License fees definitions for PTAk all versions :
+
+i. academic work (Public reasearch institutes)				  ... no fee
+ii.academic work or post-doc research work within commercial cie	  ... no fee until use of this work
+iii. use in a process or methodology within commercial cie	  	  ... license A
+iv. any other situation where you need to justify a license		  ... license B 
+iv bis B aiming at scientific contribution via  academic paper	  ... license B' 
+v. to commercialize a methodology involving the package		  ... license C
+
+license A : £300 per year
+license B : £200 once
+license B': £100 once
+license C : £200 per year (+£20 per sale)
+
+The notification of the license and its applicabilities will be sent to you soon after your payment.
+
+
+Payements of licenses should be made  in GBP to :
+Dr D G  Leibovici
+ Branch code: 08-93-00   Account number: 13251972   Tran/Code: 77
+at
+The Cooperative Bank
+PO Box 48
+1 Balloon Street
+Manchester M60 1GP
+ (U.K.)
+
+or by PAYPAL in any devise at https://www.paypal.com
+         account DIDIER.LEIBOVICI@FREE.FR
+
+
+
+
+This package is licensed as it is without any warranty of accuracy and or proper use.
+
+best regards
+Dr Didier Leibovici
+didier.leibovici@free.fr
+c3s2i@free.fr
+
