@@ -65,24 +65,43 @@ decompositions are not necesseraly nested. This makes PTA-\emph{k}modes a model 
 nested decompositions not giving the exact \emph{orthogonal rank}.
  So PTA-\emph{k}modes will look for best approximation according to orthogonal tensors in a nested approximmation process.}
 
-  \value{a \code{\link{PTAk}} object }
+  \value{a \code{\link{PTAk}} object which consist of a list of lists. Each mode has a list in which is listed:
+\item{$v}{matrix of components for the given mode}
+\item{$iter}{vector of iterations numbers where maximum was reach}
+\item{$test}{vector of test values at maximum}
+\item{$modesnam}{name of the mode}
+\item{$v}{matrix of components for the given mode}
+ 	The last mode list has also some additional information on the analysis done:
+\item{$d}{vector of singular values}
+\item{$pct}{percentage of sum of squares for each quared singular value}
+\itme{$ssX}{vector of local sum of squares \emph{i.e.} of the current tensor with the rescursive algorithm}
+\item{$vsnam}{vector of names given to the singular value according to a recursive data dependent scheme}
+\item{$datanam}{data reference}
+\item{$method}{call applied: could be PTAk or CANDPARA or PCAn or even SVDgen, with parameters choices}
+\item{$addedcomment}{ the addedcomment (repeated) given in the call}
+You will notice that methods other than PTAk may not have all list elements but the essential ones such as: $v, $d, $ssX, and may also have additional ones like $coremat for PCAn (the core array).
+}
+
 \author{Didier Leibovici \email{c3s2i@free.fr}}
 \references{
-Leibovici D(1993) \emph{Facteurs à Mesures Répétées et Analyses Factorielles :
-applications à un suivi épidémiologique}. Université de Montpellier
-II. PhD Thesis in Mathématiques et Applications (Biostatistiques).
+Leibovici D(1993) \emph{Facteurs <e0> Mesures R<e9>p<e9>t<e9>es et Analyses Factorielles :
+applications <e0> un suivi <e9>pid<e9>miologique}. Universit<e9> de Montpellier
+II. PhD Thesis in Math<e9>matiques et Applications (Biostatistiques).
 
-Leibovici D and El Maache H (1997) \emph{Une décomposition en Valeurs Singulières d'un élément
-d'un produit Tensoriel de k espaces de Hilbert Séparables}. Compte Rendus de l'Académie des
-Sciences tome 325, série I, Statistiques (Statistics) & Probabilités (Probability Theory):
+Leibovici D and El Maache H (1997) \emph{Une d<e9>composition en Valeurs Singuli<e8>res d'un <e9>l<e9>ment
+d'un produit Tensoriel de k espaces de Hilbert S<e9>parables}. Compte Rendus de l'Acad<e9>mie des
+Sciences tome 325, s<e9>rie I, Statistiques (Statistics) & Probabilit<e9>s (Probability Theory):
 779-782.
 
 Leibovici D and Sabatier R (1998) \emph{A Singular Value Decomposition of a k-ways array for a
 Principal Component Analysis of multi-way data, the PTA-k}. Linear Algebra and its Applications,
 269:307-329.
 
-Leibovici D (2001) \emph{A Penalised algorithm for SVD and Multiway functional methods}. (in
-preparation)
+Leibovici D (2008) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}
+. to be submitted soon at Journal of Statisticcal Software.
+
+Leibovici  D (2008) \emph{A Simple Penalised algorithm for SVD and Multiway
+   functional  methods}. (to be submitted)
 
 Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
 }
@@ -112,6 +131,12 @@ don <- array(1:360,c(5,4,6,3))
                verbose=TRUE,
                 modesnam=c("Subjects","Trimester","Time","Age"),
                  addedcomment="centered on each mode")
+
+don.sol[[1]] # mode Subjects results and components
+don.sol[[2]] # mode Trimester results and components
+don.sol[[3]] # mode Time results and components
+don.sol[[4]] # mode Age results and  components with additional information on the call
+
  summary(don.sol,testvar=2)
   plot(don.sol,mod=c(1,2,3,4),nb1=1,nb2=NULL,
      xlab="Subjects/Trimester/Time/Age",main="Best rank-one approx" )

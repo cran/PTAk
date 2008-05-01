@@ -33,7 +33,7 @@ contingency table (in frequencies).
 
 \details{
 Gives the SVD-\emph{k}modes decomposition of the \eqn{1+\chi^2/N} of
-the multiple contingency table of full count \eqn{N=\sum X <- {ijk...}},
+the multiple contingency table of full count \eqn{N=\sum X_{ijk...}},
 i.e. complete independence + lack of independence (including marginal
 independences) as shown for example in Lancaster(1951)(see reference
 in Leibovici(2000)). Noting \eqn{P=X/N},  a \code{PTAk} of the
@@ -44,7 +44,7 @@ where the metrics are diagonals of the corresponding margins. For
 full description of arguments see \code{\link{PTAk}}. If \code{E}
 is not \code{NULL} an FCAk-modes relatively to a model is
 done (see Escoufier(1985) and therin reference
-Escofier(1984) for a 2-way derivation, e.g. for a three way contingency table
+Escofier(1984) for a 2-way derivation), e.g. for a three way contingency table
 \eqn{k=3} the \emph{4}-tuple data and metrics is:
  \deqn{ ((D_I^{-1} \otimes D_J^{-1} \otimes D_K^{-1})(P-E), \quad D_I, \quad D_J, \quad D_K)}
   If \code{E} was the complete independence (product of the margins)
@@ -55,16 +55,17 @@ Escofier(1984) for a 2-way derivation, e.g. for a three way contingency table
  \value{a \code{FCAk} (inherits \code{\link{PTAk}}) object }
 \references{
 Escoufier Y (1985) \emph{L'Analyse des correspondances : ses
-propriétés et ses extensions}. ISI 45th session Amsterdam.
+propri<e9>t<e9>s et ses extensions}. ISI 45th session Amsterdam.
 
-Leibovici D (1993) \emph{Facteurs à Mesures Répétées et Analyses
-Factorielles : applications à un suivi épidémiologique}. Université
-de Montpellier II PhD Thesis in Mathématiques et Applications
-(Biostatistiques).
+Leibovici D(1993) \emph{Facteurs <e0> Mesures R<e9>p<e9>t<e9>es et Analyses Factorielles :
+applications <e0> un suivi <e9>pid<e9>miologique}. Universit<e9> de Montpellier
+II. PhD Thesis in Math<e9>matiques et Applications (Biostatistiques).
 
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
-Pharmaco-EEG Studies}. (submitted)
-\url{http://c3s2i.free.fr/cv/recentpub.html}
+Pharmaco-EEG Studies}.\url{http://www.fmrib.ox.ac.uk/analysis/techrep/tr00dl2/tr00dl2.pdf}
+
+Leibovici D (2008) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}
+. to be submitted soon at Journal of Statisticcal Software.
 }
 \author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{PTAk}}, \code{\link{FCAmet}}, \code{\link{summary.FCAk}}  }

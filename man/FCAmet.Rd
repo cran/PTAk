@@ -5,12 +5,13 @@
 Computes the  ratio Observed/Expected under complete independence
 with margins of the multiple contingency table (in frequencies) and
 gives \code{chi2} statistic of lack of complete independence. }
-\usage{ FCAmet(X,chi2=FALSE,E=NULL)}
+\usage{ FCAmet(X,chi2=FALSE,E=NULL,No0margins=TRUE)}
 \arguments{
    \item{X}{a multiple contingency table (array) of order \emph{k}}
    \item{chi2}{if \code{TRUE} prints the chi2 statistic information }
    \item{E}{if not \code{NULL} represent a model which
    would be used for an \code{\link{FCAk}} relatively to a model}
+   \item{No0margins}{if TRUE, prevents zero margins in replacing cells involved by the min of the non-zero margins /nb of zero cells}
     }
 
 \value{a list with

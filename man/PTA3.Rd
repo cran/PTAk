@@ -69,10 +69,9 @@ all. These rules are te same for \code{\link{PTAk}}.
 
 \value{a \code{\link{PTAk}} object}
 \references{
-Leibovici D(1993) \emph{Facteurs à Mesures Répétées et Analyses
-Factorielles : applications à un suivi épidémiologique}. Université
-de Montpellier II. PhD Thesis in Mathématiques et Applications
-(Biostatistiques).
+Leibovici D(1993) \emph{Facteurs <e0> Mesures R<e9>p<e9>t<e9>es et Analyses Factorielles :
+applications <e0> un suivi <e9>pid<e9>miologique}. Universit<e9> de Montpellier
+II. PhD Thesis in Math<e9>matiques et Applications (Biostatistiques).
 
 Leibovici D and Sabatier R (1998) \emph{A Singular Value
 Decomposition of a k-ways array for a Principal Component Analysis of
@@ -85,7 +84,7 @@ Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of th
   \note{
 The use of metrics (diagonal or not) allows flexibility of analysis like in \emph{2} modes
 \emph{e.g.} correspondence analysis, discriminant analysis, robust analysis.  Smoothing option
-extends the analysis towards functional data analysis, and or outliers ``protection" is
+extends the analysis towards functional data analysis, and or outliers "protection" is
 theoretically valid for tensors belonging to a tensor product of separable Hilbert spaces
 (\emph{e.g.} Sobolev spaces) (see references in \code{PTAk}, \code{SVDgen}).}
 

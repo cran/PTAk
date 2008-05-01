@@ -67,17 +67,15 @@ The flexibility of this function \code{smoothing} constraint should be carefully
 function offers also the choice to change of smoothing (method or parameters)
 as the number of components grows as in Ramsay and Silverman (1997).}
  \references{
-Leibovici D and  El Maache H (1997) \emph{Une décomposition en Valeurs Singulières d'un élément
-d'un produit  Tensoriel de k espaces de Hilbert Séparables.} Compte Rendus de l'Académie des
-Sciences tome  325, série I, Statistiques (Statistics) & Probabilités (Probability Theory):
+Leibovici D and El Maache H (1997) \emph{Une d<e9>composition en Valeurs Singuli<e8>res d'un <e9>l<e9>ment
+d'un produit Tensoriel de k espaces de Hilbert S<e9>parables}. Compte Rendus de l'Acad<e9>mie des
+Sciences tome 325, s<e9>rie I, Statistiques (Statistics) & Probabilit<e9>s (Probability Theory):
 779-782.
 
 Besse P and Ferraty F (1995) \emph{Curvilinear fixed effect model}. Computational Statistics, 10:339-351.
 
-Leibovici  D (2001) \emph{Metric choices for fMRI Multiway Data
-Analysis}. (to be submitted)
 
-Leibovici  D (2001) \emph{A Penalised algorithm for SVD and Multiway
+Leibovici  D (2008) \emph{A Simple Penalised algorithm for SVD and Multiway
    functional  methods}. (to be submitted)
 
 Ramsay J.O. and Silverman B.W.  (1997) \emph{Functional Data
@@ -134,7 +132,7 @@ comtoplot <- function(com=1,solua=long.svd,solub=long.svdo,openX11s=FALSE,...)
 
 limi <- range(c(solua[[1]]$v[com,],solub[[1]]$v[com,]))
   plot(solua,nb1=com, mod=1,type="b",lty=3,lengthlabels=4,cex=0.4,
-   ylimit=limi,ylab="",col=2,...)
+   ylimit=limi,ylab="",...)
 mtext(paste("vs",com,":",yla[1],"\%"),2,col=2,line=2)
  par(new=TRUE)
 

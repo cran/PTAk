@@ -57,12 +57,12 @@ nested decompositions not giving the exact \emph{orthogonal rank}.
 \references{
 Kroonenberg P (1983) \emph{Three-mode Principal Component Analysis:
 Theory and Applications}. DSWO press. Leiden.(related references in
-\url{http://www.fsw.leidenuniv.nl/~kroonenb/})
-\
-Leibovici D (1993) \emph{Facteurs à Mesures Répétées et Analyses
-Factorielles : applications à un suivi épidémiologique}. Université
-de Montpellier II. PhD Thesis in Mathématiques et Applications
-(Biostatistiques).
+\url{http://three-mode.leidenuniv.nl})
+                         
+Leibovici D(1993) \emph{Facteurs <e0> Mesures R<e9>p<e9>t<e9>es et Analyses Factorielles :
+applications <e0> un suivi <e9>pid<e9>miologique}. Universit<e9> de Montpellier
+II. PhD Thesis in Math<e9>matiques et Applications (Biostatistiques).
+
 
 Leibovici D and Sabatier R (1998) \emph{A Singular Value
 Decomposition of a k-ways array for a Principal Component Analysis of
@@ -84,9 +84,9 @@ generalisation of the \emph{power method} (De Lathauwer et al.
 bases in each space, reminiscent of three-modes and \emph{n}-modes
 PCA (Kroonenberg(1980)), \emph{i.e.} defining what they called a
 rank-(R1,R2,...,Rn) approximation (called here \emph{space ranks},
-see \code{PCAn}). \emph{RPVSCC} stands for  \emph{R}echerche de la \emph{P}remière
-\emph{V}aleur \emph{S}ingulière par \emph{C}ontraction
-\emph{C}omplête.
+see \code{PCAn}). \emph{RPVSCC} stands for  \emph{R}echerche de la \emph{P}remi<e8>re
+\emph{V}aleur \emph{S}inguli<e8>re par \emph{C}ontraction
+\emph{C}ompl<ea>te.
  }
 \author{Didier Leibovici \email{c3s2i@free.fr}}
 \seealso{\code{\link{INITIA}}, \code{\link{PTAk}}, \code{\link{PCAn}},

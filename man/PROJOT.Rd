@@ -27,21 +27,23 @@ This function computes the \emph{tensorial orthogonal projection} of
 \code{X} onto the \emph{tensorial structure} defined by \code{solu}
 and \code{numo}. For each space (involved in the tensorial product
 where from  \code{X} belongs), one defined the projector onto
-\code{solu[[i]][["v"]][numo,]} (or on its orthogonal if
+\code{solu[[i]]$v[numo,]} (or on its orthogonal if
 \code{Ortho[[i]]==TRUE}), then the result is the image of \code{X} by
 the tensorial product of the projectors, i.e.
  \deqn{(P_{S1} \otimes P_{S2} \otimes \ldots \otimes P_{Sk})(X)}.
  }
 \value{A tensor with dimensions as \code{X}}
 \references{
-Leibovici D (1993) \emph{Facteurs à Mesures Répétées et Analyses
-Factorielles : applications à un suivi épidémiologique}. Université
-de Montpellier II PhD Thesis in Mathématiques et Applications
-(Biostatistiques).
+Leibovici D(1993) \emph{Facteurs <e0> Mesures R<e9>p<e9>t<e9>es et Analyses Factorielles :
+applications <e0> un suivi <e9>pid<e9>miologique}. Universit<e9> de Montpellier
+II. PhD Thesis in Math<e9>matiques et Applications (Biostatistiques).
 
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
-Pharmaco-EEG Studies}.(submitted) \url{http://c3s2i.free.fr/cv/recentpub.html}
-                     }
+Pharmaco-EEG Studies}. \url{http://www.fmrib.ox.ac.uk/analysis/techrep/tr00dl2/tr00dl2.pdf}
+
+
+}
+                     
 \note{
 For PTA-\emph{k}modes the projection used is only on rank-one tensors
 (Principal Tensors), \emph{i.e.} \code{numo} is a number. The code
@@ -61,7 +63,7 @@ don <- array(1:360,c(5,4,6,3))
  donfc <- PROJOT(don,ones)
 
  apply(donfc,c(2,3,4),mean)
-apply(donfc,c(1),mean)
+ apply(donfc,c(1),mean)
 
   # implementation de PTAIVk with obvious settings
  PTAIVk <- function(X,STruct,...)

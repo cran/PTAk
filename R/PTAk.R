@@ -1,11 +1,11 @@
 "howtoPTAk" <-
 function()
 {
-cat("          Copyright 2000, 2006 Didier Leibovici" , "\n",
+cat("          Copyright 2000, 2007 Didier Leibovici" , "\n",
     "            to see a full description of the licence ","\n",
-    "            open the file COPYING given in the zip or gz or in","\n",
+    "            open the file LICENSE given in the zip or gz or in","\n",
     paste(.libPaths(),"/PTAk",sep="")," or contact me at c3s2i@free.fr","\n")
-cat("         see the howtoPTAk.pdf and some example on http://c3s2i.free.fr","\n")
+cat("         see the examples on http://c3s2i.free.fr","\n")
 file.show(paste(.libPaths(), "/PTAk/DESCRIPTION", sep = ""))    
 }
 "CANDPARA" <-
@@ -1177,9 +1177,15 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
             "\n", file = ifelse(is.null(file), "", file), append = TRUE)
     }
     Y <- FCAmet(X, chi2 = chi2, E = E)
+    if(ldx==3){
+     solutions <- PTA3(Y, nbPT = nbPT, nbPT2 = nbPT2, smoothing = smoothing,
+        smoo = smoo, minpct = minpct, verbose = verbose, file = file,
+        modesnam = modesnam, addedcomment = addedcomment)}
+    else{
     solutions <- PTAk(Y, nbPT = nbPT, nbPT2 = nbPT2, smoothing = smoothing,
         smoo = smoo, minpct = minpct, verbose = verbose, file = file,
         modesnam = modesnam, addedcomment = addedcomment)
+    }
     solutions[[ldx]]$datanam <- substitute(X)
     solutions[[ldx]]$method <- match.call()
     solutions[[ldx]]$addedcomment <- addedcomment
@@ -1243,15 +1249,15 @@ function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
         iter = ite, test = test0))
 }
 "PTA3" <-
-function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksmooth(1:length(u),
-    u, kernel = "normal", bandwidth = 4, x.points = (1:length(u)))$y,
-    function(u) smooth.spline(u, df = 3)$y, NA), minpct = 0.1,
-    verbose = getOption("verbose"), file = NULL, modesnam = NULL,
-    addedcomment = "")
+function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksmooth(1:length(u), 
+    u, kernel = "normal", bandwidth = 4, x.points = (1:length(u)))$y, 
+    function(u) smooth.spline(u, df = 3)$y, NA), minpct = 0.1, 
+    verbose = getOption("verbose"), file = NULL, modesnam = NULL, 
+    addedcomment = "") 
 {
     datanam <- substitute(X)
     if (is.list(X)) {
-        if (is.list(X$met))
+        if (is.list(X$met)) 
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
     }
@@ -1262,7 +1268,7 @@ function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksm
             if (length(X$met[[d]]) > 1) {
                 if (length(X$met[[d]]) == dim(X$data)[d]^2) {
                   tempp <- d
-                  t12 <- CONTRACTION(X$data, Powmat(X$met[[d]],
+                  t12 <- CONTRACTION(X$data, Powmat(X$met[[d]], 
                     1/2), Xwiz = d, zwiX = 1)
                   d <- tempp
                   lacola <- (1:3)[-d]
@@ -1291,27 +1297,27 @@ function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksm
         return(pasta)
     }
     if (verbose) {
-        cat("\n", "       ----------+++++++++++------------",
-            "\n", ifelse(smoothing, paste("Smoothed ", "\n"),
-                ""), "              PTA 3modes ", "\n", file = ifelse(is.null(file),
+        cat("\n", "       ----------+++++++++++------------", 
+            "\n", ifelse(smoothing, paste("Smoothed ", "\n"), 
+                ""), "              PTA 3modes ", "\n", file = ifelse(is.null(file), 
                 "", file), append = TRUE)
-        cat("       ----------+++++++++++------------", "\n",
+        cat("       ----------+++++++++++------------", "\n", 
             file = ifelse(is.null(file), "", file), append = TRUE)
-        cat(" Data is ... ", deparse(datanam), "...", file = ifelse(is.null(file),
+        cat(" Data is ... ", deparse(datanam), "...", file = ifelse(is.null(file), 
             "", file), append = TRUE)
-        cat("  .... Tensor of order ", length(dim(X)), file = ifelse(is.null(file),
+        cat("  .... Tensor of order ", length(dim(X)), file = ifelse(is.null(file), 
             "", file), append = TRUE)
-        cat("  ....  with dimensions: ", dim(X), "\n", file = ifelse(is.null(file),
+        cat("  ....  with dimensions: ", dim(X), "\n", file = ifelse(is.null(file), 
             "", file), append = TRUE)
-        if (!is.null(modesnam))
-            cat("modes are ", modesnam, "\n", file = ifelse(is.null(file),
+        if (!is.null(modesnam)) 
+            cat("modes are ", modesnam, "\n", file = ifelse(is.null(file), 
                 "", file), append = TRUE)
-        if (metrics)
-            cat("---Analysis with non-Identity metrics  ------",
-                "\n", file = ifelse(is.null(file), "", file),
+        if (metrics) 
+            cat("---Analysis with non-Identity metrics  ------", 
+                "\n", file = ifelse(is.null(file), "", file), 
                 append = TRUE)
-        if (!addedcomment == "")
-            cat("\n", addedcomment, "\n", file = ifelse(is.null(file),
+        if (!addedcomment == "") 
+            cat("\n", addedcomment, "\n", file = ifelse(is.null(file), 
                 "", file), append = TRUE)
     }
     if (!is.array(X)) {
@@ -1319,65 +1325,68 @@ function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksm
     }
     solutions <- NULL
     if (smoothing) {
-        if (smoothing & !length(smoo) == 3)
+        if (smoothing & !length(smoo) == 3) 
             stop(paste("--- Smoothing list must be of length 3! ---"))
-        for (j in 1:3) if (!is.list(smoo[[j]]))
+        for (j in 1:3) if (!is.list(smoo[[j]])) 
             smoo[[j]] <- list(smoo[[j]])
     }
     for (t in 1:nbPT) {
+gc()
         if (verbose) {
-            cat("----- Principal Tensor ---- ", paste("vs", pass.(t,
-                3), sep = ""), file = ifelse(is.null(file), "",
+            cat("----- Principal Tensor ---- ", paste("vs", pass.(t, 
+                3), sep = ""), file = ifelse(is.null(file), "", 
                 file), append = TRUE)
         }
         if (smoothing) {
             if (t > 1) {
-                for (j in 1:3) if (length(smoo[[j]]) == t - 1)
+                for (j in 1:3) if (length(smoo[[j]]) == t - 1) 
                   smoo[[j]][[t]] <- smoo[[j]][[t - 1]]
             }
             tosmoo <- list(smoo[[1]][[t]], smoo[[2]][[t]], smoo[[3]][[t]])
         }
         else tosmoo <- list(NA)
-        solut <- SINGVA(X, verbose = verbose, file = file,
-            PTnam = paste("vs", pass.(t, 3), sep = ""),
-            smoothing = smoothing, smoo = tosmoo, modesnam = modesnam)
-        if (is.null(solutions) & verbose)
-            cat(" --- GLobal Percent --- ", (100 * solut[[3]]$d^2)/solut[[3]]$ssX[1],
-                "%", "\n", file = ifelse(is.null(file), "", file),
+ gc()
+        solut <- SINGVA(X, verbose = verbose, file = file, PTnam = paste("vs", 
+            pass.(t, 3), sep = ""), smoothing = smoothing, smoo = tosmoo, 
+            modesnam = modesnam)
+        if (is.null(solutions) & verbose) 
+            cat(" --- GLobal Percent --- ", (100 * solut[[3]]$d^2)/solut[[3]]$ssX[1], 
+                "%", "\n", file = ifelse(is.null(file), "", file), 
                 append = TRUE)
         if (verbose & !is.null(solutions)) {
-            cat("                 -- GLobal Percent -- ", (100 *
-                solut[[3]]$d^2)/solutions[[3]]$ssX[1], "%", "\n",
+            cat("                 -- GLobal Percent -- ", (100 * 
+                solut[[3]]$d^2)/solutions[[3]]$ssX[1], "%", "\n", 
                 file = ifelse(is.null(file), "", file), append = TRUE)
         }
         if (!is.null(solutions)) {
-            if (100 * solut[[length(solut)]]$d^2/solutions[[length(solutions)]]$ssX[1] <
+            if (100 * solut[[length(solut)]]$d^2/solutions[[length(solutions)]]$ssX[1] < 
                 minpct) {
-                cat("\n", "\n", " ++ Last 3-modes vs < ", minpct,
+                cat("\n", "\n", " ++ Last 3-modes vs < ", minpct, 
                   "% stopping this level and under ++", "\n")
-                solutions <- RESUM(solut, solutions, verbose = verbose,
+                solutions <- RESUM(solut, solutions, verbose = verbose, 
                   file = file)
                 break
             }
         }
-        if (nbPT2 >= 1)
-            solut <- APSOLU3(X, solut, pt3 = NULL, nbPT2 = nbPT2,
-                smoothing = smoothing, smoo = tosmoo, verbose = verbose,
+        if (nbPT2 >= 1) 
+            solut <- APSOLU3(X, solut, pt3 = NULL, nbPT2 = nbPT2, 
+                smoothing = smoothing, smoo = tosmoo, verbose = verbose, 
                 file = file)
-        if (verbose)
-            cat("\n", "+++ PTA 3modes  ------After ---", paste("vs",
-                pass.(t, 3), sep = ""), file = ifelse(is.null(file),
+        if (verbose) 
+            cat("\n", "+++ PTA 3modes  ------After ---", paste("vs", 
+                pass.(t, 3), sep = ""), file = ifelse(is.null(file), 
                 "", file), append = TRUE)
-        solutions <- RESUM(solut, solutions, verbose = verbose,
+        solutions <- RESUM(solut, solutions, verbose = verbose, 
             file = file)
-        if (t < nbPT)
+gc()
+        if (t < nbPT) 
             X <- PROJOT(X, solut)
     }
     if (metrics) {
         for (d in 1:3) {
             if (length(met[[d]]) > 1) {
                 if (length(met[[d]]) == dim(X)[d]^2) {
-                  solutions[[d]]$v <- solutions[[d]]$v %*% Powmat(met[[d]],
+                  solutions[[d]]$v <- solutions[[d]]$v %*% Powmat(met[[d]], 
                     -1/2)
                 }
                 else {
@@ -1390,7 +1399,7 @@ function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksm
     solutions[[3]]$method <- match.call()
     solutions[[3]]$addedcomment <- addedcomment
     solutions[[length(solutions)]]$datanam <- datanam
-    cat("\n", "-----Execution Time-----", (proc.time() - debtime)[3],
+    cat("\n", "-----Execution Time-----", (proc.time() - debtime)[3], 
         "\n")
     class(solutions) <- c("PTAk")
     invisible(solutions)
@@ -1482,6 +1491,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
             smoo[[j]] <- list(smoo[[j]])
     }
     for (t in 1:(nbPT[kor - 2])) {
+    gc()
         if (verbose)
             cat("\n", "\n", "                ++++++  k-modes Solutions  ---- k=",
                 kor, paste(", vs", pass.(t, kor), sep = ""),
@@ -1516,7 +1526,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
                   smoo[[3]][[t]], smoo[[4]][[t]], smoo[[5]][[t]],
                   smoo[[6]][[t]], smoo[[7]][[t]], smoo[[8]][[t]])
         }
-
+  gc()
         solut <- SINGVA(X, verbose = verbose, file = file,
             PTnam = paste("vs", pass.(t, kor), sep = ""), 
             smoothing = smoothing, smoo = tosmoo, modesnam = modesnam)
@@ -1544,6 +1554,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
         }
         if (kor - 3 > 0) {
             if (!nbPT[kor - 3] == 0) {
+            gc()
                 solut <- APSOLUk(X, solut, nbPT = nbPT, nbPT2 = nbPT2,
                   smoothing = smoothing, smoo = tosmoo, minpct = minpct,
                   ptk = NULL, verbose = verbose, file = file,
@@ -1551,6 +1562,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
             }
         }
         if (kor == 3 & nbPT2 >= 1) {
+        gc()
             ptk <- NULL
             solut <- APSOLU3(X, solut, pt3 = ptk, nbPT2 = nbPT2,
                 smoothing = smoothing, smoo = tosmoo, verbose = verbose,
@@ -1560,6 +1572,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
             file = file)
         if (is.null(solutions[[length(solutions)]]$datanam))
             solutions[[length(solutions)]]$datanam <- datanam
+        gc()
         if (t < nbPT[kor - 2])
             X <- PROJOT(X, solut)
     }
@@ -1639,7 +1652,11 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
             dim(X), "\n", file = ifelse(is.null(file), "", file),
             append = TRUE)
     }
-    sval0 <- INITIA(X, modesnam = modesnam, method = Ini)
+    if(class(Ini)=="PTAk") 
+          sval0 <- Ini 
+    else{
+      sval0 <- INITIA(X, modesnam = modesnam, method = Ini)
+    }
     if (!is.null(sym)) {
         if (!ord == length(sym))
             stop(paste("--- Wrong length for parameter sym ! ---"))
@@ -1771,10 +1788,16 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
 "SVDgen" <-
 function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = min(dim(Y)),
     smoo = list(function(u) ksmooth(1:length(u), u, kernel = "normal",
-        bandwidth = 3, x.points = (1:length(u)))$y))
-{
+        bandwidth = 3, x.points = (1:length(u)))$y)){
+    
+    datanam <- substitute(Y)   
+ if(is.list(Y)) {
+    D1=Y$met[[1]]
+    D2=Y$met[[2]]
+    Y=Y$data
+  }
     nomb <- min(nomb, dim(Y))
-    datanam <- substitute(Y)
+    
     dinam <- dimnames(Y)
     if (length(D1) == dim(Y)[1]^2) {
         Y <- Powmat(D1, 1/2) %*% Y
@@ -1894,9 +1917,16 @@ function (li)
 }
 "CauRuimet" <-
 function (Z, ker = 1, m0 = 1, withingroup = TRUE, loc = substitute(apply(Z,
-    2, mean, trim = 0.1)), matrixmethod = TRUE)
+    2, mean, trim = 0.1)), matrixmethod = TRUE, Nrandom=3000)
 {
+
     debtime <- proc.time()
+   if(Nrandom < dim(Z)[1]) {
+         sN=sample(1:(dim(Z)[1]),Nrandom)
+         Z=Z[sN,]
+       if(is.matrix(m0)){m0=m0[sN,]}
+   }
+  if(is.character(m0)){
     if (m0 == "tridiag") {
         m0 <- array(as.integer(0), c(dim(Z)[1], dim(Z)[1]))
         m0[1:2, 1] <- c(1, 1)
@@ -1907,6 +1937,7 @@ function (Z, ker = 1, m0 = 1, withingroup = TRUE, loc = substitute(apply(Z,
             m0[j + 1, j] <- 1
         }
     }
+  }
     mz <- eval(loc)
     Sz <- sweep(Z, 2, mz)
     Sz <- t(Sz) %*% Sz/(dim(Z)[1] - 1)
@@ -1944,20 +1975,37 @@ function (Z, ker = 1, m0 = 1, withingroup = TRUE, loc = substitute(apply(Z,
             totad <- totad
             W <- W/totad
         }
+        cat("--- W local variance like ---","\n")
     }
     else {
+    if (matrixmethod | !matrixmethod) {
+       
         W <- matrix(0, nrow = dim(Z)[2], ncol = dim(Z)[2])
         totad <- 0
+         if (is.matrix(m0)){
+         for (i in 1:(dim(Z)[1] - 1)) for (j in (i + 1):dim(Z)[1]) {
+                ad <- as.double(ker(norm2S(Z[i, ] - Z[j, ])))
+                  ad <- ad * m0[i, j]
+                W <- W + ad * ((Z[i, ] - mz) %o% (Z[j, ] -
+                  mz))
+                totad <- totad + ad
+            }
+            totad <- totad
+            W <- W/totad
+             cat("--- W global variance like  ---","\n")   
+         }
+         else {
         for (i in 1:(dim(Z)[1])) {
             ad <- as.double(ker(norm2S(Z[i, ] - mz)))
             W <- W + ad * ((Z[i, ] - mz) %o% (Z[i, ] - mz))
-            if (is.matrix(m0))
-                ad <- ad * m0[i, j]
             totad <- totad + ad
         }
-        totad <- totad * dim(Z)[1]^2
+        totad <- totad #* dim(Z)[1]^2
         W <- W/totad
-    }
+         cat("--- W robust total  variance like ---","\n")
+        }
+       }
+     }
     cat("-----Execution Time-----", (proc.time() - debtime)[3],
         "\n")
     return(W)
@@ -1974,16 +2022,55 @@ function (dat, Mm = c(1, 3), rsd = TRUE, tren = function(x) smooth.spline(as.vec
     else return(tre)
 }
 "FCAmet" <-
-function (X, chi2 = FALSE, E = NULL)
+function (X, chi2 = FALSE, E = NULL,No0margins=TRUE)
 {
     if (!is.array(X)) {
         stop(paste("--- X must be an array  ! ---"))
     }
+    
     datanam <- substitute(X)
-    ord <- length(dim(X))
-    N <- sum(X)
-    metafc <- rep(list(NULL), ord)
-    Indep <- metafc[[1]] <- apply(X, 1, sum)/N
+    ord <- length(dim(X)) 
+     N <- sum(X)
+      metafc <- rep(list(NULL), ord)
+       
+    if(No0margins){
+    evalCh.f<-function(st){
+      #st is a expression quoted e.g."x=2"
+      tmp <- tempfile()
+       writeLines(st, tmp)
+       return(eval.parent(parse(tmp)))      
+         } #end of evalCh.f          
+     library(tensorA)
+      dnam=dimnames(X)
+      X=to.tensor(as.vector(X),dim(X))
+       for(t in 1:ord){
+          metafc[[t]] <- apply(X, t, sum)
+          if (any(metafc[[t]]==0)){
+             cat("-------Zeros for margin:",t,"\n")
+             cat("-------zero values replaced by min margin on dim:",t,"\n")
+             cat("--------old $count N:",N,"\n")
+               the0=(1:length(metafc[[t]]))[metafc[[t]]==0]
+               cat(the0,"\n")
+             amin=min(metafc[[t]][metafc[[t]]!=0])/prod(dim(X)[-t])
+            
+           evalCh.f(paste("X[[",names(X)[t],"=the0]]=amin",sep=""))
+
+            #X[[(names(X)[t])=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2) doesn't work
+            #  if(t=1)  X[["I1"=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2)
+            #  if(t=2)  X[["I2"=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2)
+            #  if(t=3)  X[["I3"=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2)
+            #  if(t=4)  X[["I4"=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2)
+          }
+       }
+       X=array(as.vector(X),dim(X))
+       dimnames(X)=dnam 
+     }
+      
+      N <- sum(X)
+      
+     metafc[[1]] <- apply(X, 1, sum)/N
+        
+     Indep <-  metafc[[1]]
     for (t in 2:ord) {
         metafc[[t]] <- apply(X, t, sum)/N
         Indep <- Indep %o% metafc[[t]]
@@ -2002,6 +2089,7 @@ function (X, chi2 = FALSE, E = NULL)
             1), lower.tail = FALSE), "\n")
         cat("\n", " --", "\n")
     }
+    
     if (!is.null(E))
         invisible(list(data = (X/N - E)/Indep, met = metafc,
             count = N))
@@ -2295,7 +2383,7 @@ function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
                 ylim <- c(min(ylim, xyn), max(ylim, xyn))
             }
         }
-        for (u in mod) {
+        for (u in mod) {  
             if (!is.null(nb2)) {
                 xy <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u],
                   coefi[[2]][u]))
@@ -2337,7 +2425,7 @@ function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
                     else cex <- par("cex")
                     text(xy, labels = substr(levels(solution[[u]]$n)[as.numeric(solution[[u]]$n)],
                       1, lengthlabels[u]), col = as.numeric(solution[[u]]$n),
-                      pos = 4, cex = cex)
+                      pos = 4,...)
                     if (is.null(nb2)) {
                       par(new = TRUE)
                       plot(xy ~ solution[[u]]$n, xlab = "", ylab = "",
@@ -2346,7 +2434,7 @@ function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
                     }
                   }
                   else text(xy, labels = substr(solution[[u]]$n,
-                    1, lengthlabels[u]), col = u, pos = 4)
+                    1, lengthlabels[u]), col = u, pos = 4,...)
                 }
             }
             else if ("xlab" %in% names(list(...))) {
