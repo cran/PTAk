@@ -828,6 +828,7 @@ function (solb, sola = NULL, numass = NULL, verbose = getOption("verbose"),
                 " PT  with var>", testvar, "% total", "\n")
         else cat(" over ", length(sola[[k]]$vsnam[nostar]), " PT ",
             "\n")
+             invisible(summ)
     }
     else invisible(sola)
 }
@@ -1202,7 +1203,7 @@ function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
         v0 <- (X[sample(1:dim(X)[1], 1), ])
         if (max(abs(X)) < test * 1e-08) {
             cat(" Sum of squares veryyyy smallll  .......", "\n")
-            return(list(u = rep(0, dim(X)[1]), v = rep(0, dim(X)[2]),
+            return(list(u = as.matrix(rep(0, dim(X)[1])), v = as.matrix(rep(0, dim(X)[2])),
                 d = 0, iter = 0, test = NA))
         }
     }

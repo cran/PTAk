@@ -74,7 +74,7 @@ nested decompositions not giving the exact \emph{orthogonal rank}.
  	The last mode list has also some additional information on the analysis done:
 \item{$d}{vector of singular values}
 \item{$pct}{percentage of sum of squares for each quared singular value}
-\itme{$ssX}{vector of local sum of squares \emph{i.e.} of the current tensor with the rescursive algorithm}
+\item{$ssX}{vector of local sum of squares \emph{i.e.} of the current tensor with the rescursive algorithm}
 \item{$vsnam}{vector of names given to the singular value according to a recursive data dependent scheme}
 \item{$datanam}{data reference}
 \item{$method}{call applied: could be PTAk or CANDPARA or PCAn or even SVDgen, with parameters choices}

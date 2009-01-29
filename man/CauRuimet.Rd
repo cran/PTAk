@@ -64,8 +64,6 @@ Leibovici D (2008) \emph{Spatio-temporal Multiway Decomposition using Principal 
 . to be submitted soon at Journal of Statisticcal Software.
 }
 
-            }
-
 \note{
 As mentioned by Caussinus and Ruiz a good strategy to reveal dense groups with generalised PCA
 would be to reveal outliers first using the metric \eqn{W_o^{-1}} and remove them before using the

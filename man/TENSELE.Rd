@@ -4,7 +4,6 @@
 \description{
 Computes the Tensor Product of a list of vectors  (or matrices) according to
 a given order.}
- }
  \usage{
  TENSELE(T,moins=NULL, asarray=TRUE,order=NULL,id=NULL)}
  \arguments{
