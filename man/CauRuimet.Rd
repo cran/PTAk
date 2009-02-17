@@ -87,7 +87,7 @@ metric \eqn{W_l^{-1}}. Based on theoretical considerations they recommand for  t
  summary(res,testvar=0)
 
  # the same in a demo function
-
+  # source(paste(R.home(),"/library/PTAk/demo/CauRuimet.R",sep=""))
  # demo.CauRuimet(ker=4,withingroup=TRUE,openX11s=FALSE)
  # demo.Cauruimet(ker=0.15,withingroup=FALSE,openX11s=FALSE)
 }
