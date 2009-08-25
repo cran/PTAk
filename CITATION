@@ -1,0 +1,61 @@
+
+
+  citHeader("To cite PTAk in publications use preferably the two references or the JSS one:")
+
+desc <- packageDescription("PTAk")
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
+vers <- paste("R package version", desc$Version)
+
+
+
+citEntry(entry="Article",
+	title = "\\textup{A Singular Value Decomposition of  \\textit{k}-Way Array for
+       a Principal Component Analysis of Multiway Data, \\textsc{PTA}-\\textit{k}}",
+        author = personList(as.person("D. Leibovici"),as.person("R. Sabatier")),
+	journal = "Linear Algebra and Its Applications",
+  	year = "1998",
+ volume  = "269",
+ pages  ="307-329",        
+        textVersion = 
+        paste("Leibovici, D. and Sabatier, R.",
+	       "(1998)", 
+               "A Singular Value Decomposition of  k-Way Array for 
+               a Principal Component Analysis of Multiway Data, PTA-k. ",
+               "Linear Algebra and its Applications, 269:307-329 ",
+               sep="")
+         )
+ 
+ 
+ citEntry(entry="Manual",
+    title = "\\textup{PTAk}: \\textup{Principal Tensor Analysis on k modes}",
+    author = as.person("Leibovici D.G."),
+    year = {2009},
+    edition = " \\textup{R}-package version 1.1-21.",
+    url = "http://cran.r-project.org/web/packages/PTAk/index.html",
+       textVersion=
+        paste("Leibovici D.G. ",
+	             "(2009) ", 
+               "PTAk: Principal Tensor Analysis on k modes, ",
+               "R-package version 1.1-21. ",
+               "edition. http://cran.r-project.org/web/packages/PTAk/index.html. ",
+               sep="")
+         )
+         
+citEntry(entry="Article",
+	title = "\\textup{Spatio-Temporal Multiway Decompositions using Principal Tensor Analysis on k-modes: the  \\textsc{R}-package \\textsc{PTAk}}",
+        author = as.person("Leibovici D.G."),
+	journal = "Journal of Statistical Software",
+  	year = "accepted in 2009",
+	volume = "xx",
+	pages = "1-34",
+	number = "x",         
+        textVersion = 
+        paste("Leibovici D.G. ",
+	       "(accepted in 2009) ", 
+               "Spatio-Temporal Multiway Decompositions using Principal Tensor Analysis on k-modes: the R-package PTAk. ",
+               "Journal of Statistical Software. ",
+               "xx(x): 1-34.",
+               sep="")
+         )
+         
+    citFooter("visit also http://c3s2i.free.fr or http://cgs.nottingham.ac.uk/~lgzdl")

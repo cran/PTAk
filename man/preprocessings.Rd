@@ -20,7 +20,7 @@ Susan1D(y,x=NULL,sigmak=NULL,sigmat=NULL,
           ker=list(function(u)return(exp(-0.5*u**2))))
 }
 \arguments{
-                 \emph{function} \code{Multcent}
+           
   \item{dat}{array}
   \item{bi}{vector defining the "centering, bicentering or multi-centering" one wants
     to operate crossed with \code{by}}
@@ -31,7 +31,7 @@ Susan1D(y,x=NULL,sigmak=NULL,sigmat=NULL,
   \item{centrebyBA}{a bolean vector for "centering" with \code{centre} Before and After
     according to \code{by}}
   \item{scalebyBA}{idem as centrebyBA, for scaling operation}
-                \cr \emph{function} \code{IterMV}
+                
   \item{n}{number of iterations between "centering" and scaling}
   \item{Mm}{margins to performs \code{Detren} or \code{fFUN} on}
   \item{Vm}{margins to scale}
@@ -40,11 +40,7 @@ Susan1D(y,x=NULL,sigmak=NULL,sigmat=NULL,
   \item{usetren}{logical, to use \code{Detren}}
   \item{tren}{function to use in \code{Detren}}
   \item{rsd}{logical passed into \code{Detren} (only) to detrend or not}
-
-  \cr \emph{function} \code{Detren}
   
-
-  \cr \emph{function} \code{Susan1D}
   \item{y}{vector (length \code{n})}
   \item{x}{vector of same length, if \code{NULL} it is \code{1:n} }
   \item{sigmak}{parameter related to kernel bandwidth with \code{y}
@@ -73,8 +69,6 @@ Susan1D(y,x=NULL,sigmak=NULL,sigmat=NULL,
      regression and a kernel (\code{t}) for the values of \code{y} (the
      product of the kernels constitutes the non-linear weightings. This
      function is adapted from SUSAN algorithm (see references).
-
-
 
 }
   \author{Didier Leibovici \email{c3s2i@free.fr}}

@@ -1,3 +1,14 @@
+#PTAk  is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details. (see file LICENSE)
+#    see also <http://www.gnu.org/licenses/>.
+
 "howtoPTAk" <-
 function()
 {
@@ -800,8 +811,11 @@ function (solb, sola = NULL, numass = NULL, verbose = getOption("verbose"),
         }
     }
     if (summary) {
-
-        cat("\n", "++++ PTA- ", k, "modes ++++ ", "\n")
+         if(class(sola)[1]=="PCAn")  cat("\n", "++++ PCA- ", k, "modes ++++ ", "\n","summary function not available yet using summary.PTAk!","\n","Core tensor taken like Sing Val!")   
+         else {
+         if(class(sola)[1]=="CANDPARA")  cat("\n", "++++ CANDECOMP/PARAFAC- ", k, "modes ++++ ", "\n","\n")
+           else cat("\n", "++++ PTA- ", k, "modes ++++ ", "\n")
+           }
         di <- NULL
         for (r in 1:length(sola)) di <- c(di, length(sola[[r]]$v[1,
             ]))
@@ -2324,6 +2338,7 @@ function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
     lengthlabels = 2, ylimit = NULL, scree = FALSE, ordered = TRUE,
     nbvs = 40, RiskJack = NULL, method = "", ...)
 {      solution <- x
+if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot function not available yet using Plot.PTAk!","\n")
     if (is.null(coefi[[1]]))
         coefi[[1]] <- rep(1, length(solution))
     if (is.null(coefi[[2]]))
