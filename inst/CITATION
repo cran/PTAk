@@ -1,6 +1,4 @@
-
-
-  citHeader("To cite PTAk in publications use preferably the two references or the JSS one:")
+citHeader("To cite PTAk in publications use preferably the two references or the JSS one:")
 
 desc <- packageDescription("PTAk")
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
