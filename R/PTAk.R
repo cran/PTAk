@@ -2049,15 +2049,22 @@ function (X, chi2 = FALSE, E = NULL,No0margins=TRUE)
       metafc <- rep(list(NULL), ord)
        
     if(No0margins){
+      pass. <- function(a, r) {
+        pasta <- a
+        if(r==0)return("")
+        if(r==1)return(pasta)
+        for (i in 2:r) pasta <- paste(pasta, a, sep = "")
+        return(pasta)
+    }
     evalCh.f<-function(st){
       #st is a expression quoted e.g."x=2"
       tmp <- tempfile()
        writeLines(st, tmp)
        return(eval.parent(parse(tmp)))      
          } #end of evalCh.f          
-     library(tensorA)
+     #library(tensorA)
       dnam=dimnames(X)
-      X=to.tensor(as.vector(X),dim(X))
+      #X=to.tensor(as.vector(X),dim(X))
        for(t in 1:ord){
           metafc[[t]] <- apply(X, t, sum)
           if (any(metafc[[t]]==0)){
@@ -2068,17 +2075,14 @@ function (X, chi2 = FALSE, E = NULL,No0margins=TRUE)
                cat(the0,"\n")
              amin=min(metafc[[t]][metafc[[t]]!=0])/prod(dim(X)[-t])
             
-           evalCh.f(paste("X[[",names(X)[t],"=the0]]=amin",sep=""))
-
-            #X[[(names(X)[t])=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2) doesn't work
-            #  if(t=1)  X[["I1"=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2)
-            #  if(t=2)  X[["I2"=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2)
-            #  if(t=3)  X[["I3"=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2)
-            #  if(t=4)  X[["I4"=the0]]=min(metafc[[t]][metafc[[t]]!=0])/(N^2)
+          # evalCh.f(paste("X[[",names(X)[t],"=the0]]=amin",sep=""))
+             # t th position X[,,,theo,,]=amin
+           evalCh.f(paste("X[",  pass.(",",(t-1)),"the0", pass.(",",(ord-t)), "]=rep(amin,length(theo))",sep=""))
+            
           }
        }
-       X=array(as.vector(X),dim(X))
-       dimnames(X)=dnam 
+       #X=array(as.vector(X),dim(X))
+       #dimnames(X)=dnam 
      }
       
       N <- sum(X)

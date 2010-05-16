@@ -1,0 +1,56 @@
+To cite PTAk in publications use preferably the JSS one and the current version:
+
+Package: PTAk
+Version: 1.2-2
+Date: 2010-16-5
+Title: Principal Tensor Analysis on k modes
+Author: Didier Leibovici     <didier.leibovici@nottingham.ac.uk>
+Maintainer: Didier Leibovici <c3s2i@free.fr>
+Depends:  tensor, tensorA
+Description: A multiway method to decompose a tensor (array) of any order, as a generalisation of SVD also supporting non-identity metrics and penalisations. 2-way SVD with these extensions is also available. The package includes also some other multiway methods: PCAn (Tucker-n) and PARAFAC/CANDECOMP with these extensions.
+License: GPL(>=2)
+URL: http://c3s2i.free.fr/
+ 
+
+  Leibovici, D. and Sabatier, R.(1998)A Singular Value Decomposition of k-Way Array for a Principal Component Analysis of Multiway Data,
+  PTA-k. Linear Algebra and its Applications, 269:307-329
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {\textup{A Singular Value Decomposition of  \textit{k}-Way Array for
+       a Principal Component Analysis of Multiway Data, \textsc{PTA}-\textit{k}}},
+    author = {D. Leibovici and R. Sabatier},
+    journal = {Linear Algebra and Its Applications},
+    year = {1998},
+    volume = {269},
+    pages = {307-329},
+  }
+  Leibovici D.G. (2009) PTAk: Principal Tensor Analysis on k modes, R package version 1.2-0 .
+  http://cran.r-project.org/web/packages/PTAk/index.html.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {\textup{PTAk}: \textup{Principal Tensor Analysis on k modes}},
+    author = {Leibovici D.G.},
+    year = {2009},
+    edition = {R package version 1.1-20},
+    url = {http://cran.r-project.org/web/packages/PTAk/index.html},
+  }
+  
+  Leibovici D.G. (accepted in 2009) Spatio-Temporal Multiway Decompositions using Principal Tensor Analysis on k-modes: the R-package
+  PTAk. Journal of Statistical Software. xx(x): 1-34.
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {\textup{Spatio-Temporal Multiway Decompositions using Principal Tensor Analysis on k-modes: the  \textsc{R}-package \textsc{PTAk}}},
+    author = {Leibovici D.G.},
+    journal = {Journal of Statistical Software},
+    year = {accepted in 2009},
+    volume = {xx},
+    pages = {1-34},
+    number = {x},
+  }
+visit also http://c3s2i.free.fr or http://cgs.nottingham.ac.uk/~lgzdl

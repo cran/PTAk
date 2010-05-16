@@ -1,9 +1,10 @@
-citHeader("To cite PTAk in publications use preferably the two references or the JSS one:")
+citHeader("To cite PTAk in publications use preferably the JSS one and the current version:")
 
-desc <- packageDescription("PTAk")
-year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
-vers <- paste("R package version", desc$Version)
 
+if(!exists("meta") || is.null(meta)) meta <- packageDescription("PTAk")
+
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
+vers <- paste("R package version", meta$Version)
 
 
 citEntry(entry="Article",
@@ -11,10 +12,10 @@ citEntry(entry="Article",
        a Principal Component Analysis of Multiway Data, \\textsc{PTA}-\\textit{k}}",
         author = personList(as.person("D. Leibovici"),as.person("R. Sabatier")),
 	journal = "Linear Algebra and Its Applications",
-  	year = "1998",
- volume  = "269",
- pages  ="307-329",        
-        textVersion = 
+  	 year = "1998",
+  volume  = "269",
+   pages  ="307-329",        
+   textVersion = 
         paste("Leibovici, D. and Sabatier, R.",
 	       "(1998)", 
                "A Singular Value Decomposition of  k-Way Array for 
@@ -27,15 +28,15 @@ citEntry(entry="Article",
  citEntry(entry="Manual",
     title = "\\textup{PTAk}: \\textup{Principal Tensor Analysis on k modes}",
     author = as.person("Leibovici D.G."),
-    year = {2009},
-    edition = " \\textup{R}-package version 1.1-21.",
+    year = year,
+    edition = vers,
     url = "http://cran.r-project.org/web/packages/PTAk/index.html",
        textVersion=
         paste("Leibovici D.G. ",
-	             "(2009) ", 
-               "PTAk: Principal Tensor Analysis on k modes, ",
-               "R-package version 1.1-21. ",
-               "edition. http://cran.r-project.org/web/packages/PTAk/index.html. ",
+	             "(",year,")" ,
+               " PTAk: Principal Tensor Analysis on k modes, ",
+               vers,
+               " . http://cran.r-project.org/web/packages/PTAk/index.html. ",
                sep="")
          )
          
