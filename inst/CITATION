@@ -42,19 +42,19 @@ citEntry(entry="Article",
          
 citEntry(entry="Article",
 	title = "\\textup{Spatio-Temporal Multiway Decompositions using Principal Tensor Analysis on k-modes: the  \\textsc{R}-package \\textsc{PTAk}}",
-        author = as.person("Leibovici D.G."),
+        author = personList(as.person("Didier G. Leibovici")),
 	journal = "Journal of Statistical Software",
-  	year = "accepted in 2009",
-	volume = "xx",
-	pages = "1-34",
-	number = "x",         
-        textVersion = 
-        paste("Leibovici D.G. ",
-	       "(accepted in 2009) ", 
-               "Spatio-Temporal Multiway Decompositions using Principal Tensor Analysis on k-modes: the R-package PTAk. ",
-               "Journal of Statistical Software. ",
-               "xx(x): 1-34.",
-               sep="")
-         )
+  	year = "2010",
+	volume       = "34",
+  number       = "10",
+  pages        = "1--34",
+  url          = "http://www.jstatsoft.org/v34/i10/",
+
+  textVersion  =
+  paste("Didier G. Leibovici (2010).",
+        "Spatio-Temporal Multiway Decompositions Using Principal Tensor Analysis on k-Modes: The R Package PTAk.",
+        "Journal of Statistical Software, 34(10), 1-34.",
+        "URL http://www.jstatsoft.org/v34/i10/.")
+        )
          
-    citFooter("visit also http://c3s2i.free.fr or http://cgs.nottingham.ac.uk/~lgzdl")
+citFooter("visit also http://c3s2i.free.fr or http://cgs.nottingham.ac.uk/~lgzdl")
