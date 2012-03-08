@@ -12,7 +12,7 @@
 "howtoPTAk" <-
 function()
 {
-cat("          Copyright 2000, 2007 Didier Leibovici" , "\n",
+cat("          Copyright 2000, 2007, 2010 Didier Leibovici" , "\n",
     "            to see a full description of the licence ","\n",
     "            open the file LICENSE given in the zip or gz or in","\n",
     paste(.libPaths(),"/PTAk",sep="")," or contact me at c3s2i@free.fr","\n")
@@ -167,7 +167,7 @@ function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,
         if (verbose & (iter%%100) == 1) 
             cat("\n", "----------- test =         ", test0, "\n", 
                 file = ifelse(is.null(file), "", file), append = TRUE)
-        if (iter > (Maxiter - 1) & (iter - Maxiter)%%100 == 0) {
+        if (iter > (Maxiter - 1) & (iter - Maxiter)%%Maxiter == 0) {
             cat("\n \n \n \n \n ", " WARNING ****** Iteration already =  ", 
                 iter, "\n")
             cat(" ** type anything to STOP ** just RETURN to carry on **", 
@@ -383,7 +383,7 @@ function (X, dim = c(2, 2, 2, 3), test = 1e-12, Maxiter = 400,
             cat("\n", "----------- test =         ", test0, "\n", 
                 file = ifelse(is.null(file), "", file), append = TRUE)
         }
-        if (iter > (Maxiter - 1) & (iter - Maxiter)%%100 == 0) {
+        if (iter > (Maxiter - 1) & (iter - Maxiter)%%Maxiter == 0) {
             cat("\n \n \n \n \n ", " WARNING ****** Iteration already =  ", 
                 iter, "\n")
             cat(" ** type anything to STOP ** just RETURN to carry on **", 
@@ -931,7 +931,7 @@ function (object, testvar = 1, dontshow = "*",...)
 }
 "APSOLU3" <-
 function (X, solu, pt3 = NULL, nbPT2 = 1, smoothing = FALSE,
-    smoo = list(NA), verbose = getOption("verbose"), file = NULL)
+    smoo = list(NA), verbose = getOption("verbose"), file = NULL, ...)
 {
     if (is.list(X)) {
         if (is.list(X$met))
@@ -1004,7 +1004,7 @@ function (X, solu, pt3 = NULL, nbPT2 = 1, smoothing = FALSE,
             nomb <- min(dim(Z))
         else nomb <- min(dim(Z), nbPT2)
         if (smoothing == TRUE)
-            solq <- svdsmooth(Z, nomb = nomb, smooth = smoo[-i])
+            solq <- svdsmooth(Z, nomb = nomb, smooth = smoo[-i],...)
         else solq <- svd(Z)
         Zsol[[1]]$modesnam <- solu[[((1:3)[-i])[1]]]$modesnam
         nomb <- min(nomb, length(solq$d))
@@ -1047,7 +1047,7 @@ function (X, solu, pt3 = NULL, nbPT2 = 1, smoothing = FALSE,
 "APSOLUk" <-
 function (X, solu, nbPT, nbPT2 = 1, smoothing = FALSE, smoo = list(NA),
     minpct = 0.1, ptk = NULL, verbose = getOption("verbose"),
-    file = NULL, modesnam = NULL)
+    file = NULL, modesnam = NULL, ...)
 {
     if (is.list(X)) {
         if (is.list(X$met))
@@ -1120,12 +1120,12 @@ function (X, solu, nbPT, nbPT2 = 1, smoothing = FALSE, smoo = list(NA),
         if (length(dim(Z)) == 3) {
             solZ <- PTA3(Z, nbPT = nbPT[1], nbPT2 = nbPT2, smoothing = smoothing,
                 smoo = smoo[-i], minpct = minpct, verbose = verbose,
-                file = file, modesnam = modesnam[-i])
+                file = file, modesnam = modesnam[-i], ...)
         }
         if (length(dim(Z)) > 3) {
             solZ <- PTAk(Z, nbPT = nbPT, nbPT2 = nbPT2, smoothing = smoothing,
                 smoo = smoo[-i], minpct = minpct, verbose = verbose,
-                file = file, modesnam = modesnam[-i])
+                file = file, modesnam = modesnam[-i], ...)
         }
         nno <- length(solZ[[length(solZ)]]$vsnam)
         for (n in 1:nno) {
@@ -1172,7 +1172,7 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
     smoo = rep(list(function(u) ksmooth(1:length(u), u, kernel = "normal",
         bandwidth = 3, x.points = (1:length(u)))$y), length(dim(X))),
     verbose = getOption("verbose"), file = NULL, modesnam = NULL,
-    addedcomment = "", chi2 = TRUE, E = NULL)
+    addedcomment = "", chi2 = TRUE, E = NULL, ...)
 {
     ldx <- length(dim(X))
     if (verbose) {
@@ -1195,11 +1195,11 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
     if(ldx==3){
      solutions <- PTA3(Y, nbPT = nbPT, nbPT2 = nbPT2, smoothing = smoothing,
         smoo = smoo, minpct = minpct, verbose = verbose, file = file,
-        modesnam = modesnam, addedcomment = addedcomment)}
+        modesnam = modesnam, addedcomment = addedcomment, ...)}
     else{
     solutions <- PTAk(Y, nbPT = nbPT, nbPT2 = nbPT2, smoothing = smoothing,
         smoo = smoo, minpct = minpct, verbose = verbose, file = file,
-        modesnam = modesnam, addedcomment = addedcomment)
+        modesnam = modesnam, addedcomment = addedcomment, ...)
     }
     solutions[[ldx]]$datanam <- substitute(X)
     solutions[[ldx]]$method <- match.call()
@@ -1210,7 +1210,7 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
 "PPMA" <-
 function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
     u, kernel = "normal", bandwidth = 3, x.points = (1:length(u)))$y,
-    NA), ini = mean, vsmin = 1e-20, Maxiter = 2000)
+    NA), ini = mean, vsmin = 1e-20, Maxiter = 2000,...)
 {
     v0 <- apply(X, 2, FUN = ini)
     if (all(v0 < 1e-04)) {
@@ -1221,8 +1221,10 @@ function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
                 d = 0, iter = 0, test = NA))
         }
     }
+	PTnam="vsassocie"
+	 if(exists("PTnam",envir=.GlobalEnv))PTnam=get("PTnam",envir=.GlobalEnv)
     test0 <- 1
-    ite <- 1
+    iter <- 1
     while (test0 > test) {
         u <- as.vector(X %*% v0)
         if (is.function(pena[[1]]))
@@ -1243,10 +1245,10 @@ function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
         else test0 <- 0
         v0 <- v
         u0 <- u
-        ite <- ite + 1
-        if (ite > (Maxiter - 1) && (ite - Maxiter)%%200 == 0) {
+        iter <- iter + 1
+        if (iter > (Maxiter - 1) && (iter - Maxiter)%%Maxiter == 0) {
             cat("\n \n \n \n \n ", " WARNING ****** Iteration already =  ",
-                ite, "test= ", test0, "\n")
+                iter, "test= ", test0, "\n")
             cat(" ** type  999  to STOP ** just RETURN to carry on **",
                 "\n")
             cat(" or type a new test value initial was", test,
@@ -1260,15 +1262,15 @@ function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
             }
         }
     }
-    return(list(u = as.matrix(u), v = as.matrix(v), d = as.vector(d),
-        iter = ite, test = test0))
+    return(list("u" = as.matrix(u), "v" = as.matrix(v), "d" = as.vector(d),
+        "iter" = iter, "test" = test0))
 }
 "PTA3" <-
 function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksmooth(1:length(u), 
     u, kernel = "normal", bandwidth = 4, x.points = (1:length(u)))$y, 
     function(u) smooth.spline(u, df = 3)$y, NA), minpct = 0.1, 
     verbose = getOption("verbose"), file = NULL, modesnam = NULL, 
-    addedcomment = "") 
+    addedcomment = "", ...) 
 {
     datanam <- substitute(X)
     if (is.list(X)) {
@@ -1363,7 +1365,7 @@ gc()
  gc()
         solut <- SINGVA(X, verbose = verbose, file = file, PTnam = paste("vs", 
             pass.(t, 3), sep = ""), smoothing = smoothing, smoo = tosmoo, 
-            modesnam = modesnam)
+            modesnam = modesnam, ...)
         if (is.null(solutions) & verbose) 
             cat(" --- GLobal Percent --- ", (100 * solut[[3]]$d^2)/solut[[3]]$ssX[1], 
                 "%", "\n", file = ifelse(is.null(file), "", file), 
@@ -1386,7 +1388,7 @@ gc()
         if (nbPT2 >= 1) 
             solut <- APSOLU3(X, solut, pt3 = NULL, nbPT2 = nbPT2, 
                 smoothing = smoothing, smoo = tosmoo, verbose = verbose, 
-                file = file)
+                file = file,...)
         if (verbose) 
             cat("\n", "+++ PTA 3modes  ------After ---", paste("vs", 
                 pass.(t, 3), sep = ""), file = ifelse(is.null(file), 
@@ -1422,7 +1424,7 @@ gc()
 "PTAk" <-
 function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
     smoo = list(NA), verbose = getOption("verbose"), file = NULL,
-    modesnam = NULL, addedcomment = "")
+    modesnam = NULL, addedcomment = "", ...)
 {
     datanam <- substitute(X)
     if (is.list(X)) {
@@ -1544,7 +1546,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
   gc()
         solut <- SINGVA(X, verbose = verbose, file = file,
             PTnam = paste("vs", pass.(t, kor), sep = ""), 
-            smoothing = smoothing, smoo = tosmoo, modesnam = modesnam)
+            smoothing = smoothing, smoo = tosmoo, modesnam = modesnam, ...)
         if (is.null(solutions) & verbose)
             cat("                 -- GLobal Percent -- ", solut[[kor]]$pct,
                 "%", "\n", file = ifelse(is.null(file), "", file),
@@ -1573,7 +1575,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
                 solut <- APSOLUk(X, solut, nbPT = nbPT, nbPT2 = nbPT2,
                   smoothing = smoothing, smoo = tosmoo, minpct = minpct,
                   ptk = NULL, verbose = verbose, file = file,
-                  modesnam = modesnam)
+                  modesnam = modesnam, ...)
             }
         }
         if (kor == 3 & nbPT2 >= 1) {
@@ -1581,7 +1583,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
             ptk <- NULL
             solut <- APSOLU3(X, solut, pt3 = ptk, nbPT2 = nbPT2,
                 smoothing = smoothing, smoo = tosmoo, verbose = verbose,
-                file = file)
+                file = file, ...)
         }
         solutions <- RESUM(solut, solutions, verbose = verbose,
             file = file)
@@ -1743,7 +1745,7 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
             cat("\n", "----------- test =         ", test0, "\n",
                 file = ifelse(is.null(file), "", file), append = TRUE)
         }
-        if (iter > (Maxiter - 1) && (iter - Maxiter)%%200 == 0) {
+        if (iter > (Maxiter - 1) && (iter - Maxiter)%%Maxiter == 0) {
             cat("\n \n \n \n \n ", " WARNING ****** Iteration already =  ",
                 iter, "test= ", test0, "\n")
             cat(" ** type  999  to STOP ** just RETURN to carry on **",
@@ -1884,7 +1886,7 @@ function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = min(dim(Y)),
 "svdsmooth" <-
 function (X, nomb = min(dim(X)), smooth = list(function(u) ksmooth(1:length(u),
     u, kernel = "normal", bandwidth = 3, x.points = (1:length(u)))$y),
-    vsmin = 1e-16)
+    vsmin = 1e-16,...)
 {
     if (!is.list(smooth[[1]]))
         smooth[[1]] <- list(smooth[[1]])
@@ -1899,7 +1901,7 @@ function (X, nomb = min(dim(X)), smooth = list(function(u) ksmooth(1:length(u),
     solu[[2]]$smoocheck <- array(NA, c(2, nomb))
     solu[[2]]$smoocheck[1:2, 1] <- c(is.function(smooth[[1]][[1]]),
         is.function(smooth[[2]][[1]]))
-    fi <- PPMA(X, pena = list(smooth[[1]][[1]], smooth[[2]][[1]]))
+    fi <- PPMA(X, pena = list(smooth[[1]][[1]], smooth[[2]][[1]]),...)
     solu[[1]]$v[1, ] <- fi$u
     solu[[2]]$v[1, ] <- fi$v
     solu[[2]]$d[1] <- fi$d
@@ -1910,7 +1912,7 @@ function (X, nomb = min(dim(X)), smooth = list(function(u) ksmooth(1:length(u),
         if (length(smooth[[2]]) == qi - 1)
             smooth[[2]][[qi]] <- smooth[[2]][[qi - 1]]
         tempi <- list(toplist(smooth[[1]][[qi]]), toplist(smooth[[2]][[qi]]))
-        fi <- PPMA(X, pena = tempi)
+        fi <- PPMA(X, pena = tempi,...)
         solu[[1]]$v[qi, ] <- fi$u
         solu[[2]]$v[qi, ] <- fi$v
         solu[[2]]$d[qi] <- fi$d

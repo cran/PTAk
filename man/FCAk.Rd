@@ -12,7 +12,7 @@ contingency table (in frequencies).
                        function(u)ksmooth(1:length(u),u,kernel="normal",
                        bandwidth=3,x.points=(1:length(u)))$y),length(dim(X))),
                      verbose=getOption("verbose"),file=NULL,
-                       modesnam=NULL,addedcomment="",chi2=TRUE,E=NULL)}
+                       modesnam=NULL,addedcomment="",chi2=TRUE,E=NULL, ...)}
 \arguments{
    \item{X}{a multiple contingency table (array) of order \emph{k}}
    \item{nbPT}{a number or a vector of dimension \emph{(k-2)}}
@@ -29,6 +29,7 @@ contingency table (in frequencies).
     \item{addedcomment}{character string printed if \code{printt} after the title of the analysis}
    \item{chi2}{print the chi2 information when computing margins in \code{\link{FCAmet}}}
     \item{E}{ if not \code{NULL} is an array with the same dimensions as X}
+\item{...}{any other arguments passed to SVDGen or other functions}
     }
 
 \details{

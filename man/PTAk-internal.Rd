@@ -16,7 +16,7 @@ Internal PTAk functions }
 Ginv(A)
 PPMA(X,test=1E-10,pena=list(function(u)ksmooth(1:length(u),u,kernel="normal",
                      bandwidth=3,x.points=(1:length(u)))$y
-                     ,NA) ,ini=mean,vsmin=1E-20,Maxiter=2000)
+                     ,NA) ,ini=mean,vsmin=1E-20,Maxiter=2000, ...)
 Powmat(A,pw,eltw=FALSE)
 RaoProd(A,B)
 REBUILDPCAn(solu)
@@ -24,7 +24,7 @@ RESUM(solb,sola=NULL,numass=NULL,verbose=getOption("verbose"),file=NULL
                         ,summary=FALSE,testvar=0.1,with=TRUE)
 svdsmooth(X,nomb=min(dim(X)),
                    smooth=list(function(u)ksmooth(1:length(u),u,kernel="normal",
-                               bandwidth=3,x.points=(1:length(u)))$y),vsmin=1E-16)
+                               bandwidth=3,x.points=(1:length(u)))$y),vsmin=1E-16, ...)
 toplist(li)
 }
 \arguments{
@@ -51,6 +51,7 @@ These functions are not supposed to be called directly.
                  \item{nomb}{integer giving the number of components to fit}
                  \item{smooth}{idem as pena}
                  \item{li}{any list}
+\item{...}{any other arguments passed to functions}
                  }
  \author{Didier Leibovici \email{c3s2i@free.fr}}
   \seealso{\code{\link{PTAk}}}

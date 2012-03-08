@@ -12,7 +12,7 @@ without specific metrics, penalised or not.
                           function(u)smooth.spline(u,df=3)$y,
                           NA),
                 minpct=0.1,verbose=getOption("verbose"),file=NULL,
-                modesnam=NULL,addedcomment="")}
+                modesnam=NULL,addedcomment="", ...)}
 
 \arguments{
    \item{X}{
@@ -33,6 +33,7 @@ level and below}
 character vector of the names of the modes, if \code{NULL} "\code{mo 1}"
 ..."\code{mo k}"}
  \item{addedcomment}{character string printed after the title of the analysis}
+\item{...}{any other arguments passed to SVDGen or other functions}
 
    }
 

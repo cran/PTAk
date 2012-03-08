@@ -9,7 +9,7 @@ specific metrics, penalised or not. }
                 smoothing=FALSE,
                    smoo=list(NA),
                     verbose=getOption("verbose"),file=NULL,
-                     modesnam=NULL,addedcomment="")}
+                     modesnam=NULL,addedcomment="", ...)}
 
 \arguments{
    \item{X}{
@@ -32,6 +32,7 @@ level and below}
  \item{file}{output printed at the prompt if \code{NULL}, or printed in the given  \file{file}}
    \item{modesnam}{character vector of the names of the modes, if \code{NULL} \code{mo 1} ...\code{mo k}}
    \item{addedcomment}{character string printed if \code{printt} after the title of the analysis}
+\item{...}{any other arguments passed to other functions}
    }
 
  \details{

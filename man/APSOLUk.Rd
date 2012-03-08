@@ -9,7 +9,7 @@ Principal Tensor of the given tensor. Calls recursively PTAk. }
                        smoothing=FALSE,smoo=list(NA),
                         minpct=0.1,ptk=NULL,
                          verbose=getOption("verbose"),file=NULL,
-                          modesnam=NULL)}
+                          modesnam=NULL, ...)}
 
 \arguments{
 
@@ -27,6 +27,7 @@ used \code{X} is a list with \code{data}  as the array and
 \item{verbose}{control printing}
  \item{file}{output printed at the prompt if \code{NULL}, or printed in the given  \file{file}}
 \item{modesnam}{character vector of the names of the modes, if \code{NULL} "\code{mo 1}" ..."\code{mo k}"}
+\item{...}{any other arguments passed to PTAk or other functions}
 }
 
 \details{

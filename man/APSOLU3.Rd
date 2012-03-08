@@ -7,7 +7,7 @@ Principal Tensor of the given tensor.  }
  \usage{
 APSOLU3(X,solu,pt3=NULL,nbPT2=1,
                  smoothing=FALSE,smoo=list(NA),
-                        verbose=getOption("verbose"),file=NULL )}
+                        verbose=getOption("verbose"),file=NULL, ...)}
 
 \arguments{
 \item{X}{a tensor (as an array) of order \emph{3}, if non-identity metrics are
@@ -21,7 +21,8 @@ nbPT2  solutions}
 \item{smoothing}{see \code{\link{SVDgen}}}
 \item{smoo}{see \code{\link{PTA3}}}
 \item{verbose}{control printing}
- \item{file}{output printed at the prompt if \code{NULL}, or printed in the given  \file{file}}
+\item{file}{output printed at the prompt if \code{NULL}, or printed in the given  \file{file}}
+\item{...}{any other arguments passed to SVDGen or other functions}
    }
  \details{ For each component of the identified Principal Tensor
 given in \code{solu}, an SVD of the contracted product of \code{X} and the component is done.

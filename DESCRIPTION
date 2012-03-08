@@ -1,8 +1,8 @@
 Package: PTAk
-Version: 1.2-4
-Date: 2011-03-23
+Version: 1.2-5
+Date: 2012-03-08
 Title: Principal Tensor Analysis on k modes
-Author: Didier Leibovici <didier.leibovici@nottingham.ac.uk>
+Author: Didier Leibovici <d.g.leibovici@leeds.ac.uk>
 Maintainer: Didier Leibovici <c3s2i@free.fr>
 Depends: tensor
 Description: A multiway method to decompose a tensor (array) of any
@@ -13,6 +13,6 @@ Description: A multiway method to decompose a tensor (array) of any
         extensions.
 License: GPL (>= 2)
 URL: http://c3s2i.free.fr/
-Packaged: 2011-03-25 11:01:56 UTC; user
+Packaged: 2012-03-08 14:14:14 UTC; didierleibovici
 Repository: CRAN
-Date/Publication: 2011-03-26 15:43:49
+Date/Publication: 2012-03-08 15:09:12
