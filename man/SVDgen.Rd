@@ -1,3 +1,4 @@
+\encoding{utf-8}
 \name{SVDgen}
 \alias{SVDgen}
 \title{SVD with metrics and smoothing approximation}
@@ -8,9 +9,9 @@ components (\code{u} and \code{v}) to be smooth.
  }
 
 \usage{
-  SVDgen(Y,D2=1,D1=1,smoothing=FALSE,nomb= min(dim(Y)),
-                  smoo=list(function(u)ksmooth(1:length(u),u,kernel="normal",
-                           bandwidth=3,x.points=(1:length(u)))$y)) }
+  SVDgen(Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = NULL,
+                  smoo = list(function(u)ksmooth( 1:length(u), u, kernel = "normal",
+                           bandwidth = 3, x.points = (1:length(u)))$y)) }
  \arguments{
    \item{Y}{a matrix \eqn{n \times p}}
    \item{D2}{metric in \eqn{R^p} either a vector (\eqn{p \times 1}) or a matrix (\eqn{p \times p})}
@@ -67,9 +68,9 @@ The flexibility of this function \code{smoothing} constraint should be carefully
 function offers also the choice to change of smoothing (method or parameters)
 as the number of components grows as in Ramsay and Silverman (1997).}
  \references{
-Leibovici D and El Maache H (1997) \emph{Une d<e9>composition en Valeurs Singuli<e8>res d'un <e9>l<e9>ment
-d'un produit Tensoriel de k espaces de Hilbert S<e9>parables}. Compte Rendus de l'Acad<e9>mie des
-Sciences tome 325, s<e9>rie I, Statistiques (Statistics) & Probabilit<e9>s (Probability Theory):
+Leibovici D and El Maache H (1997) \emph{Une décomposition en Valeurs Singulières d'un élément
+d'un produit Tensoriel de k espaces de Hilbert Séparables}. Compte Rendus de l'Académie des
+Sciences tome 325, série I, Statistiques (Statistics) & Probabilités (Probability Theory):
 779-782.
 
 Besse P and Ferraty F (1995) \emph{Curvilinear fixed effect model}. Computational Statistics, 10:339-351.

@@ -4,6 +4,7 @@ citHeader("To cite PTAk in publications use preferably the JSS one and the curre
 if(!exists("meta") || is.null(meta)) meta <- packageDescription("PTAk")
 
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
+year <- substring(meta$Date,1,4)
 vers <- paste("R package version", meta$Version)
 
 

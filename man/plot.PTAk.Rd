@@ -6,10 +6,11 @@
 Screeplot of singular values or plot of superposed
 modes or not for one or two components.}
 \usage{
-\method{plot}{PTAk}(x,labels=TRUE,mod=1,nb1=1,nb2=NULL,coefi=list(NULL,NULL),
-                xylab=TRUE,ppch=(1:length(solution)),lengthlabels=2,ylimit=NULL,
-                scree=FALSE,ordered=TRUE,nbvs=40,RiskJack=NULL,method="", \dots)
-RiskJackplot(x,nbvs=1:20,mod=NULL,max=NULL,rescaled=TRUE,...)
+\method{plot}{PTAk}(x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
+    coefi = list(NULL, NULL), xylab = TRUE, ppch = (1:length(solution)),
+    lengthlabels = 2, scree = FALSE, ordered = TRUE,
+    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL, \dots)
+RiskJackplot(x, nbvs = 1:20, mod = NULL, max = NULL, rescaled=TRUE, \dots)
                               }
 \arguments{
 \item{x}{an object inheriting from class \code{PTAk}, representing a generalised  singular value decomposition}
@@ -26,10 +27,8 @@ and are vectors of dimentions the tensor order}
 \item{ppch}{a vector of length at least \code{length(mod)} used for \code{pch=}}
 \item{lengthlabels}{
 a number or a vector of numbers of characters in labels to be used for display}
-\item{ylimit}{
-used in ylim as initialisation range (in order to compare different plots)}
 \item{scree}{
-logical to display s screeplot of squared singular values as percent of total variation}
+logical to display a screeplot of squared singular values as percent of total variation}
 \item{ordered}{logical used when displaying the screeplot  with sorted
 values (TRUE) or the order is given by output listing from
 \code{summary.PTAk}}
@@ -44,6 +43,8 @@ possible to use directly the function \code{RiskJackplot}: the default
 maximum dimension (argument \code{max}) is  \code{length(solution[[k]][["d"]])}. }
 \item{method}{default is \code{""}, a value \code{"FCA"} is to be used only
 if \code{solution} is after an FCA with \code{SVDgen}}
+\item{ZoomInOut}{ used as xlim and ylim in xy-plots instead of max and min range}
+\item{Zlabels}{ used as labels instead of \code{x[[mod]]$n}, it  is a list with the same length as all modes. For example on 3 modes changing the labels of the second mode only will have to set \code{Zlabels=list(NULL,rep("a",length(x[[2]]$n) ), NULL )} }
 \item{...}{plot arguments can be passed (except \code{xlim, ylim,ylab,pch,xaxt} for component plot,
 and \code{xlab, ylab} for screeplot)}
     }

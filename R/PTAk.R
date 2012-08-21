@@ -7,14 +7,15 @@
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details. (see file LICENSE)
-#    see also <http://www.gnu.org/licenses/>.
+#    see also <http://www.gnu.org/licenses/>. 
+#   Dr Didier G.Leibovici CC 2001-20010-2012
 
 "howtoPTAk" <-
 function()
 {
-cat("          Copyright 2000, 2007, 2010 Didier Leibovici" , "\n",
-    "            to see a full description of the licence ","\n",
-    "            open the file LICENSE given in the zip or gz or in","\n",
+cat("          Copyright GPL >=2 2000, 2007, 2010, 2012 Didier Leibovici" , "\n",
+    "            see the citation file","\n",
+    "            and for a good introduction Leibovici, D.G. (2010) JSS:34(10), www.jstatsoft.org/v34/i10/","\n",
     paste(.libPaths(),"/PTAk",sep="")," or contact me at c3s2i@free.fr","\n")
 cat("         see the examples on http://c3s2i.free.fr","\n")
 file.show(paste(.libPaths(), "/PTAk/DESCRIPTION", sep = ""))    
@@ -55,7 +56,7 @@ function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,
                 t12 <- array(t12, (dim(X$data))[laperm])
                 X$data <- aperm(t12, match(1:diX, laperm))
             }
-            else X$data <- X$data * X$met[[d]]
+            else X$data <- X$data * sqrt(X$met[[d]])
         }
         met <- X$met
         X <- X$data
@@ -95,6 +96,9 @@ function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,
         stop(paste("--- X must be an array  ! ---"))
     }
     ord <- length(dim(X))
+    if (ord <=2) {
+        stop(paste("--- X must be an array  of k > 2 entries! ---"))
+    }
     if (is.null(modesnam)) {
         modesnam <- paste(rep("mo", ord), 1:ord)
     }
@@ -267,7 +271,7 @@ function (X, dim = c(2, 2, 2, 3), test = 1e-12, Maxiter = 400,
                 t12 <- array(t12, (dim(X$data))[laperm])
                 X$data <- aperm(t12, match(1:diX, laperm))
             }
-            else X$data <- X$data * X$met[[d]]
+            else X$data <- X$data * sqrt(X$met[[d]])
         }
         met <- X$met
         X <- X$data
@@ -305,6 +309,9 @@ function (X, dim = c(2, 2, 2, 3), test = 1e-12, Maxiter = 400,
     }
     solutions <- NULL
     ord <- length(dim(X))
+    if (ord <=2) {
+        stop(paste("--- X must be an array  of k > 2 entries! ---"))
+    }
     if (smoothing) {
         if (length(smoo) < ord) 
             smoo <- rep(list(smoo[[1]]), ord)
@@ -961,7 +968,7 @@ function (X, solu, pt3 = NULL, nbPT2 = 1, smoothing = FALSE,
                 t12 <- array(t12, (dim(X$data))[laperm])
                 X$data <- aperm(t12, match(1:3, laperm))
             }
-            else X$data <- X$data * X$met[[d]]
+            else X$data <- X$data * sqrt(X$met[[d]])
         }
         met <- X$met
         X <- X$data
@@ -1078,7 +1085,7 @@ function (X, solu, nbPT, nbPT2 = 1, smoothing = FALSE, smoo = list(NA),
                 t12 <- array(t12, (dim(X$data))[laperm])
                 X$data <- aperm(t12, match(1:diX, laperm))
             }
-            else X$data <- X$data * X$met[[d]]
+            else X$data <- X$data * sqrt(X$met[[d]])
         }
         met <- X$met
         X <- X$data
@@ -1175,6 +1182,9 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
     addedcomment = "", chi2 = TRUE, E = NULL, ...)
 {
     ldx <- length(dim(X))
+    if (ldx <=2) {
+        stop(paste("--- X must be an array  of k > 2 entries! ---"))
+    }
     if (verbose) {
         cat("\n", "       ----------+++++++++++------------",
             "\n", ifelse(smoothing, paste("Penalised ", "\n"),
@@ -1205,6 +1215,42 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
     solutions[[ldx]]$method <- match.call()
     solutions[[ldx]]$addedcomment <- addedcomment
     class(solutions) <- c("FCAk", "PTAk")
+    invisible(solutions)
+}
+"FCA2" <-
+function (X, nbdim =NULL, minpct = 0.01, smoothing = FALSE,
+    smoo = rep(list(function(u) ksmooth(1:length(u), u, kernel = "normal",
+        bandwidth = 3, x.points = (1:length(u)))$y), length(dim(X))),
+    verbose = getOption("verbose"), file = NULL, modesnam = NULL,
+    addedcomment = "", chi2 = FALSE, E = NULL, ...)
+{
+    ldx <- length(dim(X))
+    if (ldx !=2) {
+        stop(paste("--- X must be an array  of k = 2 entries! ---"))
+    }
+    if (verbose) {
+        cat("\n", "       ----------+++++++++++------------",
+            "\n", ifelse(smoothing, paste("Penalised ", "\n"),
+                ""), "       Correspondence Analysis on ", ldx,
+            " modes ", "\n", file = ifelse(is.null(file), "",
+                file), append = TRUE)
+        if (!is.null(modesnam))
+            cat("modes are ", modesnam, "\n", file = ifelse(is.null(file),
+                "", file), append = TRUE)
+        cat("       ----------+++++++++++------------", "\n",
+            fil = ifelse(is.null(file), "", file), append = TRUE)
+        cat("Data   = complete independence    + lack of independence ...",
+            "\n", file = ifelse(is.null(file), "", file), append = TRUE)
+        cat(" lack of independence = partial independence + lack of independence ... etc ...",
+            "\n", file = ifelse(is.null(file), "", file), append = TRUE)
+    }
+    Y <- FCAmet(X, chi2 = chi2, E = E)
+     solutions <- SVDgen(Y,smoothing = smoothing, nomb=nbdim, smoo = smoo)
+    
+    solutions[[ldx]]$datanam <- substitute(X)
+    solutions[[ldx]]$method <- match.call()
+    solutions[[ldx]]$addedcomment <- addedcomment
+    class(solutions) <- c("FCAk","FCA2", "PTAk")
     invisible(solutions)
 }
 "PPMA" <-
@@ -1301,7 +1347,7 @@ function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksm
                 t12 <- array(t12, (dim(X$data))[laperm])
                 X$data <- aperm(t12, match(1:3, laperm))
             }
-            else X$data <- X$data * X$met[[d]]
+            else X$data <- X$data * sqrt(X$met[[d]])
         }
         met <- X$met
         X <- X$data
@@ -1339,6 +1385,9 @@ function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksm
     }
     if (!is.array(X)) {
         stop(paste("--- X must be an array  ! ---"))
+    }
+    if (length(dim(X)) <=2) {
+        stop(paste("--- X must be an array  of k > 2 entries! ---"))
     }
     solutions <- NULL
     if (smoothing) {
@@ -1456,7 +1505,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
                 t12 <- array(t12, (dim(X$data))[laperm])
                 X$data <- aperm(t12, match(1:diX, laperm))
             }
-            else X$data <- X$data * X$met[[d]]
+            else X$data <- X$data * sqrt(X$met[[d]])
         }
         met <- X$met
         X <- X$data
@@ -1493,6 +1542,9 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
         stop(paste("--- X must be an array  ! ---"))
     }
     kor <- length(dim(X))
+    if (kor <=2) {
+        stop(paste("--- X must be an array  of k > 2 entries! ---"))
+    }
     if (length(nbPT) < kor - 2) {
         nbPT <- rep(nbPT[1], kor - 2)
     }
@@ -1649,7 +1701,7 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
                 t12 <- array(t12, (dim(X$data))[laperm])
                 X$data <- aperm(t12, match(1:diX, laperm))
             }
-            else X$data <- X$data * X$met[[d]]
+            else X$data <- X$data * sqrt(X$met[[d]])
         }
         met <- X$met
         X <- X$data
@@ -1803,7 +1855,7 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
     return(sval)
 }
 "SVDgen" <-
-function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = min(dim(Y)),
+function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = NULL,
     smoo = list(function(u) ksmooth(1:length(u), u, kernel = "normal",
         bandwidth = 3, x.points = (1:length(u)))$y)){
     
@@ -2079,7 +2131,7 @@ function (X, chi2 = FALSE, E = NULL,No0margins=TRUE)
             
           # evalCh.f(paste("X[[",names(X)[t],"=the0]]=amin",sep=""))
              # t th position X[,,,theo,,]=amin
-           evalCh.f(paste("X[",  pass.(",",(t-1)),"the0", pass.(",",(ord-t)), "]=rep(amin,length(theo))",sep=""))
+           evalCh.f(paste("X[",  pass.(",",(t-1)),"the0", pass.(",",(ord-t)), "]=rep(amin,length(the0))",sep=""))
             
           }
        }
@@ -2338,12 +2390,100 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
     }
     return(resul)
 }
+"COS2" <-function(solu,mod=1,solnbs=2:4,FCA=FALSE){
+	# as (t(phi_s) D phi_s)i/(t(vec_phi) D_-phi vec_phi ) if normed to lambda_s otherwise has to be times lambda_s
+	# can be added on the upto for accumulated "rendering" 
+	
+    X <-eval(solu[[length(solu)]]$datanam)
+                   
+		if("FCAk" %in% class(solu)){
+						X <-FCAmet(X)
+						if (FCA){
+								X$data <- X$data -1
+								}
+							 } 
+	 # norm of the mod vv
+	
+	 if(is.list(X)) {
+	 	# XD1/2 except mod
+        nam <- dimnames(X$data)
+        diX <- length(dim(X$data))
+        for (d in 1:diX) {
+        	if (d==mod){X$met[[d]]=1}
+           
+            if (length(X$met[[d]]) > 1) {
+                if (length(X$met[[d]]) == dim(X$data)[d]^2) {
+                  tempp <- d
+                  t12 <- CONTRACTION(X$data, Powmat(X$met[[d]],
+                    1/2), Xwiz = d, zwiX = 1)
+                  d <- tempp
+                  lacola <- (1:diX)[-d]
+                  laperm <- c(lacola, d)
+                }
+                else {
+                  lacola <- (1:diX)[-d]
+                  laperm <- c(d, lacola)
+                  lacol <- (dim(X$data))[lacola]
+                  pt12 <- matrix(aperm(X$data, laperm), ncol = prod(lacol))
+                  t12 <- sqrt(X$met[[d]]) * pt12
+                }
+                t12 <- array(t12, (dim(X$data))[laperm])
+                X$data <- aperm(t12, match(1:diX, laperm))
+            }
+            else X$data <- X$data * sqrt(X$met[[d]])
+        }
+       # metAll <- X$met
+        X <- X$data
+        dimnames(X) <- nam
+    }
+    
+     diX <-length(dim(X))
+       lacola <- (1:diX)[-mod]
+           laperm <- c(mod, lacola)
+              lacol <- (dim(X))[lacola]
+       Xmod <- matrix(aperm(X, laperm), ncol = prod(lacol))	 	 
+	 
+	   
+	  cos2 <- (solu[[mod]]$v[solnbs,]**2)*rep(solu[[length(solu)]]$d[solnbs]**2,dim(solu[[mod]]$v)[2])
+	  vv <- apply(Xmod**2,1,sum)
+	cos2 <- t(cos2)/vv
+	
+	 colnames(cos2) <- paste(rep("cos2",length(solnbs)),paste(":",solnbs,":",sep=""),solu[[length(solu)]]$vsnam[solnbs],sep="_")
+	 rownames(cos2) <- solu[[mod]]$n
+	return(round(cos2*1000))
+}
+##############
+"CTR"  <-function(solu, mod=1,solnbs=1:4){
+	# as ()t(phi_s) D phi_s)i/lambda_s  if normed to lambda_s otherwise not divided by lambda
+                    
+	if(is.list(eval(solu[[length(solu)]]$datanam))) {
+	   	met <- eval(solu[[length(solu)]]$datanam)$met[[mod]]}
+	else{
+		if("FCAk" %in% class(solu)){
+			met <-FCAmet(eval(solu[[length(solu)]]$datanam))$met[[mod]]
+			}
+		else{
+	   		met <-1
+	   	}
+	 } 
+	if(is.vector(met)){
+		ctr <- t(solu[[mod]]$v[solnbs,]**2)*met 
+		}
+	else{
+		ctr <- t( (solu[[mod]]$v[solnbs,]%*%met)*solu[[mod]]$v[solnbs,]) 
+	}
+	colnames(ctr) <- paste(rep("ctr",length(solnbs)),paste(":",solnbs,":",sep=""),solu[[length(solu)]]$vsnam[solnbs],sep="_")
+	rownames(ctr) <- solu[[mod]]$n
+	return(round(ctr*1000))
+}
+
 "plot.PTAk" <-
 function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
     coefi = list(NULL, NULL), xylab = TRUE, ppch = (1:length(solution)),
-    lengthlabels = 2, ylimit = NULL, scree = FALSE, ordered = TRUE,
-    nbvs = 40, RiskJack = NULL, method = "", ...)
+    lengthlabels = 2, scree = FALSE, ordered = TRUE,
+    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL,...)
 {      solution <- x
+	awaybor=1.04
 if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot function not available yet using Plot.PTAk!","\n")
     if (is.null(coefi[[1]]))
         coefi[[1]] <- rep(1, length(solution))
@@ -2354,7 +2494,7 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
     if (length(lengthlabels) == 1)
         lengthlabels <- rep(lengthlabels, length(solution))
     ord <- length(solution)
-    if (as.character(solution[[ord]]$method)[1] == "FCA" | method ==
+    if (substr(as.character(solution[[ord]]$method)[1],1,3) == "FCA" | substr(method,1,3) ==
         "FCA") {
         divv <- solution[[ord]]$ssX[1] - 1
         perclab <- "% FCA"
@@ -2371,7 +2511,7 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
     for (r in 1:length(solution)) di <- c(di, length(solution[[r]]$v[1,
         ]))
     if (!scree) {
-        ylim <- ylimit
+    	ylim <-c(+Inf,-Inf)
         xlab <- ""
         ylab <- ""
         if (is.null(nb2)) {
@@ -2391,37 +2531,28 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
                   round(solution[[ord]]$pct[nb2], 2), "% ", round((100 *
                     (solution[[ord]]$d[nb2])^2)/divv, 2), perclab)
         }
-        for (u in mod) {
-            if (!is.null(nb2)) {
-                xy <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u],
-                  coefi[[2]][u]))
-                xyn <- t(solution[[u]]$v[c(nb1, nb2), ]) %*%
-                  diag(c(coefi[[1]][u], coefi[[2]][u]))
-                ylim <- c(min(ylim, xyn), max(ylim, xyn))
-            }
-            else {
-                xy <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
-                xyn <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
-                ylim <- c(min(ylim, xyn), max(ylim, xyn))
-            }
-        }
         for (u in mod) {  
             if (!is.null(nb2)) {
-                xy <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u],
-                  coefi[[2]][u]))
-                xyn <- t(solution[[u]]$v[c(nb1, nb2), ]) %*%
-                  diag(c(coefi[[1]][u], coefi[[2]][u]))
-                ylim <- c(min(ylim, xyn), max(ylim, xyn))
-                xlim <- ylim
+                xyn <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u], coefi[[2]][u]))                 
                 xaxt <- "s"
+                ylim <- awaybor*c(min(xyn,ylim[1]), max(xyn,ylim[2]))
             }
             else {
-                xy <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
                 xyn <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
-                ylim <- c(min(ylim, xyn), max(ylim, xyn))
-                if (!"xaxt" %in% names(list(...)))
-                  xaxt <- "n"
+               if (!"xaxt" %in% names(list(...)))
+                  xaxt <- "n" 
+                  ylim <- awaybor*c(min(xyn,ylim[1]), max(xyn,ylim[2]))
             }
+		}
+        if(!is.null(ZoomInOut)) ylim <- ZoomInOut
+         xlim <- ylim
+        for (u in mod) { 
+        	 if (!is.null(nb2)) {
+                 xy <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u],coefi[[2]][u]))
+             }
+             else {
+                 xy <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
+             }         	
             if (labels) {
                 if ("xlab" %in% names(list(...))) {
                   if ("ylab" %in% names(list(...)))
@@ -2440,26 +2571,33 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
                     pch = ppch[u], xaxt = xaxt, xlab = xlab,
                     ...)
                 }
-                if (!is.null(solution[[u]]$n)) {
-                  if (is.factor(solution[[u]]$n)) {
+              if(!is.null(Zlabels[[u]])){
+              	ZlabUN <- Zlabels[[u]] 
+              }
+              else {
+              	ZlabUN <- solution[[u]]$n
+              }  
+                if (!is.null(ZlabUN)) {
+                  if (is.factor(ZlabUN)) {
                     if ("cex" %in% names(list(...)))
                       cex <- list(...)$cex
                     else cex <- par("cex")
-                    text(xy, labels = substr(levels(solution[[u]]$n)[as.numeric(solution[[u]]$n)],
-                      1, lengthlabels[u]), col = as.numeric(solution[[u]]$n),
+                    text(xy, labels = substr(levels(ZlabUN)[as.numeric(ZlabUN)],
+                      1, lengthlabels[u]), col = as.numeric(ZlabUN),
                       pos = 4,...)
                     if (is.null(nb2)) {
                       par(new = TRUE)
-                      plot(xy ~ solution[[u]]$n, xlab = "", ylab = "",
+                      plot(xy ~ ZlabUN, xlab = "", ylab = "",
                         ylim = ylim, cex = cex)
                       par(new = FALSE)
                     }
                   }
-                  else text(xy, labels = substr(solution[[u]]$n,
+                  else text(xy, labels = substr(ZlabUN,
                     1, lengthlabels[u]), col = u, pos = 4,...)
                 }
             }
-            else if ("xlab" %in% names(list(...))) {
+            else 
+            if ("xlab" %in% names(list(...))) {
                 if ("ylab" %in% names(list(...)))
                   plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u],
                     col = u, xaxt = xaxt, ...)
