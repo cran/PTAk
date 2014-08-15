@@ -74,10 +74,11 @@ Leibovici DG (2010) \emph{Spatio-temporal Multiway Decomposition using Principal
  cri.FCA2 <- FCA2(crimerate)
  summary(cri.FCA2)
   plot(cri.FCA2, mod = c(1,2), nb1 = 2, nb2 = 3) # unscaled
-  plot(cri.FCA2, mod = c(1,2), nb1 = 2, nb2 = 3, coefi = list(rep(0.130787,50),rep(0.104359,7)) )# symmetric-map biplot
+  plot(cri.FCA2, mod = c(1,2), nb1 = 2, nb2 = 3, coefi = 
+  	list(c(0.130787,0.130787),c(0.104359,0.104359)) )# symmetric-map biplot
  CTR(cri.FCA2, mod = 1, solnbs = 2:4)
  CTR(cri.FCA2, mod = 2, solnbs = 2:4)
- COS2(cri.FCA2, mod = 2, solnbs = 2:4, FCA = TRUE)
+ COS2(cri.FCA2, mod = 2, solnbs = 2:4)
  
  
 }

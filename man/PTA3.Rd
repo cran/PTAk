@@ -104,12 +104,14 @@ theoretically valid for tensors belonging to a tensor product of separable Hilbe
 # Zone_clim<-Zone_climTUN$att.data[,c(2:13,15:26,28:39,42:53,57:80,83:95,55:56)]
 # Zot <-Zone_clim[,85:87] ;temp <-colnames(Zot) 
 # Zot <- as.matrix(Zot)%x%t(as.matrix(rep(1,12)))
-# colnames(Zot) <-c(paste(rep(temp [1],12),1:12),paste(rep(temp [2],12),1:12), paste(rep(temp [3],12),1:12))
+# colnames(Zot) <-c(paste(rep(temp [1],12),1:12),paste(rep(temp [2],12),1:12),
+#	 paste(rep(temp [3],12),1:12))
 # Zone_clim <-cbind(Zone_clim[,1:84],Zot)
  
 # Zone3w <- array(as.vector(as.matrix(Zone_clim)),c(2599,12,10))
 ## preprocessing
-#Zone3w<-Multcent(dat=Zone3w,bi=NULL,by=3,centre=mean, centrebyBA=c(TRUE,FALSE),scalebyBA=c(TRUE,FALSE))
+#Zone3w<-Multcent(dat=Zone3w,bi=NULL,by=3,centre=mean, 
+#	centrebyBA=c(TRUE,FALSE),scalebyBA=c(TRUE,FALSE))
 # Zone3w.PTA3<-PTA3(Zone3w,nbPT=3,nbPT2=3)
 ## summary and plot
 # summary(Zone3w.PTA3)

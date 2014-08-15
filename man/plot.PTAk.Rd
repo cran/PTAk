@@ -3,13 +3,12 @@
 \alias{RiskJackplot}
 \title{Plot a PTAk object}
 \description{
-Screeplot of singular values or plot of superposed
-modes or not for one or two components.}
+Screeplot of singular values or superposed plot of modes for one or two components (1 dimensional scatterplot with spread labels or scatterplot on two dimensions).}
 \usage{
 \method{plot}{PTAk}(x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
     coefi = list(NULL, NULL), xylab = TRUE, ppch = (1:length(solution)),
     lengthlabels = 2, scree = FALSE, ordered = TRUE,
-    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL, \dots)
+    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL, Zcol=NULL, \dots)
 RiskJackplot(x, nbvs = 1:20, mod = NULL, max = NULL, rescaled=TRUE, \dots)
                               }
 \arguments{
@@ -20,8 +19,8 @@ RiskJackplot(x, nbvs = 1:20, mod = NULL, max = NULL, rescaled=TRUE, \dots)
 axe, can be checked using \code{\link{summary.PTAk}} }
 \item{nb2}{as nb1 to be displayed on the horizontal axe, if \code{NULL} the horizontal
 axe will be used  as \code{Index} (see \code{\link{plot.default}}) }
-\item{coefi}{coefficients to multiply components for rescaling or changing signs
-purposes; each element of the list correpond to \code{nb1} and \code{nb2}
+\item{coefi}{coefficients to multiply components for all modes (not just the one in \code{mod}) for rescaling or changing signs
+purposes; each element of the list correspond to \code{nb1} and \code{nb2}
 and are vectors of dimentions the tensor order}
 \item{xylab}{logical to display axes labels}
 \item{ppch}{a vector of length at least \code{length(mod)} used for \code{pch=}}
@@ -37,16 +36,16 @@ values (TRUE) or the order is given by output listing from
 \item{rescaled}{boolean to rescale the y axis to 0-100}
 \item{RiskJack}{
 if not \code{NULL} is a integer,  scree is \code{TRUE} and ordered is \code{TRUE}, plots
-on top of the scree plot a Risk plot with maximum dimension: \cr
-\code{min(RiskJack+length(nbvs),length(solution[[k]][["d"]]))}. It is
+on top of the scree plot a Risk plot with \code{nbvs = 1:RiskJack}. It is
 possible to use directly the function \code{RiskJackplot}: the default
 maximum dimension (argument \code{max}) is  \code{length(solution[[k]][["d"]])}. }
 \item{method}{default is \code{""}, a value \code{"FCA"} is to be used only
 if \code{solution} is after an FCA with \code{SVDgen}}
-\item{ZoomInOut}{ used as xlim and ylim in xy-plots instead of max and min range}
-\item{Zlabels}{ used as labels instead of \code{x[[mod]]$n}, it  is a list with the same length as all modes. For example on 3 modes changing the labels of the second mode only will have to set \code{Zlabels=list(NULL,rep("a",length(x[[2]]$n) ), NULL )} }
-\item{...}{plot arguments can be passed (except \code{xlim, ylim,ylab,pch,xaxt} for component plot,
-and \code{xlab, ylab} for screeplot)}
+\item{ZoomInOut}{ list used as [[1]] for xlim and [[2]] for ylim in xy-plots instead of max and min range}
+\item{Zlabels}{ used as labels instead of \code{x[[mod]]$n}, it is a list with the same length as all modes. For example on 3 modes changing the labels of the second mode only will have to set \code{Zlabels=list(NULL,rep("a",length(x[[2]]$n) ), NULL )} }
+\item{Zcol}{ list of vectors of colours for Zlabels}
+\item{...}{plot arguments can be passed (except \code{xlim, ylim, ylab,pch,xaxt} for component plot,
+and \code{xlab, ylab} for screeplot). For example to have normed plot one can use \code{asp=1}}
     }
  \details{
 Plot components of one or two Principal Tensors, modes are superposed if more

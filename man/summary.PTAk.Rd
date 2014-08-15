@@ -28,7 +28,7 @@ useful. \code{summary.FCAk} is alike
 \code{summary.PTAk} but \code{testvar} operates on the variability of
 the lack of complete independence. }
 
-\value{prints on the prompt}
+\value{prints on the prompt with an invisible return of the summary table}
 \references{
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
   Pharmaco-EEG Studies}.(submitted)

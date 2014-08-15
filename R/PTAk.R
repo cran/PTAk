@@ -13,19 +13,23 @@
 "howtoPTAk" <-
 function()
 {
-cat("          Copyright GPL >=2 2000, 2007, 2010, 2012 Didier Leibovici" , "\n",
+	print(packageDescription("PTAk"))
+		cat( "\n")
+		cat("********************", "\n",
+	"          Copyright GPL >=2 2000, 2007, 2010, 2012 Didier Leibovici" , "\n",
     "            see the citation file","\n",
-    "            and for a good introduction Leibovici, D.G. (2010) JSS:34(10), www.jstatsoft.org/v34/i10/","\n",
-    paste(.libPaths(),"/PTAk",sep="")," or contact me at c3s2i@free.fr","\n")
-cat("         see the examples on http://c3s2i.free.fr","\n")
-file.show(paste(.libPaths(), "/PTAk/DESCRIPTION", sep = ""))    
+    "            and for a good introduction ","\n",
+    "           Leibovici, D.G. (2010) JSS:34(10), www.jstatsoft.org/v34/i10/","\n",
+    "          contact me at c3s2i@free.fr","\n")
+cat("         see some examples on http://c3s2i.free.fr","\n")
+   
 }
 "CANDPARA" <-
 function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,
     smoo = list(NA), verbose = getOption("verbose"), file = NULL, 
     modesnam = NULL, addedcomment = "")
 {
-    datanam <- substitute(X)
+   datanam <- substitute(X)
     sym <- NULL
     if (is.list(X)) {
         if (is.list(X$met)) 
@@ -466,7 +470,6 @@ function (solu)
 function (X, z, Xwiz = NULL, zwiX = NULL, rezwiX = FALSE, usetensor = TRUE)
 {
     if (usetensor) {
-   	 library(tensor)
         if (is.null(zwiX)) {
             if (is.vector(z))
                 zwiX <- 1
@@ -803,7 +806,7 @@ function (solb, sola = NULL, numass = NULL, verbose = getOption("verbose"),
                 pctota > testvar]), "%", "\n")
     }
     if (!is.null(file)) {
-        cat("               ------Percent Rebuilt from Slected ----",
+        cat("               ------Percent Rebuilt from Selected ----",
             sum(pctota[!substr(sola[[k]]$vsnam, 1, 1) == "*" &
                 pctota > testvar]), "%", "\n", file = file, append = TRUE)
         if (verbose) {
@@ -829,7 +832,7 @@ function (solb, sola = NULL, numass = NULL, verbose = getOption("verbose"),
         nostar <- !substr(sola[[k]]$vsnam, 1, 1) == "*"
         cat("               data= ", deparse(sola[[k]]$datanam),
             " ", di, "\n")
-        cat("   ", sola[[k]]$addedcomment, "\n")
+        if(sola[[k]]$addedcomment!="")cat("   ", sola[[k]]$addedcomment, "\n")
         cat("                ------Percent Rebuilt----", sum(pctota[nostar]),
             "%", "\n")
         summ <- matrix(cbind(1:length(sola[[k]]$d), sola[[k]]$d,
@@ -849,7 +852,7 @@ function (solb, sola = NULL, numass = NULL, verbose = getOption("verbose"),
                 " PT  with var>", testvar, "% total", "\n")
         else cat(" over ", length(sola[[k]]$vsnam[nostar]), " PT ",
             "\n")
-             invisible(summ)
+       invisible(summ)
     }
     else invisible(sola)
 }
@@ -883,58 +886,68 @@ function (T, moins = NULL, asarray = TRUE, order = NULL, id = NULL)
     }
     return(tensel)
 }
-
 "summary.FCAk" <-
 function (object, testvar = 0.5, dontshow = "*",...)
 {        solution <-object
-    nostar <- (!substr(solution[[length(solution)]]$vsnam, 1, 1) == "*")
-    if (dontshow == "*")
-        show <- (!substr(solution[[length(solution)]]$vsnam, 1, 1) ==
-            "*")
-    else if (!is.null(dontshow))
-        show <- dontshow & nostar
-    else show <- TRUE
-    k <- length(solution)
-    pctotafc <- (100 * (solution[[k]]$d)^2)/(solution[[k]]$ssX[1] - 1)
-    pctota <- (100 * (solution[[k]]$d)^2)/solution[[k]]$ssX[1]
-    cat("\n", "++++ FCA- ", k, "modes++++ ", "\n")
+      #dobjectontshow NULL == "*"
+      nostar <- (!substr(object[[length(object)]]$vsnam, 1, 1) == "*")    
+      show <-nostar
+       
+    	if (is.character(dontshow)){
+    		if(dontshow=="*") dontshow="[*]"
+        	  show <- !(grepl(dontshow, object[[length(object)]]$vsnam)) 
+        	  }
+   	 	if (is.logical(dontshow))show <-!dontshow 
+    
+   
+    k <- length(object)
+    ismodel <- "E=" %in% class(object)
+    wha="complete independence"
+    if(ismodel)wha=" model(E=) "
+    pctota <- (100 * (object[[k]]$d)^2)/object[[k]]$ssX[1]
+    pctotafc <-pctota
+    if(!ismodel)pctotafc <- (100 * (object[[k]]$d)^2)/(object[[k]]$ssX[1] - 1)
+    cat("\n", "+++ FCA- ",wha," ++ ", k, "modes+++ ", "\n")
     di <- NULL
-    for (r in 1:length(solution)) di <- c(di, length(solution[[r]]$v[1,
+    for (r in 1:length(object)) di <- c(di, length(object[[r]]$v[1,
         ]))
-    cat("     ++ Contingency Table ", deparse(solution[[k]]$datanam),
+    cat("     ++ Contingency Table ", deparse(object[[k]]$datanam),
         " ", di, " ++", "\n")
-    cat("   ", solution[[k]]$addedcomment, "\n")
-    cat("                -----Total Percent Rebuilt----", sum(pctota[nostar]),
+    if(object[[k]]$addedcomment!="")cat("   ", object[[k]]$addedcomment, "\n")
+    cat("     -----Total Percent Rebuilt----", sum(pctota[nostar]),
         "%", "\n")
-    cat("     ++ Percent of lack of complete independence rebuilt  ++ ",
-        sum(pctotafc[show][-1]), "%", "\n")
-    cat("                                    selected pctoafc > ",
-        testvar, "%  total= ", sum(pctotafc[show & pctotafc >
-            testvar][-1]), "\n")
-    summ <- matrix(cbind(1:length(solution[[k]]$d), solution[[k]]$d,
-        solution[[k]]$ssX, pctota, pctotafc), ncol = 5)
+    cat("     ++ Percent of lack of ",wha, " rebuilt  ++ ",
+        ifelse(ismodel,sum(pctotafc[show]),sum(pctotafc[show][-1])), "%", "\n")
+    cat("                    selected pctoafc > ",
+        testvar, "%  total= ",  ifelse(ismodel,sum(pctotafc[show & pctotafc >
+            testvar]),sum(pctotafc[show & pctotafc >
+            testvar][-1])), "\n")
+    summ <- matrix(cbind(1:length(object[[k]]$d), object[[k]]$d,
+        object[[k]]$ssX, pctota, pctotafc), ncol = 5)
     summ <- summ[pctotafc > testvar & show, ]
     summ <- matrix(summ, ncol = 5)
-    summ[1, 5] <- NA
-    dimnames(summ) <- list(solution[[k]]$vsnam[pctotafc > testvar &
+    if(!ismodel)summ[1, 5] <- NA
+    dimnames(summ) <- list(object[[k]]$vsnam[pctotafc > testvar &
         show], c("-no-", "--Sing Val--", "--ssX--", "--Global Pct--",
         "--FCA--"))
     print(summ, digits = 5)
     cat("\n", "++++               ++++", "\n")
     if (!is.null(testvar) & !testvar == 0)
-        cat(" Shown are selected  over ", length(solution[[k]]$vsnam[nostar]) -
-            1, " PT  with pct AFC >", testvar, "% ", "\n")
-    else cat(" over ", length(solution[[k]]$vsnam), " PT (with*)",
+        cat(" Shown are selected  over ", length(object[[k]]$vsnam[show]) -
+            1, " PT  with pct FCA >", testvar, "% ", "\n")
+    else cat(" over ", length(object[[k]]$vsnam), " PT (with*)",
         "\n")
+  invisible(summ)
 }
 "summary.PTAk" <-
 function (object, testvar = 1, dontshow = "*",...)
 {
-    if (!is.null(dontshow))
-        if (dontshow == "*")
-            dontshow <- (!substr(object[[length(object)]]$vsnam,
-                1, 1) == "*")
-    RESUM(object, summary = TRUE, testvar = testvar, with = dontshow)
+           if (is.character(dontshow)){
+    		if(dontshow=="*") dontshow="[*]"
+        	  show <- !(grepl(dontshow, object[[length(object)]]$vsnam)) 
+        	  }
+   	 	if (is.logical(dontshow))show <-!dontshow 
+    RESUM(object, summary = TRUE, testvar = testvar, with = show)
 }
 "APSOLU3" <-
 function (X, solu, pt3 = NULL, nbPT2 = 1, smoothing = FALSE,
@@ -1214,7 +1227,8 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
     solutions[[ldx]]$datanam <- substitute(X)
     solutions[[ldx]]$method <- match.call()
     solutions[[ldx]]$addedcomment <- addedcomment
-    class(solutions) <- c("FCAk", "PTAk")
+    class(solutions) <- c("FCAk","PTAk")
+    if(!is.null(E)) class(solutions) <- c("FCAk","PTAk","E=")
     invisible(solutions)
 }
 "FCA2" <-
@@ -1250,7 +1264,8 @@ function (X, nbdim =NULL, minpct = 0.01, smoothing = FALSE,
     solutions[[ldx]]$datanam <- substitute(X)
     solutions[[ldx]]$method <- match.call()
     solutions[[ldx]]$addedcomment <- addedcomment
-    class(solutions) <- c("FCAk","FCA2", "PTAk")
+    class(solutions) <- c("FCAk", "FCA2","PTAk")
+    if(!is.null(E)) class(solutions) <- c("FCAk","FCA2","PTAk","E=")
     invisible(solutions)
 }
 "PPMA" <-
@@ -1929,6 +1944,7 @@ function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = NULL,
     solutions[[2]]$ssX <- rep(ssX, nomb)
     solutions[[2]]$vsnam <- paste("vs", 1:nomb, sep = "")
     solutions[[2]]$datanam <- datanam
+    solutions[[2]]$addedcomment <- ""
     solutions[[2]]$method <- match.call()
     if (smoothing)
         solutions[[2]]$smoocheck <- result$smoocheck
@@ -2137,12 +2153,10 @@ function (X, chi2 = FALSE, E = NULL,No0margins=TRUE)
        }
        #X=array(as.vector(X),dim(X))
        #dimnames(X)=dnam 
-     }
+     } # X rebuilt if zeos margins
       
-      N <- sum(X)
-      
+      N <- sum(X)  
      metafc[[1]] <- apply(X, 1, sum)/N
-        
      Indep <-  metafc[[1]]
     for (t in 2:ord) {
         metafc[[t]] <- apply(X, t, sum)/N
@@ -2296,13 +2310,14 @@ function (A, B)
     }
 }
 "RiskJackplot" <-
-function (x, nbvs = 1:20, mod = NULL, max = NULL, rescaled = TRUE,
+function (x, nbvs = 1:20, mod = NULL, max = NULL, rescaled = TRUE, 
     ...)
 {     solution <- x
     qchoix <- nbvs
     ord <- length(solution)
     if (is.null(max))
         max <- length(solution[[ord]]$d)
+    if(max(nbvs) >= 0.8*max)warning("nbvs could be too high!")    
     if (is.null(mod))
         mod <- 1:length(solution)
     val <- solution[[ord]]$d[!substr(solution[[ord]]$vsnam, 1,
@@ -2353,7 +2368,7 @@ function (x, nbvs = 1:20, mod = NULL, max = NULL, rescaled = TRUE,
             lty = u, col = u, type = "b", ...)
         par(new = TRUE)
     }
-    legend(max(qchoix) - 1.5, max(RJack)/2, paste("Risk-mode",
+    legend(2, max(RJack)/2, paste("Risk-mode",
         mod), col = mod, lty = mod, bty = "n", cex = 0.7)
     invisible(par(new = FALSE))
 }
@@ -2390,18 +2405,22 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
     }
     return(resul)
 }
-"COS2" <-function(solu,mod=1,solnbs=2:4,FCA=FALSE){
+"COS2" <-function(solu,mod=1,solnbs=2:4){
 	# as (t(phi_s) D phi_s)i/(t(vec_phi) D_-phi vec_phi ) if normed to lambda_s otherwise has to be times lambda_s
 	# can be added on the upto for accumulated "rendering" 
 	
     X <-eval(solu[[length(solu)]]$datanam)
                    
 		if("FCAk" %in% class(solu)){
+				if("E" %in% names(solu[[length(solu)]]$method)){
+					leE=eval((solu[[length(solu)]]$method)$E)
+				 X <-FCAmet(X,E=leE)				
+				}
+				else{				
 						X <-FCAmet(X)
-						if (FCA){
-								X$data <- X$data -1
-								}
-							 } 
+						X$data <- X$data -1
+				} 
+		}					 
 	 # norm of the mod vv
 	
 	 if(is.list(X)) {
@@ -2476,12 +2495,11 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
 	rownames(ctr) <- solu[[mod]]$n
 	return(round(ctr*1000))
 }
-
 "plot.PTAk" <-
 function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
     coefi = list(NULL, NULL), xylab = TRUE, ppch = (1:length(solution)),
     lengthlabels = 2, scree = FALSE, ordered = TRUE,
-    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL,...)
+    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL, Zcol=NULL,...)
 {      solution <- x
 	awaybor=1.04
 if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot function not available yet using Plot.PTAk!","\n")
@@ -2494,8 +2512,7 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
     if (length(lengthlabels) == 1)
         lengthlabels <- rep(lengthlabels, length(solution))
     ord <- length(solution)
-    if (substr(as.character(solution[[ord]]$method)[1],1,3) == "FCA" | substr(method,1,3) ==
-        "FCA") {
+    if ("FCAk" %in% class(x) && !("E=" %in% class(x)) ) {
         divv <- solution[[ord]]$ssX[1] - 1
         perclab <- "% FCA"
         if (length(nbvs) == 1)
@@ -2511,9 +2528,10 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
     for (r in 1:length(solution)) di <- c(di, length(solution[[r]]$v[1,
         ]))
     if (!scree) {
-    	ylim <-c(+Inf,-Inf)
         xlab <- ""
         ylab <- ""
+        ylim <- NULL
+        xlim <- NULL
         if (is.null(nb2)) {
             xlim <- c(1, max(di[mod]) + 1)
             if (xylab)
@@ -2535,17 +2553,22 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
             if (!is.null(nb2)) {
                 xyn <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u], coefi[[2]][u]))                 
                 xaxt <- "s"
-                ylim <- awaybor*c(min(xyn,ylim[1]), max(xyn,ylim[2]))
+                ylim <- range(xyn[,2],ylim)
+                xlim <- range(xyn[,1],xlim)
+                
             }
             else {
                 xyn <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
                if (!"xaxt" %in% names(list(...)))
                   xaxt <- "n" 
-                  ylim <- awaybor*c(min(xyn,ylim[1]), max(xyn,ylim[2]))
+				ylim <- range(xyn,ylim)               
             }
 		}
-        if(!is.null(ZoomInOut)) ylim <- ZoomInOut
-         xlim <- ylim
+		ylim <- awaybor *ylim
+		if (!is.null(nb2))xlim <- awaybor *xlim
+        if(!is.null(ZoomInOut[[2]])) ylim <- ZoomInOut[[2]]
+          if(!is.null(ZoomInOut[[1]]) &&  !is.null(nb2)) xlim <-ZoomInOut[[1]]
+
         for (u in mod) { 
         	 if (!is.null(nb2)) {
                  xy <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u],coefi[[2]][u]))
@@ -2557,7 +2580,7 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
                 if ("xlab" %in% names(list(...))) {
                   if ("ylab" %in% names(list(...)))
                     plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u],
-                      xaxt = xaxt, ...)
+                      xaxt = xaxt,...)
                   else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab,
                     pch = ppch[u], xaxt = xaxt, ...)
                   if (is.null(nb2))
@@ -2573,17 +2596,20 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
                 }
               if(!is.null(Zlabels[[u]])){
               	ZlabUN <- Zlabels[[u]] 
-              }
+              	       }
               else {
               	ZlabUN <- solution[[u]]$n
               }  
                 if (!is.null(ZlabUN)) {
+                	ZcolUN= u
+              	if(!is.null(Zcol[[u]]))ZcolUN=Zcol[[u]]
+
                   if (is.factor(ZlabUN)) {
                     if ("cex" %in% names(list(...)))
                       cex <- list(...)$cex
                     else cex <- par("cex")
-                    text(xy, labels = substr(levels(ZlabUN)[as.numeric(ZlabUN)],
-                      1, lengthlabels[u]), col = as.numeric(ZlabUN),
+                    text(xy, labels = substr(levels(ZlabUN),
+                      1, lengthlabels[u]), col = ZcolUN,
                       pos = 4,...)
                     if (is.null(nb2)) {
                       par(new = TRUE)
@@ -2592,10 +2618,14 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
                       par(new = FALSE)
                     }
                   }
-                  else text(xy, labels = substr(ZlabUN,
-                    1, lengthlabels[u]), col = u, pos = 4,...)
+                  else { 
+                  	ZcolUN= u
+              	if(!is.null(Zcol[[u]]))ZcolUN=Zcol[[u]]
+                  	text(xy, labels = substr(ZlabUN,
+                    1, lengthlabels[u]), col = ZcolUN, pos = 4,...)
+                    }
                 }
-            }
+            } 
             else 
             if ("xlab" %in% names(list(...))) {
                 if ("ylab" %in% names(list(...)))
@@ -2614,8 +2644,10 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
                   pch = ppch[u], col = u, xaxt = xaxt, xlab = xlab,
                   ...)
             }
+            if(!is.null(nb2)) {
             abline(h = 0, col = "green", lty = 2)
             abline(v = 0, col = "green", lty = 2)
+            }
             par(new = TRUE)
         }
         invisible(par(new = FALSE))
@@ -2626,13 +2658,14 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
                 ld <- length(solution[[ord]]$d[!substr(solution[[ord]]$vsnam,
                   1, 1) == "*"])
                 if (length(nbvs) == 1) {
-                  nbvs <- min(max(5, nbvs), ld)
+                  nbvs <- min(max(3, nbvs), ld)
                   nbvs <- 1:nbvs
                 }
                 scre <- 100 * ((solution[[ord]]$d[!substr(solution[[ord]]$vsnam,
-                  1, 1) == "*"])^2)/divv
-                scre <- (sort(scre[nbvs]))
+                  1, 1) == "*"])^2)/divv 
+                scre <- (sort(scre[nbvs]))            
                 scre <- scre[length(scre):1]
+                if (!is.null(RiskJack)) scre <- scre[1:min(max(RiskJack,2),max(nbvs-2))]
                 nbvs <- nbvs[1:length(scre)]
                 plot(nbvs, scre, xlab = "Ordered ", ylab = "Squared Singular Values (%)",
                   xaxt = "n", ...)
@@ -2645,11 +2678,12 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
                   format = "fg"), col.axis = 3)
                 par(new = TRUE)
                 if (!is.null(RiskJack))
-                  RiskJackplot(solution, nbvs = nbvs, mod = mod,
-                    max = min(RiskJack + length(nbvs), ld), rescaled = TRUE,
+                  RiskJackplot(solution, nbvs = nbvs, mod = NULL,
+                    max = NULL, rescaled = TRUE,
                     axes = FALSE, ann = FALSE, pch = "r")
                 par(new = FALSE)
-            }
+            } 
+            
             if (ordered == FALSE) {
                 ld <- length(solution[[ord]]$d[!substr(solution[[ord]]$vsnam,
                   1, 1) == "*"])
