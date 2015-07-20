@@ -31,13 +31,13 @@ citEntry(entry="Article",
     author = as.person("Leibovici D.G."),
     year = year,
     edition = vers,
-    url = "http://cran.r-project.org/web/packages/PTAk/index.html",
+    url = "http://cran.r-project.org/package=PTAk",
        textVersion=
         paste("Leibovici D.G. ",
 	             "(",year,")" ,
                " PTAk: Principal Tensor Analysis on k modes, ",
                vers,
-               " . http://cran.r-project.org/web/packages/PTAk/index.html. ",
+               ". http://cran.r-project.org/package=PTAk",
                sep="")
          )
          
@@ -58,4 +58,4 @@ citEntry(entry="Article",
         "URL http://www.jstatsoft.org/v34/i10/.")
         )
          
-citFooter("visit also http://c3s2i.free.fr or http://cgs.nottingham.ac.uk/~lgzdl")
+citFooter("visit also http://c3s2i.free.fr or http://www.nottingham.ac.uk/ngi/people/didier.leibovici")

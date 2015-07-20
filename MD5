@@ -1,5 +1,5 @@
-76709bc21aef11e55a7407b1cdfc744b *DESCRIPTION
-6191bda78b1e6b57a61722bfb30644b3 *NAMESPACE
+fdd3cb8c03db1235954ac692d0ee8294 *DESCRIPTION
+fb00a00b7b4a861b94e5f4bc62f87773 *NAMESPACE
 79a59eea1c45685d634e411a64757076 *R/PTAk.R
 797b3fcc8fa6e52eabe30cf7c1ccb6ff *data/Zone_climTUN.RData
 4de2e77194cf641923a1cbe7d419fe71 *data/crimerate.RData
@@ -10,13 +10,12 @@
 c794228c9fc76685ac9b4d388ea449fd *demo/PTA3.R
 f758d598839eb469438d13aa61034eb0 *demo/PTAk.R
 72695472781717db12208d16b54cce86 *demo/SVDgen.R
-8ce386d90e686645d6ec78548194dbd7 *inst/CITATION
+89f4b020e3f7ffe678afb978ed9df048 *inst/CITATION
 06171c00954deaee2e35b3df74a4a709 *inst/doc/PTAkgeneral.pdf
 cc0484ee9925035e5b0d9c7652c0844c *inst/doc/PTAklogo.png
 78bca5e2454a9fe2e0d6f9eabcb7799c *inst/doc/PTAkstructure.pdf
 444535b9cb76ddff1bab1e1865a3fb14 *inst/doc/R.css
-991865e3415392ad3f109c44f0f2b408 *inst/doc/citation.html
-b1cabc856739f1eb124aaedd8336d676 *inst/doc/index.html
+478a43e19a9e8ee51bf12194d60a9562 *inst/doc/index.html
 eeabcad43477c837dfc4f0ab5f906ba1 *inst/doc/left.jpg
 cb0601933fba90e1c0b8e6021bdd6851 *inst/doc/logo.jpg
 b9a8ea745057fe6d3ff69a376da143d8 *inst/doc/logosm.jpg
