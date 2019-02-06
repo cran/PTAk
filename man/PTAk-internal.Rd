@@ -8,7 +8,7 @@
 \alias{RESUM}
 \alias{svdsmooth}
 \alias{toplist}
-
+\alias{svd.p}
 \title{Internal PTAk functions}
 \description{
 Internal PTAk functions }
@@ -26,10 +26,11 @@ svdsmooth(X,nomb=min(dim(X)),
                    smooth=list(function(u)ksmooth(1:length(u),u,kernel="normal",
                                bandwidth=3,x.points=(1:length(u)))$y),vsmin=1E-16, ...)
 toplist(li)
+svd.p(X,...)
 }
 \arguments{
 These functions are not supposed to be called directly.
-        \item{X}{ a matrix}
+        \item{X}{a matrix}
          \item{test}{a zero limit number}
          \item{pena}{ list of functions to be used as smoother}
          \item{ini}{initialisation method over the dual dimension}
@@ -53,6 +54,6 @@ These functions are not supposed to be called directly.
                  \item{li}{any list}
 \item{...}{any other arguments passed to functions}
                  }
- \author{Didier Leibovici \email{c3s2i@free.fr}}
+ \author{Didier G. Leibovici}
   \seealso{\code{\link{PTAk}}}
 \keyword{misc}

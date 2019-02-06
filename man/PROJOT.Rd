@@ -33,6 +33,8 @@ the tensorial product of the projectors, i.e.
  \deqn{(P_{S1} \otimes P_{S2} \otimes \ldots \otimes P_{Sk})(X)}.
  }
 \value{A tensor with dimensions as \code{X}}
+
+\author{Didier G. Leibovici \email{GeotRycs@gmail.com}}
 \references{
 Leibovici D(1993) \emph{Facteurs <e0> Mesures R<e9>p<e9>t<e9>es et Analyses Factorielles :
 applications <e0> un suivi <e9>pid<e9>miologique}. Universit<e9> de Montpellier
@@ -52,7 +54,7 @@ the projector onto a tensorial structure, and can define the
 PTAIV-\emph{k}modes (PTAk on Instrumental Variables Leibovici(1993).
 (see other references  for tensorial product of linear operators in
 Leibovici(2000) \emph{e.g.} Dauxois et al.(1994))}
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+
 \seealso{\code{\link{PTAk}} }
 \examples{
 
@@ -72,5 +74,6 @@ don <- array(1:360,c(5,4,6,3))
          }
 
    }
+
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

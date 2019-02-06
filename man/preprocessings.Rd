@@ -71,8 +71,7 @@ Susan1D(y,x=NULL,sigmak=NULL,sigmat=NULL,
      function is adapted from SUSAN algorithm (see references).
 
 }
-  \author{Didier Leibovici \email{c3s2i@free.fr}}
-
+  \author{Didier G. Leibovici}
 \references{
  Smith S.M. and J.M. Brady (1997) \emph{SUSAN - a new approach to low level image processing}.
      International Journal of Computer Vision, 23(1):45-78, May 1997.

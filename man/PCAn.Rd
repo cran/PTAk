@@ -45,6 +45,8 @@ decompositions are not necesseraly nested. This makes PTA-\emph{k}modes a model 
 nested decompositions not giving the exact \emph{orthogonal rank}.
  So PTA-\emph{k}modes will look for best approximation according to orthogonal tensors in a nested approximmation process. }
 \value{a \code{PCAn} (inherits \code{\link{PTAk}}) object}
+
+\author{Didier G. Leibovici}
 \references{
 Caroll J.D  and Chang J.J (1970) \emph{Analysis of individual
 differences in multidimensional   scaling via n-way generalization of
@@ -66,7 +68,7 @@ multi-way data, the PTA-k}. Linear Algebra and its Applications,
 Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
               }
 \note{The use of metrics (diagonal or not) and smoothing extend flexibility of analysis. }
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+
 \keyword{models}
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

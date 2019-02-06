@@ -35,7 +35,7 @@ Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
 \url{http://c3s2i.free.fr/cv/recentpub.html}
 }
 
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+\author{Didier G. Leibovici \email{GeotRYcs@gmail.com}}
 
 \note{At the moment can be used for \code{PCAn},
   \code{CANDPRA}, better summaries will be in the next release.}

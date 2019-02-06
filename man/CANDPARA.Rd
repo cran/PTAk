@@ -39,6 +39,7 @@ package but complete functionnality of the use these methods and more
 complete packages may be checked at the www site quoted below.
  }
 \value{a \code{CANDPARA} (inherits from \code{\link{PTAk}}) object}
+\author{Didier G. Leibovici}
  \references{
 Caroll J.D and Chang J.J (1970) \emph{Analysis of individual
 differences in multidimensional scaling via n-way generalization of
@@ -65,7 +66,7 @@ can be done with PTAk looking only for k-modes Principal Tensors
 It is identical to look in any \code{PTAk} decomposition only for the
 \emph{k}modes solution but obviously with unecessary computations.}
 
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+
 
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

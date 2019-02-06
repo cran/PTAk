@@ -83,7 +83,7 @@ nested decompositions not giving the exact \emph{orthogonal rank}.
 You will notice that methods other than PTAk may not have all list elements but the essential ones such as: $v, $d, $ssX, and may also have additional ones like $coremat for PCAn (the core array).
 }
 
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+\author{Didier G. Leibovici}
 \references{
 Leibovici D(1993) \emph{Facteurs <e0> Mesures R<e9>p<e9>t<e9>es et Analyses Factorielles :
 applications <e0> un suivi <e9>pid<e9>miologique}. Universit<e9> de Montpellier

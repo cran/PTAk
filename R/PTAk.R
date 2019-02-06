@@ -16,7 +16,7 @@ function()
 	print(packageDescription("PTAk"))
 		cat( "\n")
 		cat("********************", "\n",
-	"          Copyright GPL >=2 2000, 2007, 2010, 2012 Didier Leibovici" , "\n",
+	"          Copyright GPL >=2 2000, 2007, 2010, 2012, 2018 Didier Leibovici" , "\n",
     "            see the citation file","\n",
     "            and for a good introduction ","\n",
     "           Leibovici, D.G. (2010) JSS:34(10), www.jstatsoft.org/v34/i10/","\n",
@@ -111,7 +111,7 @@ function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,
             smoo <- rep(list(smoo[[1]]), ord)
     }
     else smoo <- list(NULL)
-    sval0 <- INITIA(X, modesnam = modesnam, method = "svd", dim = dim)
+    sval0 <- INITIA(X, modesnam = modesnam, method = "svds", dim = dim)
     test0 <- 1
     atest <- 0
     sval <- sval0
@@ -328,7 +328,7 @@ function (X, dim = c(2, 2, 2, 3), test = 1e-12, Maxiter = 400,
         stop(" Wrong length for dim argument (= Rank-spaces !)")
     for (j in 1:ord) if (dim[j] > dim(X)[j]) 
         stop(" (dim argument) some Rank-spaces are too big!")
-    sval0 <- INITIA(X, modesnam = modesnam, method = "svd", dim = dim)
+    sval0 <- INITIA(X, modesnam = modesnam, method = "svds", dim = dim)
     test0 <- 1
     atest <- 0
     sval <- sval0
@@ -579,41 +579,78 @@ function (X, zlist, moins = 1, zwiX = NULL, usetensor = TRUE,
     return(X)
 }
 "INITIA" <-
-function (X, modesnam = NULL, method = "Presvd", dim = 1, ...)
+function (X, modesnam = NULL, method = "svds", dim = 1, ...) 
 {
     if (!is.array(X)) {
         stop(paste("--- X must be an array  ! ---"))
     }
-    VV <- list(NULL)
-    if (is.null(modesnam))
+    ssX <- sum(X^2)
+	 VV <- list(NULL)
+		 VVsum<-function(X){
+			out=list(length(dim(X)))
+		  if(length(dim(X))==2){out[[1]]=X%*%t(X);out[[2]]=t(X)%*%X;return(out)}
+			for (i in 1:length(dim(X))){
+				jd=max(dim(X)[-i])
+				j=match(jd,dim(X))
+			 v=apply(X,c(j,i),sum,na.rm=T)
+			 out[[i]]=t(v)%*%v
+			}
+		return(out)
+		}
+		svd.p<-function(X,...){
+		A=svd(X,...)
+		d=min(c(dim(A$u)[2],dim(A$v)[2]))
+		for(k in 1:d){
+			nn=summary(factor(c(A$v[,k],A$u[,k])>=0,levels=c(F,T)))
+			if(nn[1]>nn[2]){
+				A$u[,k]=-A$u[,k]
+				A$v[,k]=-A$v[,k]		
+			}
+		}
+	return(A)
+	}
+
+	if (method == "svds")vv=VVsum(X)
+    if (is.null(modesnam)) 
         modesnam <- paste(rep("m", length(dim(X))), 1:length(dim(X)))
-    if (!is.function(method) && method == "Presvd")
+    if (!is.function(method) && method == "Presvd") 
         dim <- 1
-    if (length(dim) == 1)
+    if (length(dim) == 1) 
         dim <- rep(dim, length(dim(X)))
     for (i in 1:length(dim(X))) {
         cci <- (1:length(dim(X)))[-i]
-        if (is.function(method))
-            VV[[i]] <- method(matrix(aperm(X, c(cci, i)), ncol = dim(X)[i]),
+        if (is.function(method)) 
+            VV[[i]] <- method(matrix(aperm(X, c(cci, i)), ncol = dim(X)[i]), 
                 ...)
         else {
-            if (method == "Presvd")
-                VV[[i]] <- PPMA(matrix(aperm(X, c(cci, i)), ncol = dim(X)[i]),
+            if (method == "Presvd") 
+                VV[[i]] <- PPMA(matrix(aperm(X, c(cci, i)), ncol = dim(X)[i]), 
                   pena = list(NULL, NULL))
-            if (method == "svd")
-                VV[[i]] <- svd(matrix(aperm(X, c(cci, i)), ncol = dim(X)[i]))
+            if (method == "svd") 
+                VV[[i]] <- svd.p(matrix(aperm(X, c(cci, i)), ncol = dim(X)[i]))
+            if (method == "svds") 
+                VV[[i]] <- svd.p(vv[[i]])
+
         }
-        if (dim[i] > dim(X)[i])
+        if (dim[i] > dim(X)[i]) 
             dimi <- dim(X)[i]
         else dimi <- dim[i]
+        
         VV[[i]]$d <- VV[[i]]$d[1:dimi]
         VV[[i]]$modesnam <- modesnam[[i]]
         VV[[i]]$n <- dimnames(X)[[i]]
         VV[[i]]$v <- t(VV[[i]]$v[, 1:dimi])
-        if (dimi == 1)
+        if (dimi == 1) 
             VV[[i]]$v <- as.vector(VV[[i]]$v)
         VV[[i]]$u <- NULL
+        
+      VV[[i]]$pct <- 100 * (VV[[i]]$d)^2/ssX 
     }
+  	
+    VV[[i]]$vsnam<-paste0("vs",dim*11)
+    VV[[i]]$datanam<-substitute(X)
+    VV[[i]]$method<-match.call() 
+ class(VV) <- c("SVDsum","PTAk")
     return(VV)
 }
 "PROJOT" <-
@@ -686,6 +723,37 @@ function (X, solu, numo = 1, bortho = TRUE, Ortho = TRUE, metrics = NULL)
 "REBUILD" <-
 function (solutions, nTens = 1:2, testvar = 1, redundancy = FALSE)
 {
+   
+   
+   met12<-function(Xdata,Xmet){
+        nam <- dimnames(Xdata)
+        diX <- length(dim(Xdata))
+        for (d in 1:diX) {
+            if (length(Xmet[[d]]) > 1) {
+                if (length(Xmet[[d]]) == dim(Xdata)[d]^2) {
+                  tempp <- d
+                  t12 <- CONTRACTION(Xdata, Powmat(Xmet[[d]], 
+                    1/2), Xwiz = d, zwiX = 1)
+                  d <- tempp
+                  lacola <- (1:diX)[-d]
+                  laperm <- c(lacola, d)
+                }
+                else {
+                  lacola <- (1:diX)[-d]
+                  laperm <- c(d, lacola)
+                  lacol <- (dim(Xdata))[lacola]
+                  pt12 <- matrix(aperm(Xdata, laperm), ncol = prod(lacol))
+                  t12 <- sqrt(Xmet[[d]]) * pt12
+                }
+                t12 <- array(t12, (dim(Xdata))[laperm])
+                Xdata <- aperm(t12, match(1:diX, laperm))
+            }
+            else Xdata <- Xdata * sqrt(Xmet[[d]])
+        }
+        
+    return(Xdata)    
+
+   }#met12 why -1
     if (!is.list(solutions)) {
         stop(" should be a solutions object see PTA3")
     }
@@ -722,8 +790,17 @@ function (solutions, nTens = 1:2, testvar = 1, redundancy = FALSE)
         pcre <- 100 * sum(deja^2)/solutions[[ord]]$ssX[1]
         cat("-- Variance Percent rebuilt", solutions[[ord]]$datanam,
             " at ", pcre, "% ", "\n")
-        cat("-- MSE ", mean((eval(solutions[[ord]]$datanam) -
-            tensfin)^2), "\n")
+         if (is.list(eval(solutions[[ord]]$datanam))) {
+         	data=eval(solutions[[ord]]$datanam)$data 
+         	diff1=(data-tensfin)
+         	diff2=met12(diff1,eval(solutions[[ord]]$datanam)$met) 	
+         }
+         else {
+         	data=eval(solutions[[ord]]$datanam)
+         	diff1=(data-tensfin)
+         }
+        cat("-- MSE ", mean((diff1)^2), "\n")#metrics for the ^2
+        if(is.list(eval(solutions[[ord]]$datanam)))cat("-- MSE metric ", mean((diff2)^2), "\n")#metrics for the ^2
         cat("-- with ", length(deja), " Principal Tensors out of ",
             length(nTens), " given", "\n")
         if (pcre > 100) {
@@ -731,8 +808,8 @@ function (solutions, nTens = 1:2, testvar = 1, redundancy = FALSE)
                 "\n")
             print(pcre, digits = 20)
         }
-        comp <- 100 - 100 * (sum(dim(eval(solutions[[ord]]$datanam))) +
-            1) * length(deja)/prod(dim(eval(solutions[[ord]]$datanam)))
+        comp <- 100 - 100 * (sum(dim(data)) +
+            1) * length(deja)/prod(dim(data))
         cat("-- compression    ", comp, " %", "\n")
         if (comp < 0) {
             cat("******no compression ....", "\n")
@@ -814,7 +891,7 @@ function (solb, sola = NULL, numass = NULL, verbose = getOption("verbose"),
             summ <- as.matrix(cbind(1:length(sola[[k]]$d), sola[[k]]$d,
                 sola[[k]]$ssX, sola[[k]]$pct, pctota))
             dimnames(summ) <- list(sola[[k]]$vsnam, c("-no-",
-                "--Sing Val--", "--ssX--", "--local Pct--", "--Global Pct--"))
+                "--Sing Val--", "--ssX--", "--local %--", "--Global %--"))
             summ <- summ[pctota > testvar, ]
             print(summ, digits = 5)
             sink()
@@ -1025,7 +1102,7 @@ function (X, solu, pt3 = NULL, nbPT2 = 1, smoothing = FALSE,
         else nomb <- min(dim(Z), nbPT2)
         if (smoothing == TRUE)
             solq <- svdsmooth(Z, nomb = nomb, smooth = smoo[-i],...)
-        else solq <- svd(Z)
+        else solq <- svd.p(Z)
         Zsol[[1]]$modesnam <- solu[[((1:3)[-i])[1]]]$modesnam
         nomb <- min(nomb, length(solq$d))
         Zsol[[1]]$v <- t(solq$u[, 1:nomb])
@@ -1274,7 +1351,7 @@ function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
     NA), ini = mean, vsmin = 1e-20, Maxiter = 2000,...)
 {
     v0 <- apply(X, 2, FUN = ini)
-    if (all(v0 < 1e-04)) {
+    if (all(v0 < 1e-08)) {
         v0 <- (X[sample(1:dim(X)[1], 1), ])
         if (max(abs(X)) < test * 1e-08) {
             cat(" Sum of squares veryyyy smallll  .......", "\n")
@@ -1290,13 +1367,13 @@ function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
         u <- as.vector(X %*% v0)
         if (is.function(pena[[1]]))
             u <- pena[[1]](u)
-        d <- sqrt(u %*% u)
+        d <- sqrt(sum(u * u))
         if (!d == 0)
             u <- u/d
         v <- as.vector(u %*% X)
         if (is.function(pena[[2]]))
             v <- pena[[2]](v)
-        d <- sqrt(v %*% v)
+        d <- sqrt(sum(v * v))
         if (!d == 0)
             v <- v/d
         if (test0 == 1)
@@ -1304,6 +1381,12 @@ function (X, test = 1e-10, pena = list(function(u) ksmooth(1:length(u),
         if (!d < vsmin)
             test0 <- sum((u - u0)^2) + sum((v - v0)^2)
         else test0 <- 0
+        
+        nn=summary(factor(c(u,v)>=0,levels=c(F,T)))
+		if(nn[1]>nn[2]){
+				u=-u
+				v=-v		
+			}
         v0 <- v
         u0 <- u
         iter <- iter + 1
@@ -1682,13 +1765,14 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
     invisible(solutions)
 }
 "SINGVA" <-
-function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption("verbose"),
-    file = NULL, smoothing = FALSE, smoo = list(NA), modesnam = NULL,
-    Ini = "Presvd", sym = NULL)
+function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption("verbose"), 
+    file = NULL, smoothing = FALSE, smoo = list(NA), modesnam = NULL, 
+    Ini = "svds", sym = NULL) 
 {
+	alpha0=NULL
     datanam <- substitute(X)
     if (is.list(X)) {
-        if (is.list(X$met))
+        if (is.list(X$met)) 
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
     }
@@ -1700,7 +1784,7 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
             if (length(X$met[[d]]) > 1) {
                 if (length(X$met[[d]]) == dim(X$data)[d]^2) {
                   tempp <- d
-                  t12 <- CONTRACTION(X$data, Powmat(X$met[[d]],
+                  t12 <- CONTRACTION(X$data, Powmat(X$met[[d]], 
                     1/2), Xwiz = d, zwiX = 1)
                   d <- tempp
                   lacola <- (1:diX)[-d]
@@ -1727,53 +1811,58 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
     }
     ord <- length(dim(X))
     if (verbose) {
-        cat("\n", "       ----------+++++++++++------------ RPVSCC algorithm ",
+        cat("\n", "       ----------+++++++++++------------ RPVSCC algorithm ", 
             "\n", file = ifelse(is.null(file), "", file), append = TRUE)
-        cat("                             ------------ Singular Value  ",
-            PTnam, "\n", file = ifelse(is.null(file), "", file),
+        cat("                             ------------ Singular Value  ", 
+            PTnam, "\n", file = ifelse(is.null(file), "", file), 
             append = TRUE)
-        cat("                                       ----  dimensions:  ",
-            dim(X), "\n", file = ifelse(is.null(file), "", file),
+        cat("                                       ----  dimensions:  ", 
+            dim(X), "\n", file = ifelse(is.null(file), "", file), 
             append = TRUE)
     }
-    if(class(Ini)=="PTAk") 
-          sval0 <- Ini 
-    else{
-      sval0 <- INITIA(X, modesnam = modesnam, method = Ini)
+    if (class(Ini) == "PTAk") 
+        sval0 <- Ini
+    else {
+        sval0 <- INITIA(X, modesnam = modesnam, method = Ini)
     }
-    if (!is.null(sym)) {
-        if (!ord == length(sym))
-            stop(paste("--- Wrong length for parameter sym ! ---"))
-        for (i in 1:ord) {
-            if (!i == sym[i])
-                sval0[[i]] <- sval0[[sym[i]]]
-        }
-    }
+    # if (!is.null(sym)) {
+        # if (!ord == length(sym)) 
+            # stop(paste("--- Wrong length for parameter sym ! ---"))
+        # for (i in 1:ord) {
+            # if (!i == sym[i]) 
+                # sval0[[i]] <- sval0[[sym[i]]]
+        # }
+    # }
     if (verbose) {
-        cat(" ----------------------", "\n", "Initialisation  done",
+        cat(" ----------------------", "\n", "Initialisation  done", 
             "\n", file = ifelse(is.null(file), "", file), append = TRUE)
     }
     sval <- sval0
     if (smoothing) {
         sval[[ord]]$smoocheck <- array(FALSE, c(ord, 1))
-        if (!length(smoo) == ord)
-            stop(paste("--- Smoothing list must be of length ",
+        if (!length(smoo) == ord) 
+            stop(paste("--- Smoothing list must be of length ", 
                 ord, "! ---"))
         for (i in 1:ord) smoo[[i]] <- toplist(smoo[[i]])
     }
     test0 <- 1
     atest <- 0
     iter <- 0
+    pourplot<-c(iter,test0,0)
+    alpha <-0 # Kolda's shift in case no convergence with sym
     while (test0 > test) {
         iter <- iter + 1
-        if (verbose & iter%%100 == 1) {
-            cat(" ----------- iteration-", iter, "\n", file = ifelse(is.null(file),
+        if (verbose) {
+            cat(" ----------- iteration-", iter, "\n", file = ifelse(is.null(file), 
                 "", file), append = TRUE)
         }
-        for (i in 1:ord) {
+        
+     sval00<-sval0
+     sord=sample(1:ord)
+        for (i in sord) {
             if (iter == 1) {
                 if (verbose) {
-                  cat(" ", i, "^", sval0[[i]]$d, file = ifelse(is.null(file),
+                  cat(" ", i, "^", sval0[[i]]$d, file = ifelse(is.null(file), 
                     "", file), append = TRUE)
                 }
                 sval[[i]]$d <- NULL
@@ -1787,76 +1876,100 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
                   sval[[ord]]$smoocheck[i, 1] <- TRUE
                 }
             }
-            sval[[i]]$v <- as.vector(v)
-            sval0[[i]]$v <- as.vector(sval0[[i]]$v)
-            sd <- sqrt(sval[[i]]$v %*% sval[[i]]$v)
+            sval[[i]]$v <- as.vector(v) +ifelse(alpha==0,0,alpha*as.vector(sval0[[i]]$v) )
+                 # Kolda's Shift 2010 if not converging increase alpha ... from 0 to 1, 2 or 3
+            sval[[i]]$v <- as.vector(sval[[i]]$v)
+            sd <- sqrt(sum(sval[[i]]$v^2))
+            
+            if (!sd == 0)
+                sval[[i]]$v <- as.vector(sval[[i]]$v)/sd
+             
+                
+           
             if (verbose & iter%%100 == 0) {
-                cat(" --", sd, file = ifelse(is.null(file), "",
+                cat(" --", sd, file = ifelse(is.null(file), "", 
                   file), append = TRUE)
             }
-            if (!sd == 0)
-                sval[[i]]$v <- (sval[[i]]$v)/sd
-            atest <- atest + (sval[[i]]$v - sval0[[i]]$v) %*%
-                (sval[[i]]$v - sval0[[i]]$v)
-            if (!is.null(sym)) {
-                for (i in ord:1) {
-                  if (!i == sym[i])
-                    sval[[sym[i]]] <- sval[[i]]
-                }
-            }
             sval0 <- sval
+         }#for
+        #
+        if (!is.null(sym)) {            	
+                	r1<-1
+                for (z in ord:1) {
+                  if (!z== sym[z]) 
+                    sval[[z]]$v <- sval[[ sym[z] ]]$v #
+                    r1<-as.vector(r1%x%sval[[z]]$v)
+                }
+                
+                sd<-sum(as.vector(X)*r1)
+            }
+        
+        for(i in 1:ord){
+        atest <- atest + (sval[[i]]$v - sval00[[i]]$v) %*% 
+                (sval[[i]]$v - sval00[[i]]$v)
         }
+        if(iter%%(0.7*Maxiter)==0 & !is.null(alpha0)) alpha=0.5*alpha+alpha0
         test0 <- sqrt(atest)
         atest <- 0
-        if (verbose & (iter%%100) == 1) {
-            cat("\n", "----------- test =         ", test0, "\n",
+        if (verbose ) {
+            cat("\n", "---iteration--- ", iter, " --- test =         ", test0, "\n", 
                 file = ifelse(is.null(file), "", file), append = TRUE)
         }
-        if (iter > (Maxiter - 1) && (iter - Maxiter)%%Maxiter == 0) {
-            cat("\n \n \n \n \n ", " WARNING ****** Iteration already =  ",
+        
+        if (iter > (Maxiter - 1) && (iter - Maxiter)%%Maxiter == 
+            0) {
+            cat("\n \n \n \n \n ", " WARNING ****** Iteration already =  ", 
                 iter, "test= ", test0, "\n")
-            cat(" ** type  999  to STOP ** just RETURN to carry on **",
+            cat(" ** type  999  to STOP ** just RETURN to carry on **", 
                 "\n")
-            cat(" or type a new test value initial was", test,
+            cat(" or type a new test value initial was", test, 
                 "\n")
             conti <- scan("", n = 1, quiet = TRUE, flush = TRUE)
             if (length(conti) > 0) {
-                if (conti == 999)
+                if (conti == 999) 
                   stop(paste(" ---- Aborted by request ---- "))
-                if (is.numeric(conti))
+                if (is.numeric(conti)) 
                   test <- conti
             }
         }
+        #
+         
         sval0 <- sval
-    }
+       pourplot<-rbind(pourplot,c(iter,test0,sd)) 
+    }#while
+   colnames(pourplot)=c("iter","test","sd")
     ssX <- sum(X^2)
     sstens <- sd^2
     totPCT <- 100 * sstens/ssX
     if (!verbose) {
         cat(" ---Final iteration--- ", iter, "\n")
-        cat(" --Singular Value-- ", sd, " -- Local Percent -- ",
+        cat(" --Singular Value-- ", sd, " -- Local Percent -- ", 
             totPCT, "%", "\n")
     }
     else {
-        cat(" --------Final iteration----", iter, "\n", file = ifelse(is.null(file),
+        cat(" --------Final iteration----", iter, "\n", file = ifelse(is.null(file), 
             "", file), append = TRUE)
-        cat(" ----------- test =         ", test0, "\n", file = ifelse(is.null(file),
+        cat(" ----------- test =         ", test0, "\n", file = ifelse(is.null(file), 
             "", file), append = TRUE)
-        cat("\n", " --Singular Value-- ", sd, " -- Local Percent -- ",
-            totPCT, "%", "\n", file = ifelse(is.null(file), "",
+        cat("\n", " --Singular Value-- ", sd, " -- Local Percent -- ", 
+            totPCT, "%", "\n", file = ifelse(is.null(file), "", 
                 file), append = TRUE)
     }
+    #last i
+    i=ord
     sval[[i]]$iter <- iter
-    sval[[i]]$test <- test
+    sval[[i]]$test <- as.vector(test0)
     sval[[i]]$d <- as.vector(sd)
     sval[[i]]$pct <- as.vector(totPCT)
     sval[[i]]$ssX <- as.vector(ssX)
     sval[[i]]$vsnam <- PTnam
+    sval[[i]]$pourplot <-pourplot
+    sval[[i]]$lastalpha <-alpha
     if (metrics) {
         for (d in 1:length(sval)) {
             if (length(met[[d]]) > 1) {
                 if (length(met[[d]]) == dim(X)[d]^2) {
-                  sval[[d]]$v <- as.vector(sval[[d]]$v %*% Powmat(met[[d]],
+                  sval[[d]]$v <- as.vector(sval[[d]]$v %*% Powmat(met[[d]], 
                     -1/2))
                 }
                 else {
@@ -1869,11 +1982,23 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
     class(sval) <- c("PTAk")
     return(sval)
 }
+
 "SVDgen" <-
 function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = NULL,
     smoo = list(function(u) ksmooth(1:length(u), u, kernel = "normal",
         bandwidth = 3, x.points = (1:length(u)))$y)){
-    
+  svd.p<-function(X,...){
+		A=svd(X,...)
+		d=min(c(dim(A$u)[2],dim(A$v)[2]))
+		for(k in 1:d){
+			nn=summary(factor(A$u[,k]>=0,levels=c(F,T)))
+			if(nn[1]>nn[2]){
+				A$u[,k]=-A$u[,k]
+				A$v[,k]=-A$v[,k]		
+			}
+		}
+	return(A)
+	}  
     datanam <- substitute(Y)   
  if(is.list(Y)) {
     D1=Y$met[[1]]
@@ -1906,7 +2031,7 @@ function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = NULL,
     dimnames(Y) <- dinam
     if (smoothing == TRUE)
         result <- svdsmooth(Y, nomb = nomb, smooth = smoo)
-    else result <- svd(Y)
+    else result <- svd.p(Y) # to positiving the first and max
     if (length(D1) == dim(Y)[1]^2) {
         result$u <- Powmat(D1, -1/2) %*% result$u
     }
@@ -2126,12 +2251,18 @@ function (X, chi2 = FALSE, E = NULL,No0margins=TRUE)
         for (i in 2:r) pasta <- paste(pasta, a, sep = "")
         return(pasta)
     }
-    evalCh.f<-function(st){
+    evalCh.fold<-function(st){
       #st is a expression quoted e.g."x=2"
       tmp <- tempfile()
        writeLines(st, tmp)
        return(eval.parent(parse(tmp)))      
-         } #end of evalCh.f          
+         } #end of evalCh.f  
+         evalCh.f<-function(st){
+                      #st is a expression quoted e.g."x=2"
+                        #tmp <- tempfile()
+                         #writeLines(st, tmp)return(eval.parent(parse(text=temp)))
+                             return(eval.parent(parse(text=st)))
+                    } #end of evalCh.f        
      #library(tensorA)
       dnam=dimnames(X)
       #X=to.tensor(as.vector(X),dim(X))
@@ -2187,6 +2318,20 @@ function (A)
 {
     Powmat(A, -1)
 }
+"svd.p"<-
+function(X,...){
+		A=svd(X,...)
+		d=min(c(dim(A$u)[2],dim(A$v)[2]))
+		for(k in 1:d){
+			nn=summary(factor(A$u[,k]>=0,levels=c(F,T)))
+			if(nn[1]>nn[2]){
+				A$u[,k]=-A$u[,k]
+				A$v[,k]=-A$v[,k]		
+			}
+		}
+	return(A)
+}
+	
 "IterMV" <-
 function (n = 10, dat, Mm = c(1, 3), Vm = c(2, 3),
     fFUN = mean, usetren = FALSE, tren = function(x) smooth.spline(as.vector(x),
@@ -2495,29 +2640,35 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
 	rownames(ctr) <- solu[[mod]]$n
 	return(round(ctr*1000))
 }
+
 "plot.PTAk" <-
-function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
-    coefi = list(NULL, NULL), xylab = TRUE, ppch = (1:length(solution)),
-    lengthlabels = 2, scree = FALSE, ordered = TRUE,
-    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL, Zcol=NULL,...)
-{      solution <- x
-	awaybor=1.04
-if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot function not available yet using Plot.PTAk!","\n")
-    if (is.null(coefi[[1]]))
+function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL, coefi = list(NULL, 
+    NULL), xylab = TRUE, ppch = (1:length(solution)), lengthlabels = 2, 
+    scree = FALSE, ordered = TRUE, nbvs = 40, RiskJack = NULL, 
+    method = "", ZoomInOut = NULL, Zlabels = NULL, Zcol = NULL, poslab=c(2,1,3,3), 
+    ...) 
+{
+    solution <- x
+    awaybor = 1.04
+    if (class(solution)[1] == "PCAn" | class(solution)[1] == 
+        "CANDPARA") 
+        cat("\n", "Plot function not available yet using Plot.PTAk!", 
+            "\n")
+    if (is.null(coefi[[1]])) 
         coefi[[1]] <- rep(1, length(solution))
-    if (is.null(coefi[[2]]))
+    if (is.null(coefi[[2]])) 
         coefi[[2]] <- rep(1, length(solution))
-    if (is.null(lengthlabels))
+    if (is.null(lengthlabels)) 
         lengthlabels <- rep(10, length(solution))
-    if (length(lengthlabels) == 1)
+    if (length(lengthlabels) == 1) 
         lengthlabels <- rep(lengthlabels, length(solution))
     ord <- length(solution)
-    if ("FCAk" %in% class(x) && !("E=" %in% class(x)) ) {
+    if ("FCAk" %in% class(x) && !("E=" %in% class(x))) {
         divv <- solution[[ord]]$ssX[1] - 1
         perclab <- "% FCA"
-        if (length(nbvs) == 1)
+        if (length(nbvs) == 1) 
             nbvs <- 2:nbvs
-        else if (1 %in% nbvs)
+        else if (1 %in% nbvs) 
             nbvs <- nbvs[-match(1, nbvs)]
     }
     else {
@@ -2525,7 +2676,7 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
         perclab <- "% global"
     }
     di <- NULL
-    for (r in 1:length(solution)) di <- c(di, length(solution[[r]]$v[1,
+    for (r in 1:length(solution)) di <- c(di, length(solution[[r]]$v[1, 
         ]))
     if (!scree) {
         xlab <- ""
@@ -2533,120 +2684,123 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
         ylim <- NULL
         xlim <- NULL
         if (is.null(nb2)) {
-            xlim <- c(1, max(di[mod]) + 1)
-            if (xylab)
-                ylab <- paste(solution[[ord]]$vsnam[nb1], " local",
-                  round(solution[[ord]]$pct[nb1], 2), "% ", round((100 *
+            xlim <- c(0, max(di[mod]) + 1)
+            if (xylab) 
+                ylab <- paste(solution[[ord]]$vsnam[nb1], " local", 
+                  round(solution[[ord]]$pct[nb1], 2), "% ", round((100 * 
                     (solution[[ord]]$d[nb1])^2)/divv, 2), perclab)
         }
         else {
-            if (xylab)
-                xlab <- paste(solution[[ord]]$vsnam[nb1], " local",
-                  round(solution[[ord]]$pct[nb1], 2), "% ", round((100 *
+            if (xylab) 
+                xlab <- paste(solution[[ord]]$vsnam[nb1], " local", 
+                  round(solution[[ord]]$pct[nb1], 2), "% ", round((100 * 
                     (solution[[ord]]$d[nb1])^2)/divv, 2), perclab)
-            if (xylab)
-                ylab <- paste(solution[[ord]]$vsnam[nb2], " local",
-                  round(solution[[ord]]$pct[nb2], 2), "% ", round((100 *
+            if (xylab) 
+                ylab <- paste(solution[[ord]]$vsnam[nb2], " local", 
+                  round(solution[[ord]]$pct[nb2], 2), "% ", round((100 * 
                     (solution[[ord]]$d[nb2])^2)/divv, 2), perclab)
         }
-        for (u in mod) {  
+        for (u in mod) {
             if (!is.null(nb2)) {
-                xyn <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u], coefi[[2]][u]))                 
+                xyn <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% 
+                  diag(c(coefi[[1]][u], coefi[[2]][u]))
                 xaxt <- "s"
-                ylim <- range(xyn[,2],ylim)
-                xlim <- range(xyn[,1],xlim)
-                
+                ylim <- range(c(xyn[, 2], ylim))
+                xlim <- range(c(xyn[, 1], xlim))
             }
             else {
                 xyn <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
-               if (!"xaxt" %in% names(list(...)))
-                  xaxt <- "n" 
-				ylim <- range(xyn,ylim)               
+                if (!"xaxt" %in% names(list(...))) 
+                  xaxt <- "n"
+                ylim <- range(xyn, ylim)
             }
-		}
-		ylim <- awaybor *ylim
-		if (!is.null(nb2))xlim <- awaybor *xlim
-        if(!is.null(ZoomInOut[[2]])) ylim <- ZoomInOut[[2]]
-          if(!is.null(ZoomInOut[[1]]) &&  !is.null(nb2)) xlim <-ZoomInOut[[1]]
-
-        for (u in mod) { 
-        	 if (!is.null(nb2)) {
-                 xy <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u],coefi[[2]][u]))
-             }
-             else {
-                 xy <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
-             }         	
+        }
+        ylim <- awaybor * ylim
+        if (!is.null(nb2)) 
+            xlim <- awaybor * xlim
+        if (!is.null(ZoomInOut[[2]])) 
+            ylim <- ZoomInOut[[2]]
+        if (!is.null(ZoomInOut[[1]]) && !is.null(nb2)) 
+            xlim <- ZoomInOut[[1]]
+        for (u in mod) {
+            if (!is.null(nb2)) {
+                xy <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% diag(c(coefi[[1]][u], 
+                  coefi[[2]][u]))
+            }
+            else {
+                xy <- solution[[u]]$v[nb1, ] * coefi[[1]][u]
+            }
             if (labels) {
                 if ("xlab" %in% names(list(...))) {
-                  if ("ylab" %in% names(list(...)))
-                    plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u],
-                      xaxt = xaxt,...)
-                  else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab,
+                  if ("ylab" %in% names(list(...))) 
+                    plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u], 
+                      xaxt = xaxt, ...)
+                  else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab, 
                     pch = ppch[u], xaxt = xaxt, ...)
-                  if (is.null(nb2))
+                  if (is.null(nb2)) 
                     axis(1, 1:length(xy))
                 }
                 else {
-                  if ("ylab" %in% names(list(...)))
-                    plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u],
+                  if ("ylab" %in% names(list(...))) 
+                    plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u], 
                       xaxt = xaxt, xlab = xlab, ...)
-                  else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab,
-                    pch = ppch[u], xaxt = xaxt, xlab = xlab,
+                  else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab, 
+                    pch = ppch[u], xaxt = xaxt, xlab = xlab, 
                     ...)
                 }
-              if(!is.null(Zlabels[[u]])){
-              	ZlabUN <- Zlabels[[u]] 
-              	       }
-              else {
-              	ZlabUN <- solution[[u]]$n
-              }  
+                if (!is.null(Zlabels[[u]])) {
+                  ZlabUN <- Zlabels[[u]]
+                }
+                else {
+                  ZlabUN <- solution[[u]]$n
+                }
                 if (!is.null(ZlabUN)) {
-                	ZcolUN= u
-              	if(!is.null(Zcol[[u]]))ZcolUN=Zcol[[u]]
-
+                  ZcolUN = u
+                  if (!is.null(Zcol[[u]])) 
+                    ZcolUN = Zcol[[u]]
                   if (is.factor(ZlabUN)) {
-                    if ("cex" %in% names(list(...)))
+                    if ("cex" %in% names(list(...))) 
                       cex <- list(...)$cex
                     else cex <- par("cex")
-                    text(xy, labels = substr(levels(ZlabUN),
-                      1, lengthlabels[u]), col = ZcolUN,
-                      pos = 4,...)
+                    text(xy, labels = substr(levels(ZlabUN), 
+                      1, lengthlabels[u]), col = ZcolUN, pos = poslab, 
+                      ...)
                     if (is.null(nb2)) {
                       par(new = TRUE)
-                      plot(xy ~ ZlabUN, xlab = "", ylab = "",
+                      plot(xy ~ ZlabUN, xlab = "", ylab = "", 
                         ylim = ylim, cex = cex)
                       par(new = FALSE)
                     }
                   }
-                  else { 
-                  	ZcolUN= u
-              	if(!is.null(Zcol[[u]]))ZcolUN=Zcol[[u]]
-                  	text(xy, labels = substr(ZlabUN,
-                    1, lengthlabels[u]), col = ZcolUN, pos = 4,...)
-                    }
+                  else {
+                    ZcolUN = u
+                    if (!is.null(Zcol[[u]])) 
+                      ZcolUN = Zcol[[u]]
+                    text(xy, labels = substr(ZlabUN, 1, lengthlabels[u]), 
+                      col = ZcolUN, pos = poslab, ...)
+                  }
                 }
-            } 
-            else 
-            if ("xlab" %in% names(list(...))) {
-                if ("ylab" %in% names(list(...)))
-                  plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u],
+            }
+            else if ("xlab" %in% names(list(...))) {
+                if ("ylab" %in% names(list(...))) 
+                  plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u], 
                     col = u, xaxt = xaxt, ...)
-                else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab,
+                else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab, 
                   pch = ppch[u], col = u, xaxt = xaxt, ...)
-                if (is.null(nb2))
+                if (is.null(nb2)) 
                   axis(1, 1:length(xy))
             }
             else {
-                if ("ylab" %in% names(list(...)))
-                  plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u],
+                if ("ylab" %in% names(list(...))) 
+                  plot(xy, xlim = xlim, ylim = ylim, pch = ppch[u], 
                     col = u, xaxt = xaxt, xlab = xlab, ...)
-                else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab,
-                  pch = ppch[u], col = u, xaxt = xaxt, xlab = xlab,
+                else plot(xy, xlim = xlim, ylim = ylim, ylab = ylab, 
+                  pch = ppch[u], col = u, xaxt = xaxt, xlab = xlab, 
                   ...)
             }
-            if(!is.null(nb2)) {
-            abline(h = 0, col = "green", lty = 2)
-            abline(v = 0, col = "green", lty = 2)
+            if (!is.null(nb2)) {
+                abline(h = 0, col = "green", lty = 2)
+                abline(v = 0, col = "green", lty = 2)
             }
             par(new = TRUE)
         }
@@ -2655,44 +2809,45 @@ if(class(solution)[1]=="PCAn" | class(solution)[1]=="CANDPARA" )cat("\n","Plot f
     else {
         if (!is.null(ordered)) {
             if (ordered == TRUE) {
-                ld <- length(solution[[ord]]$d[!substr(solution[[ord]]$vsnam,
+                ld <- length(solution[[ord]]$d[!substr(solution[[ord]]$vsnam, 
                   1, 1) == "*"])
                 if (length(nbvs) == 1) {
                   nbvs <- min(max(3, nbvs), ld)
                   nbvs <- 1:nbvs
                 }
-                scre <- 100 * ((solution[[ord]]$d[!substr(solution[[ord]]$vsnam,
-                  1, 1) == "*"])^2)/divv 
-                scre <- (sort(scre[nbvs]))            
+                scre <- 100 * ((solution[[ord]]$d[!substr(solution[[ord]]$vsnam, 
+                  1, 1) == "*"])^2)/divv
+                scre <- (sort(scre[nbvs]))
                 scre <- scre[length(scre):1]
-                if (!is.null(RiskJack)) scre <- scre[1:min(max(RiskJack,2),max(nbvs-2))]
+                if (!is.null(RiskJack)) 
+                  scre <- scre[1:min(max(RiskJack, 2), max(nbvs - 
+                    2))]
                 nbvs <- nbvs[1:length(scre)]
-                plot(nbvs, scre, xlab = "Ordered ", ylab = "Squared Singular Values (%)",
+                plot(nbvs, scre, xlab = "Ordered ", ylab = "Squared Singular Values (%)", 
                   xaxt = "n", ...)
                 axis(1, at = nbvs)
                 par(new = TRUE)
-                plot(nbvs, ylim = c(0, 100), cumsum(scre), axes = FALSE,
-                  lwd = 2, lty = 1, type = "b", pch = "c", col = 3,
+                plot(nbvs, ylim = c(0, 100), cumsum(scre), axes = FALSE, 
+                  lwd = 2, lty = 1, type = "b", pch = "c", col = 3, 
                   xlab = "", ylab = "")
-                axis(4, at = atpc <- seq(0, 100, 10), labels = formatC(atpc,
+                axis(4, at = atpc <- seq(0, 100, 10), labels = formatC(atpc, 
                   format = "fg"), col.axis = 3)
                 par(new = TRUE)
-                if (!is.null(RiskJack))
-                  RiskJackplot(solution, nbvs = nbvs, mod = NULL,
-                    max = NULL, rescaled = TRUE,
-                    axes = FALSE, ann = FALSE, pch = "r")
+                if (!is.null(RiskJack)) 
+                  RiskJackplot(solution, nbvs = nbvs, mod = NULL, 
+                    max = NULL, rescaled = TRUE, axes = FALSE, 
+                    ann = FALSE, pch = "r")
                 par(new = FALSE)
-            } 
-            
+            }
             if (ordered == FALSE) {
-                ld <- length(solution[[ord]]$d[!substr(solution[[ord]]$vsnam,
+                ld <- length(solution[[ord]]$d[!substr(solution[[ord]]$vsnam, 
                   1, 1) == "*"])
                 if (length(nbvs) == 1) {
                   nbvs <- min(max(5, nbvs), ld)
                   nbvs <- 1:nbvs
                 }
                 scre <- ((solution[[ord]]$d)^2)[nbvs]
-                plot(nbvs, scre, xlab = "Unordered with redundancy",
+                plot(nbvs, scre, xlab = "Unordered with redundancy", 
                   ylab = "Squared Singular Values", ...)
             }
         }

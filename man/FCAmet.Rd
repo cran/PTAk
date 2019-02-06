@@ -24,7 +24,8 @@ a list wherein each entry is the vector of the corresponding margins i.e.
 \item{count}{is the total sum \code{sum(X).}}
  }
 \note{The statistics and metrics do not depend on \code{E}. The statistic given measure only the lack of independence.}
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+
+\author{Didier G. Leibovici}
 \seealso{ \code{\link{FCAk}} }
 \keyword{ multivariate}
 \keyword{models}

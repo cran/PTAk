@@ -85,7 +85,7 @@ Ramsay J.O. and Silverman B.W.  (1997) \emph{Functional Data
 
 
 
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+\author{Didier G. Leibovici \email{GeotRYcs@gmail.com}}
 \seealso{\code{\link{PTAk}},\code{\link{PCAn}}, \code{\link{CANDPARA}} }
 
 \examples{

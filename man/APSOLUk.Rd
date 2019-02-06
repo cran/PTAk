@@ -41,6 +41,8 @@ arguments see \code{\link{PTAk}}.}
 \value{
 an updated \code{PTAk} object }                                  
 
+\author{Didier G. Leibovici}
+
 \references{
 Leibovici D and Sabatier R (1998) \emph{A Singular Value
 Decomposition of a k-ways array for a Principal Component Analysis of
@@ -65,7 +67,7 @@ be the first best rank-one tensor approximating \code{X}
 for this decomposition analysis to be called
 PTA-\emph{k}modes.}
 
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+
 \seealso{\code{\link{PTAk}} }
 \keyword{array }  \keyword{algebra}
 \keyword{multivariate}

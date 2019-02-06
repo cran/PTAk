@@ -7,7 +7,7 @@ SINGVA(X,test=1E-12,PTnam="vs111",Maxiter=2000,
                   verbose=getOption("verbose"),file=NULL,
                     smoothing=FALSE,smoo=list(NA),
                      modesnam=NULL,
-                      Ini="Presvd",sym=NULL)}
+                      Ini="svds",sym=NULL)}
 \arguments{
    \item{X}{
 a tensor (as an array) of order \emph{k}, if non-identity metrics are
@@ -88,7 +88,7 @@ see \code{PCAn}). \emph{RPVSCC} stands for  \emph{R}echerche de la \emph{P}remi<
 \emph{V}aleur \emph{S}inguli<e8>re par \emph{C}ontraction
 \emph{C}ompl<ea>te.
  }
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+\author{Didier G. Leibovici}
 \seealso{\code{\link{INITIA}}, \code{\link{PTAk}}, \code{\link{PCAn}},
 \code{\link{CANDPARA}} }
 

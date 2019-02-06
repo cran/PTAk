@@ -8,7 +8,8 @@ Screeplot of singular values or superposed plot of modes for one or two componen
 \method{plot}{PTAk}(x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL,
     coefi = list(NULL, NULL), xylab = TRUE, ppch = (1:length(solution)),
     lengthlabels = 2, scree = FALSE, ordered = TRUE,
-    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL, Zcol=NULL, \dots)
+    nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL, Zcol=NULL,
+    poslab=c(2,1,3,3), \dots)
 RiskJackplot(x, nbvs = 1:20, mod = NULL, max = NULL, rescaled=TRUE, \dots)
                               }
 \arguments{
@@ -44,6 +45,7 @@ if \code{solution} is after an FCA with \code{SVDgen}}
 \item{ZoomInOut}{ list used as [[1]] for xlim and [[2]] for ylim in xy-plots instead of max and min range}
 \item{Zlabels}{ used as labels instead of \code{x[[mod]]$n}, it is a list with the same length as all modes. For example on 3 modes changing the labels of the second mode only will have to set \code{Zlabels=list(NULL,rep("a",length(x[[2]]$n) ), NULL )} }
 \item{Zcol}{ list of vectors of colours for Zlabels}
+\item{poslab}{integer or vector for 'pos' parameter, position of labels}
 \item{...}{plot arguments can be passed (except \code{xlim, ylim, ylab,pch,xaxt} for component plot,
 and \code{xlab, ylab} for screeplot). For example to have normed plot one can use \code{asp=1}}
     }
@@ -58,6 +60,8 @@ interpretation, once the Principal Tensor has been rebuilt mentally
 (\emph{i.e.} product of signs ...) to work out oppositions or associations. The
 risk plot on top of a screeplot is an approximation of the Jacknife estimate of
 the MSE in the choice of number of dimensions (see Besse et al.(1997)). }
+
+\author{Didier G. Leibovici}
 \references{
 Besse, P Cardot, H and Ferraty, F (1997) \emph{Simultaneous
 non-parametric regressions of unbalanced longitudinal
@@ -69,7 +73,7 @@ Studies}.(submitted) \url{http://c3s2i.free.fr/cv/recentpub.html}
 \note{This function is used all for \code{FCAk}, and
   \code{CANDPARA}, \code{PCAn} objjects notheless for this
   last object other interesting plots known as jointplots have not been implemented.}
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+
 \seealso{ \code{\link{PTAk}}, \code{\link{PTA3}},
 \code{\link{FCAk}},\code{\link{SVDgen}}}
 \examples{

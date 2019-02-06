@@ -54,6 +54,7 @@ Escofier(1984) for a 2-way derivation), e.g. for a three way contingency table
   independence are looked for).
 }
  \value{a \code{FCAk} (inherits \code{\link{PTAk}}) object }
+\author{Didier G. Leibovici}
 \references{
 Escoufier Y (1985) \emph{L'Analyse des correspondances : ses
 propri<e9>t<e9>s et ses extensions}. ISI 45th session Amsterdam.
@@ -68,7 +69,7 @@ Pharmaco-EEG Studies}.\url{http://www.fmrib.ox.ac.uk/analysis/techrep/tr00dl2/tr
 Leibovici D (2008) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}
 . to be submitted soon at Journal of Statisticcal Software.
 }
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+
 \seealso{\code{\link{PTAk}}, \code{\link{FCAmet}}, \code{\link{summary.FCAk}}  }
 
 \examples{

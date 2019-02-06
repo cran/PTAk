@@ -79,7 +79,7 @@ exactly the same thing faster as well as it is from
 \code{zwiX} are \code{NULL} they are replaced by the full
 possibilities.}
 
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+\author{Didier G. Leibovici}
 
  \seealso{\code{\link{PTAk}},  \code{\link{APSOLUk}} }
 

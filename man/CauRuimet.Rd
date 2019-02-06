@@ -71,7 +71,7 @@ metric \eqn{W_l^{-1}}. Based on theoretical considerations they recommand for  t
 \code{ker}, with the decreasing function \eqn{e^{(-ker \;t)}}: a lower bound of 1 if
 \code{withingroup} and something fairly small say in the interval [0.05;0.3] otherwise.
   }
-\author{Didier Leibovici \email{c3s2i@free.fr}}
+\author{Didier G. Leibovici}
 \seealso{\code{\link{SVDgen}}}
 \examples{
 
