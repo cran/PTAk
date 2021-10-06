@@ -97,14 +97,12 @@ Sciences tome 325, s<e9>rie I, Statistiques (Statistics) & Probabilit<e9>s (Prob
 Leibovici D and Sabatier R (1998) \emph{A Singular Value Decomposition of a k-ways array for a
 Principal Component Analysis of multi-way data, the PTA-k}. Linear Algebra and its Applications,
 269:307-329.
-
-Leibovici D (2008) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}
-. to be submitted soon at Journal of Statisticcal Software.
+Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
 
 Leibovici  D (2008) \emph{A Simple Penalised algorithm for SVD and Multiway
-   functional  methods}. (to be submitted)
+   functional  methods}. (to be submitted in the futur)
 
-Kolda T.G (2003)\emph{ A Counterexample to the Possibility of an Extension of the Eckart-Young Low-Rank Approximation Theorem for the Orthogonal Rank Tensor Decomposition}. SIAM J. Matrix Analysis, 24(2):763-767, Jan. 2003.
+Leibovici DG (2010) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}. Journal of Statistical Software, 34(10), 1-34. \doi{10.18637/jss.v034.i10}
 }
 \note{
 The use of metrics (diagonal or not) allows flexibility of analysis like in \emph{2} modes

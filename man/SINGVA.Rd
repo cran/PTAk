@@ -56,8 +56,7 @@ nested decompositions not giving the exact \emph{orthogonal rank}.
 \value{a \code{\link{PTAk}} object (without \code{datanam method})}
 \references{
 Kroonenberg P (1983) \emph{Three-mode Principal Component Analysis:
-Theory and Applications}. DSWO press. Leiden.(related references in
-\url{http://three-mode.leidenuniv.nl})
+Theory and Applications}. DSWO press. Leiden.
                          
 Leibovici D(1993) \emph{Facteurs <e0> Mesures R<e9>p<e9>t<e9>es et Analyses Factorielles :
 applications <e0> un suivi <e9>pid<e9>miologique}. Universit<e9> de Montpellier

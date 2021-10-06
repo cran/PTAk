@@ -50,8 +50,7 @@ models and conditions for 'an explanatory' multi-mode factor
 analysis}. UCLA Working Papers in Phonetics, 16,1-84.
 
 Kroonenberg P (1983) \emph{Three-mode Principal Component Analysis:
-Theory and Applications}. DSWO press. Leiden.(related references in
-\url{http://three-mode.leidenuniv.nl})
+Theory and Applications}. DSWO press. Leiden.)
 
 Leibovici D and Sabatier R (1998) \emph{A Singular Value
 Decomposition of a k-ways array for a Principal Component Analysis of

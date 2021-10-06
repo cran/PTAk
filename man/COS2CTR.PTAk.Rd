@@ -8,12 +8,14 @@ After a \code{\link{FCA2}}, a \code{\link{SVDgen}}, a \code{\link{FCAk}} or a \c
 }
 \usage{
 COS2(solu, mod=1, solnbs=2:4)
-CTR(solu, mod=1, solnbs=1:4)
+CTR(solu, mod=1, solnbs=1:4, signed = TRUE, mil = TRUE)
 }
 \arguments{
    \item{solu}{an object inheriting from class \code{PTAk}, representing a generalised  singular value decomposition}
    \item{mod}{an integer representing the mode number entry, 1 is row, 2 columns, ...}
-   \item{solnbs}{a vector of integers representing the tensor numbers in the listing summary}  
+   \item{solnbs}{a vector of integers representing the tensor numbers in the listing summary}
+   \item{signed}{logical to use signed-CTR from affect the sign of corresponding value in \code{solu[[mod]]$v[,c ]}, c defined by solnbs.}
+   \item{mil}{logical}
     }
 
 \details{
@@ -31,7 +33,7 @@ Leibovici D(1993) \emph{Facteurs \enc{à}{a} Mesures \enc{Répétées}{Repetees}
 applications \enc{à}{a} un suivi \enc{Epidémiologique}{Epidemiologique}}. \enc{Université}{Universite} de Montpellier
 II. PhD Thesis in \enc{Mathématiques}{Mathematiques} et Applications (Biostatistiques).
 
-Leibovici DG (2010) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}. Journal of Statistical Software, 34(10), 1-34. \url{http://www.jstatsoft.org/v34/i10/}
+Leibovici DG (2010) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}. Journal of Statistical Software, 34(10), 1-34. \doi{10.18637/jss.v034.i10}
 }
 \author{Didier G. Leibovici}
 \seealso{\code{\link{PTAk}}, \code{\link{FCA2}}, \code{\link{FCAk}}, \code{\link{summary.FCAk}}, \code{\link{plot.PTAk}} }
@@ -106,7 +108,7 @@ return(cbind(x,y,lab,coul,pchl,poslab))
 
 ctrcos2(cri.FCA2,mod=1)
 ctrcos2(cri.FCA2,mod=2)
- plotctrcos2(cri.FCA2)
+plotctrcos2(cri.FCA2)
  
 }
 \keyword{models}

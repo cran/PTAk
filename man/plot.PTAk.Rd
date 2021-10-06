@@ -9,7 +9,7 @@ Screeplot of singular values or superposed plot of modes for one or two componen
     coefi = list(NULL, NULL), xylab = TRUE, ppch = (1:length(solution)),
     lengthlabels = 2, scree = FALSE, ordered = TRUE,
     nbvs = 40, RiskJack = NULL, method = "",ZoomInOut=NULL, Zlabels=NULL, Zcol=NULL,
-    poslab=c(2,1,3,3), \dots)
+    poslab=c(2,1,3,3), signedCTR = FALSE, relCTR = TRUE,\dots)
 RiskJackplot(x, nbvs = 1:20, mod = NULL, max = NULL, rescaled=TRUE, \dots)
                               }
 \arguments{
@@ -46,6 +46,8 @@ if \code{solution} is after an FCA with \code{SVDgen}}
 \item{Zlabels}{ used as labels instead of \code{x[[mod]]$n}, it is a list with the same length as all modes. For example on 3 modes changing the labels of the second mode only will have to set \code{Zlabels=list(NULL,rep("a",length(x[[2]]$n) ), NULL )} }
 \item{Zcol}{ list of vectors of colours for Zlabels}
 \item{poslab}{integer or vector for 'pos' parameter, position of labels}
+\item{signedCTR}{logical to plot signed-CTR instead of coordinates, see \code{\link{CTR}}}
+\item{relCTR}{logical if \code{signedCTR = TRUE} use relative CTRs, expected contribution \code{1} if uniform or equal contributions.}
 \item{...}{plot arguments can be passed (except \code{xlim, ylim, ylab,pch,xaxt} for component plot,
 and \code{xlab, ylab} for screeplot). For example to have normed plot one can use \code{asp=1}}
     }
@@ -68,13 +70,13 @@ non-parametric regressions of unbalanced longitudinal
 data}. Computational Statistics and Data Analysis, 24:255-270.
 
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for Pharmaco-EEG
-Studies}.(submitted) \url{http://c3s2i.free.fr/cv/recentpub.html}
+Studies}. \url{https://www.researchgate.net/publication/216807619_Multiway_Multidimensional_Analysis_for_Pharmaco-EEG_Studies}
              }
 \note{This function is used all for \code{FCAk}, and
   \code{CANDPARA}, \code{PCAn} objjects notheless for this
   last object other interesting plots known as jointplots have not been implemented.}
 
-\seealso{ \code{\link{PTAk}}, \code{\link{PTA3}},
+\seealso{ \code{\link{PTAk}}, \code{\link{PTA3}}, \code{\link{CTR}},
 \code{\link{FCAk}},\code{\link{SVDgen}}}
 \examples{
 #  see the demo function   source(paste(R.home(),"/ library/PTAk/demo/PTA3.R",sep=""));

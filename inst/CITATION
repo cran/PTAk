@@ -1,5 +1,4 @@
-citHeader("To cite PTAk in publications use preferably the JSS one and the current version:")
-
+citHeader("To cite PTAk in publications use preferably the JSS article and the current version:")
 
 if(!exists("meta") || is.null(meta)) meta <- packageDescription("PTAk")
 
@@ -49,13 +48,13 @@ citEntry(entry="Article",
 	volume       = "34",
   number       = "10",
   pages        = "1--34",
-  url          = "http://www.jstatsoft.org/v34/i10/",
+  doi          = "10.18637/jss.v034.i10",
 
   textVersion  =
   paste("Didier G. Leibovici (2010).",
         " Spatio-Temporal Multiway Decompositions Using Principal Tensor Analysis on k-Modes: The R Package PTAk.",
         "Journal of Statistical Software, 34(10), 1-34.",
-        "URL http://www.jstatsoft.org/v34/i10/.")
+        "doi:10.18637/jss.v034.i10")
         )
          
-citFooter("visit also http://c3s2i.free.fr or http://didier.leibovici.free.fr")
+citFooter("visit also https://www.GeotRYcs.com,  http://didier.leibovici.free.fr")

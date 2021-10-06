@@ -65,7 +65,9 @@ II. PhD Thesis in \enc{Mathématiques}{Mathematiques} et Applications (Biostatis
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
 Pharmaco-EEG Studies}.\url{http://www.fmrib.ox.ac.uk/analysis/techrep/tr00dl2/tr00dl2.pdf}
 
-Leibovici DG (2010) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}. Journal of Statistical Software, 34(10), 1-34. \url{http://www.jstatsoft.org/v34/i10/}
+Leibovici DG (2010) \emph{Spatio-temporal Multiway Decomposition using Principal Tensor Analysis on k-modes:the R package \pkg{PTAk}}. Journal of Statistical Software, 34(10), 1-34. \doi{10.18637/jss.v034.i10}
+
+Leibovici DG and Birkin MH (2013) Simple, multiple and multiway correspondence analysis applied to spatial census-based population microsimulation studies using R. NCRM Working Paper. NCRM-n^o 07/13, Id-3178 \url{https://eprints.ncrm.ac.uk/id/eprint/3178}
 }
 
 \seealso{\code{\link{PTAk}}, \code{\link{FCAmet}}, \code{\link{summary.FCAk}}  }

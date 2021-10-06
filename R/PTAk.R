@@ -581,6 +581,7 @@ function (X, zlist, moins = 1, zwiX = NULL, usetensor = TRUE,
 "INITIA" <-
 function (X, modesnam = NULL, method = "svds", dim = 1, ...) 
 {
+   datanam <- substitute(X) 
     if (!is.array(X)) {
         stop(paste("--- X must be an array  ! ---"))
     }
@@ -648,7 +649,7 @@ function (X, modesnam = NULL, method = "svds", dim = 1, ...)
     }
   	
     VV[[i]]$vsnam<-paste0("vs",dim*11)
-    VV[[i]]$datanam<-substitute(X)
+    VV[[i]]$datanam<-datanam
     VV[[i]]$method<-match.call() 
  class(VV) <- c("SVDsum","PTAk")
     return(VV)
@@ -1758,7 +1759,8 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
         }
     }
     solutions[[kor]]$method <- match.call()
-    solutions[[kor]]$addedcomment <- addedcomment
+    solutions[[kor]]$datanam <- datanam
+        solutions[[kor]]$addedcomment <- addedcomment
     cat("-----Execution Time-----", (proc.time() - debtime)[3],
         "\n")
     class(solutions) <- c("PTAk")
@@ -1965,6 +1967,7 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
     sval[[i]]$vsnam <- PTnam
     sval[[i]]$pourplot <-pourplot
     sval[[i]]$lastalpha <-alpha
+    sval[[i]]$datanam <- datanam
     if (metrics) {
         for (d in 1:length(sval)) {
             if (length(met[[d]]) > 1) {
@@ -2068,7 +2071,7 @@ function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = NULL,
     solutions[[2]]$pct <- (100 * result$d^2/ssX)[1:nomb]
     solutions[[2]]$ssX <- rep(ssX, nomb)
     solutions[[2]]$vsnam <- paste("vs", 1:nomb, sep = "")
-    solutions[[2]]$datanam <- datanam
+    solutions[[2]]$datanam <- substitute(Y)
     solutions[[2]]$addedcomment <- ""
     solutions[[2]]$method <- match.call()
     if (smoothing)
@@ -2617,7 +2620,7 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
 	return(round(cos2*1000))
 }
 ##############
-"CTR"  <-function(solu, mod=1,solnbs=1:4){
+"CTR"  <-function(solu, mod=1,solnbs=1:4,signed=TRUE,mil=TRUE){
 	# as ()t(phi_s) D phi_s)i/lambda_s  if normed to lambda_s otherwise not divided by lambda
                     
 	if(is.list(eval(solu[[length(solu)]]$datanam))) {
@@ -2631,24 +2634,38 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
 	   	}
 	 } 
 	if(is.vector(met)){
-		ctr <- t(solu[[mod]]$v[solnbs,]**2)*met 
+		ctr <- t(solu[[mod]]$v[solnbs,]**2)*met
+		if(length(solnbs)==1)ctr=t(ctr)
 		}
 	else{
 		ctr <- t( (solu[[mod]]$v[solnbs,]%*%met)*solu[[mod]]$v[solnbs,]) 
 	}
+	if(signed){
+		if(length(solnbs)==1)ctr=ctr*sign(solu[[mod]]$v[solnbs,])
+		if(length(solnbs)!=1)ctr=ctr*t(sign(solu[[mod]]$v[solnbs,]))
+		}
 	colnames(ctr) <- paste(rep("ctr",length(solnbs)),paste(":",solnbs,":",sep=""),solu[[length(solu)]]$vsnam[solnbs],sep="_")
 	rownames(ctr) <- solu[[mod]]$n
-	return(round(ctr*1000))
+	if(mil)mil=1000 else mil=100
+	return(round(ctr*mil))
 }
 
 "plot.PTAk" <-
 function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL, coefi = list(NULL, 
     NULL), xylab = TRUE, ppch = (1:length(solution)), lengthlabels = 2, 
     scree = FALSE, ordered = TRUE, nbvs = 40, RiskJack = NULL, 
-    method = "", ZoomInOut = NULL, Zlabels = NULL, Zcol = NULL, poslab=c(2,1,3,3), 
+    method = "", ZoomInOut = NULL, Zlabels = NULL, Zcol = NULL, poslab=c(2,1,3,3), signedCTR=FALSE, relCTR=TRUE,
     ...) 
 {
     solution <- x
+    if(signedCTR){
+    	nb12=c(nb1,nb2)
+    	nb12=nb12[!is.null(nb12)]
+    	for(m in mod){
+    			solution[[m]]$v[nb12,] 	<-	t(CTR(solution,mod=m,solnbs=nb12,signed=TRUE,mil=FALSE)) 
+    			if(relCTR) solution[[m]]$v[nb12,] <-solution[[m]]$v[nb12,]/100*length(solution[[m]]$n) 
+    			}
+    }#signedCTR
     awaybor = 1.04
     if (class(solution)[1] == "PCAn" | class(solution)[1] == 
         "CANDPARA") 
@@ -2700,6 +2717,11 @@ function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL, coefi = list(NULL,
                   round(solution[[ord]]$pct[nb2], 2), "% ", round((100 * 
                     (solution[[ord]]$d[nb2])^2)/divv, 2), perclab)
         }
+        if(xylab & signedCTR)ylab <-paste("signedCTR",ylab)
+        if(xylab & xlab !="" & signedCTR)xlab <-paste("signedCTR",xlab)
+        if(grepl("CTR",ylab) & relCTR)ylab <-paste("rel-",ylab)
+        if(grepl("CTR",xlab) & relCTR)xlab <-paste("rel-",xlab)
+        
         for (u in mod) {
             if (!is.null(nb2)) {
                 xyn <- t(solution[[u]]$v[c(nb1, nb2), ]) %*% 

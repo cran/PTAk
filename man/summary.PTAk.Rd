@@ -32,7 +32,7 @@ the lack of complete independence. }
 \references{
 Leibovici D (2000) \emph{Multiway Multidimensional Analysis for
   Pharmaco-EEG Studies}.(submitted)
-\url{http://c3s2i.free.fr/cv/recentpub.html}
+\url{https://www.researchgate.net/publication/216807619_Multiway_Multidimensional_Analysis_for_Pharmaco-EEG_Studies}
 }
 
 \author{Didier G. Leibovici \email{GeotRYcs@gmail.com}}
