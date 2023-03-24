@@ -36,7 +36,7 @@ values (TRUE) or the order is given by output listing from
 \item{max}{is the number of singular values to be considered as giving the perfect fit, NULL is the max possible in x}
 \item{rescaled}{boolean to rescale the y axis to 0-100}
 \item{RiskJack}{
-if not \code{NULL} is a integer,  scree is \code{TRUE} and ordered is \code{TRUE}, plots
+if not \code{NULL} is an integer,  scree is \code{TRUE} and ordered is \code{TRUE}, plots
 on top of the scree plot a Risk plot with \code{nbvs = 1:RiskJack}. It is
 possible to use directly the function \code{RiskJackplot}: the default
 maximum dimension (argument \code{max}) is  \code{length(solution[[k]][["d"]])}. }

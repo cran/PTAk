@@ -1,6 +1,6 @@
 Package: PTAk
-Version: 1.4-0
-Date: 2021-10-06
+Version: 2.0.0
+Date: 2023-03-23
 Title: Principal Tensor Analysis on k Modes
 Author: Didier G. Leibovici (2010) <doi:10.18637/jss.v034.i10>
 Maintainer: Didier G. Leibovici <GeotRYcs@gmail.com>
@@ -10,6 +10,6 @@ Description: A multiway method to decompose a tensor (array) of any order, as a 
 License: GPL (>= 2)
 URL: https://www.GeotRYcs.com
 NeedsCompilation: no
-Packaged: 2021-10-06 17:54:09 UTC; lgzdl
+Packaged: 2023-03-24 18:32:58 UTC; lgzdl
 Repository: CRAN
-Date/Publication: 2021-10-06 19:40:02 UTC
+Date/Publication: 2023-03-25 00:00:10 UTC

@@ -95,12 +95,12 @@ Ramsay J.O. and Silverman B.W.  (1997) \emph{Functional Data
  # on smoothing
 
  data(longley)
- long <- as.matrix(longley[,1:7])
+ long <- as.matrix(longley[,-6])
 
  long.svd <- SVDgen(long,smoothing=FALSE)
   summary.PTAk(long.svd,testvar=0)
    # X11(width=4,height=4)
-  plot.PTAk(long.svd,scree=TRUE,RiskJack=0,type="b",lty=3)
+  plot.PTAk(long.svd,scree=TRUE,RiskJack=4,type="b",lty=3)
 
  long.svdo <- SVDgen(long,smoothing=TRUE,
   smoo=list(function(u)ksmooth(1:length(u),
@@ -108,7 +108,7 @@ Ramsay J.O. and Silverman B.W.  (1997) \emph{Functional Data
 
   summary.PTAk(long.svdo,testvar=0)
   #  X11(width=4,height=4)
-  plot.PTAk(long.svdo,scree=TRUE,RiskJack=0,type="b",lty=3)
+  plot.PTAk(long.svdo,scree=TRUE,type="b",lty=3)
  ###using polynomial fitting
    polyfit <- function(u,deg=length(u)/5)
        {n <- length(u);time <- rep(1,n);
@@ -159,7 +159,7 @@ mtext(paste("vs",com,":",yla[1],"\%"),2,col=2,line=2)
    plot(cri.svd,scree=TRUE,RiskJack=4,type="b",lty=3)
   cri.svdo <- SVDgen(crimerate.mat,D2=metW,D1=1)
    summary(cri.svdo,testvar=0)
-   plot(cri.svdo,scree=TRUE,RiskJack=5,type="b",lty=3)
+   plot(cri.svdo,scree=TRUE,RiskJack=4,type="b",lty=3)
   # X11(width=8,height=4)
   par(mfrow=c(1,2))
    plot(cri.svd,nb1=1,nb2=2,mod=1,lengthlabels=3)

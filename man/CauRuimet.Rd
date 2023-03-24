@@ -83,7 +83,7 @@ metric \eqn{W_l^{-1}}. Based on theoretical considerations they recommand for  t
  D2 <- Powmat(D2,(-1))
  iris2 <- sweep(iris2,2,apply(iris2,2,mean))
  res <- SVDgen(iris2,D2=D2,D1=1)
- plot(res,nb1=1,nb2=2,cex=0.5)
+ plot(res,nb1=1,nb2=2,cex=1,mod=1,Zcol=list(c(rep(1,50),rep(2,50),rep(3,50))))
  summary(res,testvar=0)
 
  # the same in a demo function

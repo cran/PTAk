@@ -1,6 +1,0 @@
-CauRuimet                 loads and runs demo.CauRuimet() to redo the example of the function.
-FCAk                      loads and runs demo.FCAk() which does nothing at the moment!
-PTA3                      loads and runs demo.PTA3() to perform n PTA3 on the data iris3 bootstrapping n samples of 15 for each species and look at the  distributions of some
-                          Principal Tensors.
-PTAk                      loads and runs demo.PTAk() which shows nothing at the moment!
-SVDgen                    loads and runs demo.SVDgen() which compares svd and svdsmooth on an image with added gaussian noise: the default image (ima=NULL) is the timage12 dataset.

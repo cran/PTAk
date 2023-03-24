@@ -40,5 +40,5 @@ refer to the SVD-\emph{k}modes decomposition (because the orthogonality is defin
 tensor space not necessarily on each component space) but are still meaningful. }
 \author{Didier G. Leibovici}
 \seealso{\code{\link{PTA3}}, \code{\link{APSOLUk}} }
-\keyword{array }  \keyword{algebra}
+\keyword{array}  \keyword{algebra}
 \keyword{multivariate}

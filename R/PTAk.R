@@ -8,7 +8,7 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details. (see file LICENSE)
 #    see also <http://www.gnu.org/licenses/>. 
-#   Dr Didier G.Leibovici CC 2001-20010-2012
+#   Dr Didier G.Leibovici CC 2001-2012-2015 etc ...2023
 
 "howtoPTAk" <-
 function()
@@ -20,8 +20,8 @@ function()
     "            see the citation file","\n",
     "            and for a good introduction ","\n",
     "           Leibovici, D.G. (2010) JSS:34(10), www.jstatsoft.org/v34/i10/","\n",
-    "          contact me at c3s2i@free.fr","\n")
-cat("         see some examples on http://c3s2i.free.fr","\n")
+    "          contact me at didier.leibovici@free.fr or GeotRYcs@gmail.com","\n")
+cat("         ","\n")
    
 }
 "CANDPARA" <-
@@ -31,7 +31,7 @@ function (X, dim = 3, test = 1e-08, Maxiter = 1000, smoothing = FALSE,
 {
    datanam <- substitute(X)
     sym <- NULL
-    if (is.list(X)) {
+    if (!is.array(X)) {
         if (is.list(X$met)) 
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
@@ -246,7 +246,7 @@ function (X, dim = c(2, 2, 2, 3), test = 1e-12, Maxiter = 400,
 {
     datanam <- substitute(X)
     sym <- NULL
-    if (is.list(X)) {
+    if (!is.array(X)) {
         if (is.list(X$met)) 
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
@@ -791,7 +791,7 @@ function (solutions, nTens = 1:2, testvar = 1, redundancy = FALSE)
         pcre <- 100 * sum(deja^2)/solutions[[ord]]$ssX[1]
         cat("-- Variance Percent rebuilt", solutions[[ord]]$datanam,
             " at ", pcre, "% ", "\n")
-         if (is.list(eval(solutions[[ord]]$datanam))) {
+         if (!is.array(eval(solutions[[ord]]$datanam)) ) {
          	data=eval(solutions[[ord]]$datanam)$data 
          	diff1=(data-tensfin)
          	diff2=met12(diff1,eval(solutions[[ord]]$datanam)$met) 	
@@ -801,7 +801,7 @@ function (solutions, nTens = 1:2, testvar = 1, redundancy = FALSE)
          	diff1=(data-tensfin)
          }
         cat("-- MSE ", mean((diff1)^2), "\n")#metrics for the ^2
-        if(is.list(eval(solutions[[ord]]$datanam)))cat("-- MSE metric ", mean((diff2)^2), "\n")#metrics for the ^2
+        if(!is.array(eval(solutions[[ord]]$datanam)) )cat("-- MSE metric ", mean((diff2)^2), "\n")#metrics for the ^2
         cat("-- with ", length(deja), " Principal Tensors out of ",
             length(nTens), " given", "\n")
         if (pcre > 100) {
@@ -899,9 +899,9 @@ function (solb, sola = NULL, numass = NULL, verbose = getOption("verbose"),
         }
     }
     if (summary) {
-         if(class(sola)[1]=="PCAn")  cat("\n", "++++ PCA- ", k, "modes ++++ ", "\n","summary function not available yet using summary.PTAk!","\n","Core tensor taken like Sing Val!")   
+         if(inherits(sola,"PCAn"))  cat("\n", "++++ PCA- ", k, "modes ++++ ", "\n","summary function not available yet using summary.PTAk!","\n","Core tensor taken like Sing Val!")   
          else {
-         if(class(sola)[1]=="CANDPARA")  cat("\n", "++++ CANDECOMP/PARAFAC- ", k, "modes ++++ ", "\n","\n")
+         if(inherits(sola,"CANDPARA"))  cat("\n", "++++ CANDECOMP/PARAFAC- ", k, "modes ++++ ", "\n","\n")
            else cat("\n", "++++ PTA- ", k, "modes ++++ ", "\n")
            }
         di <- NULL
@@ -979,7 +979,7 @@ function (object, testvar = 0.5, dontshow = "*",...)
     
    
     k <- length(object)
-    ismodel <- "E=" %in% class(object)
+    ismodel <- inherits(object,"E=")
     wha="complete independence"
     if(ismodel)wha=" model(E=) "
     pctota <- (100 * (object[[k]]$d)^2)/object[[k]]$ssX[1]
@@ -1031,7 +1031,7 @@ function (object, testvar = 1, dontshow = "*",...)
 function (X, solu, pt3 = NULL, nbPT2 = 1, smoothing = FALSE,
     smoo = list(NA), verbose = getOption("verbose"), file = NULL, ...)
 {
-    if (is.list(X)) {
+    if (!is.array(X) ) {
         if (is.list(X$met))
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
@@ -1147,7 +1147,7 @@ function (X, solu, nbPT, nbPT2 = 1, smoothing = FALSE, smoo = list(NA),
     minpct = 0.1, ptk = NULL, verbose = getOption("verbose"),
     file = NULL, modesnam = NULL, ...)
 {
-    if (is.list(X)) {
+    if (!is.array(X)) {
         if (is.list(X$met))
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
@@ -1272,6 +1272,7 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
     verbose = getOption("verbose"), file = NULL, modesnam = NULL,
     addedcomment = "", chi2 = TRUE, E = NULL, ...)
 {
+	datanam <-substitute(X)
     ldx <- length(dim(X))
     if (ldx <=2) {
         stop(paste("--- X must be an array  of k > 2 entries! ---"))
@@ -1302,7 +1303,7 @@ function (X, nbPT = 3, nbPT2 = 1, minpct = 0.01, smoothing = FALSE,
         smoo = smoo, minpct = minpct, verbose = verbose, file = file,
         modesnam = modesnam, addedcomment = addedcomment, ...)
     }
-    solutions[[ldx]]$datanam <- substitute(X)
+    solutions[[ldx]]$datanam <- datanam
     solutions[[ldx]]$method <- match.call()
     solutions[[ldx]]$addedcomment <- addedcomment
     class(solutions) <- c("FCAk","PTAk")
@@ -1316,6 +1317,7 @@ function (X, nbdim =NULL, minpct = 0.01, smoothing = FALSE,
     verbose = getOption("verbose"), file = NULL, modesnam = NULL,
     addedcomment = "", chi2 = FALSE, E = NULL, ...)
 {
+	datanam <- substitute(X)
     ldx <- length(dim(X))
     if (ldx !=2) {
         stop(paste("--- X must be an array  of k = 2 entries! ---"))
@@ -1339,7 +1341,7 @@ function (X, nbdim =NULL, minpct = 0.01, smoothing = FALSE,
     Y <- FCAmet(X, chi2 = chi2, E = E)
      solutions <- SVDgen(Y,smoothing = smoothing, nomb=nbdim, smoo = smoo)
     
-    solutions[[ldx]]$datanam <- substitute(X)
+    solutions[[ldx]]$datanam <- datanam
     solutions[[ldx]]$method <- match.call()
     solutions[[ldx]]$addedcomment <- addedcomment
     class(solutions) <- c("FCAk", "FCA2","PTAk")
@@ -1418,7 +1420,7 @@ function (X, nbPT = 2, nbPT2 = 1, smoothing = FALSE, smoo = list(function(u) ksm
     addedcomment = "", ...) 
 {
     datanam <- substitute(X)
-    if (is.list(X)) {
+    if (!is.array(X)) {
         if (is.list(X$met)) 
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
@@ -1575,7 +1577,7 @@ function (X, nbPT = 2, nbPT2 = 1, minpct = 0.1, smoothing = FALSE,
     modesnam = NULL, addedcomment = "", ...)
 {
     datanam <- substitute(X)
-    if (is.list(X)) {
+    if (!is.array(X)) {
         if (is.list(X$met))
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
@@ -1773,7 +1775,7 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
 {
 	alpha0=NULL
     datanam <- substitute(X)
-    if (is.list(X)) {
+    if (!is.array(X)) {
         if (is.list(X$met)) 
             metrics <- TRUE
         else stop(paste("------with metrics X must be a list with $data and $met----"))
@@ -1822,7 +1824,7 @@ function (X, test = 1e-12, PTnam = "vs111", Maxiter = 2000, verbose = getOption(
             dim(X), "\n", file = ifelse(is.null(file), "", file), 
             append = TRUE)
     }
-    if (class(Ini) == "PTAk") 
+    if (inherits(Ini, "PTAk") )
         sval0 <- Ini
     else {
         sval0 <- INITIA(X, modesnam = modesnam, method = Ini)
@@ -2003,7 +2005,7 @@ function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = NULL,
 	return(A)
 	}  
     datanam <- substitute(Y)   
- if(is.list(Y)) {
+ if(!is.array(Y)) {
     D1=Y$met[[1]]
     D2=Y$met[[2]]
     Y=Y$data
@@ -2071,12 +2073,12 @@ function (Y, D2 = 1, D1 = 1, smoothing = FALSE, nomb = NULL,
     solutions[[2]]$pct <- (100 * result$d^2/ssX)[1:nomb]
     solutions[[2]]$ssX <- rep(ssX, nomb)
     solutions[[2]]$vsnam <- paste("vs", 1:nomb, sep = "")
-    solutions[[2]]$datanam <- substitute(Y)
+    solutions[[2]]$datanam <- datanam
     solutions[[2]]$addedcomment <- ""
     solutions[[2]]$method <- match.call()
     if (smoothing)
         solutions[[2]]$smoocheck <- result$smoocheck
-    class(solutions) <- c("PTAk")
+    class(solutions) <- c("SVDgen","PTAk")
     return(solutions)
 }
 "svdsmooth" <-
@@ -2559,7 +2561,7 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
 	
     X <-eval(solu[[length(solu)]]$datanam)
                    
-		if("FCAk" %in% class(solu)){
+		if(inherits(solu,"FCAk")){
 				if("E" %in% names(solu[[length(solu)]]$method)){
 					leE=eval((solu[[length(solu)]]$method)$E)
 				 X <-FCAmet(X,E=leE)				
@@ -2571,7 +2573,7 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
 		}					 
 	 # norm of the mod vv
 	
-	 if(is.list(X)) {
+	 if(!is.array(X)) {
 	 	# XD1/2 except mod
         nam <- dimnames(X$data)
         diX <- length(dim(X$data))
@@ -2623,10 +2625,10 @@ function (y, x = NULL, sigmak = NULL, sigmat = NULL, ker = list(function(u) retu
 "CTR"  <-function(solu, mod=1,solnbs=1:4,signed=TRUE,mil=TRUE){
 	# as ()t(phi_s) D phi_s)i/lambda_s  if normed to lambda_s otherwise not divided by lambda
                     
-	if(is.list(eval(solu[[length(solu)]]$datanam))) {
+	if(!is.array(eval(solu[[length(solu)]]$datanam))) {
 	   	met <- eval(solu[[length(solu)]]$datanam)$met[[mod]]}
 	else{
-		if("FCAk" %in% class(solu)){
+		if(inherits(solu,"FCAk" )){
 			met <-FCAmet(eval(solu[[length(solu)]]$datanam))$met[[mod]]
 			}
 		else{
@@ -2667,8 +2669,7 @@ function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL, coefi = list(NULL,
     			}
     }#signedCTR
     awaybor = 1.04
-    if (class(solution)[1] == "PCAn" | class(solution)[1] == 
-        "CANDPARA") 
+    if (inherits(solution,c("PCAn","CANDPARA")) )
         cat("\n", "Plot function not available yet using Plot.PTAk!", 
             "\n")
     if (is.null(coefi[[1]])) 
@@ -2680,7 +2681,7 @@ function (x, labels = TRUE, mod = 1, nb1 = 1, nb2 = NULL, coefi = list(NULL,
     if (length(lengthlabels) == 1) 
         lengthlabels <- rep(lengthlabels, length(solution))
     ord <- length(solution)
-    if ("FCAk" %in% class(x) && !("E=" %in% class(x))) {
+    if (inherits(x,"FCAk") && !inherits(x,"E=") ) {
         divv <- solution[[ord]]$ssX[1] - 1
         perclab <- "% FCA"
         if (length(nbvs) == 1) 
